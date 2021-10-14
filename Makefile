@@ -10,8 +10,8 @@ all:
 	$(MAKE) -C libcs50
 	$(MAKE) -C common
 	$(MAKE) -C crawler
-	$(MAKE) -C indexer
-	$(MAKE) -C querier
+#	$(MAKE) -C indexer
+#	$(MAKE) -C querier
 
 ############## valgrind all programs ##########
 valgrind: all

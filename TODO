@@ -1,0 +1,14 @@
+Crawler: 
+    - IMPLEMENTATION.md
+    - README.md
+    - testing.sh
+    - TESTING.md
+
+Common:
+    - comment pagedir.h
+    - comment pagedir.c
+    - Makefile for ar
+    - README.md
+
+Other:
+    - make sure that make all works!
