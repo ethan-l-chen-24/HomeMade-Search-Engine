@@ -1,0 +1,232 @@
+bash -v testing.sh 
+
+# ETHAN CHEN
+# testing.sh - testing file for crawler module
+
+# REMOVE DIRECTORIES IFF EXIST AND MAKE NEW
+rm -rf ../common/letters-depth-[0-6]
+rm -rf ../common/toscrape-depth-[0-1]
+rm -rf ../common/crawler-depth-[0-1]
+rm -rf ../common/default
+mkdir ../common/default
+mkdir ../common/letters-depth-{0..6}
+mkdir ../common/toscrape-depth-{0..1}
+mkdir ../common/wikipedia-depth-{0..1}
+mkdir: cannot create directory ‘../common/wikipedia-depth-0’: File exists
+mkdir: cannot create directory ‘../common/wikipedia-depth-1’: File exists
+
+# LETTERS TESTS
+# -------------
+./crawler http://cs50tse.cs.dartmouth.edu/tse/letters/ letters-depth-0 0
+Saved ../common/letters-depth-0/1
+SUCCESS
+
+./crawler http://cs50tse.cs.dartmouth.edu/tse/letters/ letters-depth-1 1
+Saved ../common/letters-depth-1/1
+Saved ../common/letters-depth-1/2
+SUCCESS
+
+./crawler http://cs50tse.cs.dartmouth.edu/tse/letters/ letters-depth-2 2
+Saved ../common/letters-depth-2/1
+Saved ../common/letters-depth-2/2
+URL https://en.wikipedia.org/wiki/Algorithm is invalid!
+Saved ../common/letters-depth-2/3
+Saved ../common/letters-depth-2/4
+SUCCESS
+
+./crawler http://cs50tse.cs.dartmouth.edu/tse/letters/ letters-depth-3 3
+Saved ../common/letters-depth-3/1
+Saved ../common/letters-depth-3/2
+URL https://en.wikipedia.org/wiki/Algorithm is invalid!
+Saved ../common/letters-depth-3/3
+Saved ../common/letters-depth-3/4
+URL https://en.wikipedia.org/wiki/Breadth-first_search is invalid!
+Saved ../common/letters-depth-3/5
+Saved ../common/letters-depth-3/6
+Saved ../common/letters-depth-3/7
+SUCCESS
+
+./crawler http://cs50tse.cs.dartmouth.edu/tse/letters/ letters-depth-4 4
+Saved ../common/letters-depth-4/1
+Saved ../common/letters-depth-4/2
+URL https://en.wikipedia.org/wiki/Algorithm is invalid!
+Saved ../common/letters-depth-4/3
+Saved ../common/letters-depth-4/4
+URL https://en.wikipedia.org/wiki/Breadth-first_search is invalid!
+Saved ../common/letters-depth-4/5
+URL https://en.wikipedia.org/wiki/ENIAC is invalid!
+Saved ../common/letters-depth-4/6
+Saved ../common/letters-depth-4/7
+Saved ../common/letters-depth-4/8
+URL https://en.wikipedia.org/wiki/Depth-first_search is invalid!
+Saved ../common/letters-depth-4/9
+URL https://en.wikipedia.org/wiki/Computational_biology is invalid!
+SUCCESS
+
+./crawler http://cs50tse.cs.dartmouth.edu/tse/letters/ letters-depth-5 5
+Saved ../common/letters-depth-5/1
+Saved ../common/letters-depth-5/2
+URL https://en.wikipedia.org/wiki/Algorithm is invalid!
+Saved ../common/letters-depth-5/3
+Saved ../common/letters-depth-5/4
+URL https://en.wikipedia.org/wiki/Breadth-first_search is invalid!
+Saved ../common/letters-depth-5/5
+URL https://en.wikipedia.org/wiki/ENIAC is invalid!
+Saved ../common/letters-depth-5/6
+URL https://en.wikipedia.org/wiki/Graph_traversal is invalid!
+Saved ../common/letters-depth-5/7
+Saved ../common/letters-depth-5/8
+URL https://en.wikipedia.org/wiki/Fast_Fourier_transform is invalid!
+Saved ../common/letters-depth-5/9
+URL https://en.wikipedia.org/wiki/Depth-first_search is invalid!
+Saved ../common/letters-depth-5/10
+URL https://en.wikipedia.org/wiki/Computational_biology is invalid!
+SUCCESS
+
+./crawler http://cs50tse.cs.dartmouth.edu/tse/letters/ letters-depth-6 6
+Saved ../common/letters-depth-6/1
+Saved ../common/letters-depth-6/2
+URL https://en.wikipedia.org/wiki/Algorithm is invalid!
+Saved ../common/letters-depth-6/3
+Saved ../common/letters-depth-6/4
+URL https://en.wikipedia.org/wiki/Breadth-first_search is invalid!
+Saved ../common/letters-depth-6/5
+URL https://en.wikipedia.org/wiki/ENIAC is invalid!
+Saved ../common/letters-depth-6/6
+URL https://en.wikipedia.org/wiki/Graph_traversal is invalid!
+Saved ../common/letters-depth-6/7
+URL https://en.wikipedia.org/wiki/Huffman_coding is invalid!
+Saved ../common/letters-depth-6/8
+URL https://en.wikipedia.org/wiki/Fast_Fourier_transform is invalid!
+Saved ../common/letters-depth-6/9
+URL https://en.wikipedia.org/wiki/Depth-first_search is invalid!
+Saved ../common/letters-depth-6/10
+URL https://en.wikipedia.org/wiki/Computational_biology is invalid!
+SUCCESS
+
+# TOSCRAPE TESTS
+# --------------
+./crawler http://cs50tse.cs.dartmouth.edu/tse/toscrape/ toscrape-depth-0 0
+Saved ../common/toscrape-depth-0/1
+SUCCESS
+
+./crawler http://cs50tse.cs.dartmouth.edu/tse/toscrape/ toscrape-depth-1 1
+Saved ../common/toscrape-depth-1/1
+Saved ../common/toscrape-depth-1/2
+Saved ../common/toscrape-depth-1/3
+Saved ../common/toscrape-depth-1/4
+Saved ../common/toscrape-depth-1/5
+Saved ../common/toscrape-depth-1/6
+Saved ../common/toscrape-depth-1/7
+Saved ../common/toscrape-depth-1/8
+Saved ../common/toscrape-depth-1/9
+Saved ../common/toscrape-depth-1/10
+Saved ../common/toscrape-depth-1/11
+Saved ../common/toscrape-depth-1/12
+Saved ../common/toscrape-depth-1/13
+Saved ../common/toscrape-depth-1/14
+Saved ../common/toscrape-depth-1/15
+Saved ../common/toscrape-depth-1/16
+Saved ../common/toscrape-depth-1/17
+Saved ../common/toscrape-depth-1/18
+Saved ../common/toscrape-depth-1/19
+Saved ../common/toscrape-depth-1/20
+Saved ../common/toscrape-depth-1/21
+Saved ../common/toscrape-depth-1/22
+Saved ../common/toscrape-depth-1/23
+Saved ../common/toscrape-depth-1/24
+Saved ../common/toscrape-depth-1/25
+Saved ../common/toscrape-depth-1/26
+Saved ../common/toscrape-depth-1/27
+Saved ../common/toscrape-depth-1/28
+Saved ../common/toscrape-depth-1/29
+Saved ../common/toscrape-depth-1/30
+Saved ../common/toscrape-depth-1/31
+Saved ../common/toscrape-depth-1/32
+Saved ../common/toscrape-depth-1/33
+Saved ../common/toscrape-depth-1/34
+Saved ../common/toscrape-depth-1/35
+Saved ../common/toscrape-depth-1/36
+Saved ../common/toscrape-depth-1/37
+Saved ../common/toscrape-depth-1/38
+Saved ../common/toscrape-depth-1/39
+Saved ../common/toscrape-depth-1/40
+Saved ../common/toscrape-depth-1/41
+Saved ../common/toscrape-depth-1/42
+Saved ../common/toscrape-depth-1/43
+Saved ../common/toscrape-depth-1/44
+Saved ../common/toscrape-depth-1/45
+Saved ../common/toscrape-depth-1/46
+Saved ../common/toscrape-depth-1/47
+Saved ../common/toscrape-depth-1/48
+Saved ../common/toscrape-depth-1/49
+Saved ../common/toscrape-depth-1/50
+Saved ../common/toscrape-depth-1/51
+Saved ../common/toscrape-depth-1/52
+Saved ../common/toscrape-depth-1/53
+Saved ../common/toscrape-depth-1/54
+Saved ../common/toscrape-depth-1/55
+Saved ../common/toscrape-depth-1/56
+Saved ../common/toscrape-depth-1/57
+Saved ../common/toscrape-depth-1/58
+Saved ../common/toscrape-depth-1/59
+Saved ../common/toscrape-depth-1/60
+Saved ../common/toscrape-depth-1/61
+Saved ../common/toscrape-depth-1/62
+Saved ../common/toscrape-depth-1/63
+Saved ../common/toscrape-depth-1/64
+Saved ../common/toscrape-depth-1/65
+Saved ../common/toscrape-depth-1/66
+Saved ../common/toscrape-depth-1/67
+Saved ../common/toscrape-depth-1/68
+Saved ../common/toscrape-depth-1/69
+Saved ../common/toscrape-depth-1/70
+Saved ../common/toscrape-depth-1/71
+Saved ../common/toscrape-depth-1/72
+Saved ../common/toscrape-depth-1/73
+Saved ../common/toscrape-depth-1/74
+SUCCESS
+
+# WIKIPEDIA TESTS
+# ---------------
+./crawler http://cs50tse.cs.dartmouth.edu/tse/wikipedia/ wikipedia-depth-0 0
+Saved ../common/wikipedia-depth-0/1
+SUCCESS
+
+./crawler http://cs50tse.cs.dartmouth.edu/tse/wikipedia/ wikipedia-depth-0 0
+Saved ../common/wikipedia-depth-0/1
+SUCCESS
+
+./crawler http://cs50tse.cs.dartmouth.edu/tse/wikipedia/ wikipedia-depth-1 1
+Saved ../common/wikipedia-depth-1/1
+Saved ../common/wikipedia-depth-1/2
+Saved ../common/wikipedia-depth-1/3
+Saved ../common/wikipedia-depth-1/4
+Saved ../common/wikipedia-depth-1/5
+Saved ../common/wikipedia-depth-1/6
+Saved ../common/wikipedia-depth-1/7
+SUCCESS
+
+# NONEXISTENT DIRECTORY TEST
+./crawler http://cs50tse.cs.dartmouth.edu/tse/letters/ non-existent-dir 0
+Error: Invalid directoryError: The directory non-existent-dir does not exist
+FAIL
+
+# INVALID LINK
+./crawler http://cs50tse.cs.dartmouth.edu/tse/invalidLink/ default 3
+Error: URL http://cs50tse.cs.dartmouth.edu/tse/invalidLink/ was not reachable
+SUCCESS
+
+# NEGATIVE DEPTH
+./crawler http://cs50tse.cs.dartmouth.edu/tse/toscrape/ default -1
+Error: maxDepth must be non-negative
+
+# OUT OF CS50 DOMAIN
+./crawler https://www.google.com/ default 3
+Error: seedURL https://www.google.com/ is invalid
+
+# WRONG NUMBER OF ARGUMENTS
+./crawler sdfjkldsj sdfjkldjs 23 vdsjlkj
+Usage: ./crawler [seedURL] [pageDirectory] [maxDepth]
+Makefile:41: recipe for target 'test' failed
+make: *** [test] Error 1

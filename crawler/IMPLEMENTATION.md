@@ -7,9 +7,11 @@ Refer to `README.md` for specifics on the specs.
 
 ### Implementation
 
+The crawler is implemented in `C` USING `VSCode` as an editor. It was also developed using MacOS.
+
 The crawler is implemented according to the pseudocode given in the lab description. The only change is that the validity of the directory is checked at the beginning
 
-The data structures used in this implementation were a `struct bag` and `struct hashtable` as defined in `bag.h` and `hashtable.h`, respectively.
+The data structures used in this implementation were a `struct bag` and `struct hashtable` as defined in `bag.h` and `hashtable.h`, respectively. The `struct bag`, named _toCrawl_, held a list of all of the webpages that still needed to be visited. The `struct hashtable` held all of the websites' _URLs_ as keys with arbitrary values, so that no _URL_ is visited more than once.
 
 The algorithm works as so: 
 * Parse the command line and validate the parameters
@@ -32,7 +34,9 @@ This implementation, as mentioned in the lab description, decomposes the objecti
 * pageScanner - extracts _URLs_ from a page
 * pageSaver - outputs a page to the appropriate file
 
-For more specific pseudocode on each method, refer to the comments above each method in the `crawler.c` file 
+For more specific pseudocode on each method, refer to the comments above each method in the `crawler.c` file. 
+
+Just a quick note on the page saver: the files were saved to a directory inside of the common folder. This is regardless of the placement of the .c file, as long as it is within a directory parallel to the comon directory.
 
 ### Usage
 

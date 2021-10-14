@@ -16,8 +16,11 @@ The `crawler.c` should handle most edge cases, but for proper execution, it cert
 * the `seedURL`exists, as does the target directory
 * there is enough memory on the computer to handle the tasks
 * all of the necessary .o files exist for compilation
+* the program assumes that the directory is just the name of the local directory in common, e.g. wikipedia-depth-0 rather than ../common/wikipedia-depth-0. The program automatically appends the filepath prefix
 
 Additionally, because we used a _bag_ to store the webpages, we cannot expect the order of the extracted webpages to be consistently the same (although since our bag is a LinkedList it technically will always be the same). Thus, target output (in theory) may differ based on random factors.
+
+A final limitation to this crawler, as shown as such in the example of letters-depth-2, is that an _index_ page that leads back to the home page does not recognize them as the same page, and thus there will be a single copy of that page. According to EdDiscussion, this is alright, albeit a limitation. 
 
 ### Files
 

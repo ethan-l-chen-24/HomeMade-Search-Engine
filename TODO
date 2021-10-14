@@ -1,10 +1,5 @@
-Crawler: 
-    - testing.sh
-    - TESTING.md
 
 Common:
-    - comment pagedir.h
-    - comment pagedir.c
     - Makefile for ar
     - README.md
 

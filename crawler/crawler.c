@@ -79,13 +79,31 @@ int main(int argc, char* argv[])
         return 1;
     }
 
+    // check for positive non-negative maxDepth
+    if(maxDepth < 0) {
+        fprintf(stderr, "Error: maxDepth must be non-negative\n");
+        free(seedURL);
+        return 1;
+    }
+    if(!IsInternalURL(seedURL)) {
+        free(seedURL);
+        return 1;
+    }
+
     // call the crawler function, return successful if so, otherwise
     // free the seedURL and exit unsuccessful 
     if (crawler(seedURL, pageDir, maxDepth)) {
-        printf("SUCCESS\n");
+        // testing
+        #ifdef TEST
+            printf("SUCCESS\n");
+        #endif
         return 0;
     } else {
         if (seedURL != NULL) count_free(seedURL);
+        // testing
+        #ifdef TEST
+            printf("FAIL\n");
+        #endif
         return 1;
     }
 }
@@ -188,9 +206,11 @@ void processWebpages(hashtable_t* visitedURLs, bag_t* toCrawl, int* idCounter, c
             while ((nextURL = pageScanner(newPage, &pos)) != NULL) {
                 // check if within cs50tse domain and normalized
                 if (!IsInternalURL(nextURL)) {
-                    // optional print statement when URL can't be normalized
-                    // or is not within cs50tse domain, UNCOMMENT FOR USE
-                    //printf("URL %s is invalid!", nextURL);
+                    // testing print statement when URL can't be normalized
+                    // or is not within cs50tse domain
+                    #ifdef TEST
+                        printf("URL %s is invalid!\n", nextURL);  
+                    #endif
                     count_free(nextURL);
                     continue;
                 }
@@ -288,6 +308,12 @@ bool pageSaver(webpage_t* page, int* id, char* pageDir)
 	        if(pageHTML != NULL) fprintf(fp, "%s", pageHTML);
             
 	        fclose(fp); // close the file
+
+            // testing
+            #ifdef TEST
+                printf("Saved ../common/%s/%d\n", pageDir, *id);
+            #endif
+
             *id += 1; // increment the id
             return true;
         } else {

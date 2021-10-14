@@ -11,7 +11,8 @@ LIBS = -lm
 LLIBS = $L/libcs50-given.a
 
 # uncomment the following to turn on verbose memory logging
-#TESTING=-DMEMTEST
+# recomment -DTEST to turn off testing output in stdout
+TESTING=-DTEST #-DMEMTEST
 
 CFLAGS = -Wall -pedantic -std=c11 -ggdb $(TESTING) -I../lib
 CC = gcc
@@ -25,7 +26,7 @@ URL = letters
 DEPTH = 2
 
 crawler: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LLIBS) $(LIBS) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LLIBS) $(LIBS) -o $@ 
 
 crawler.o:  $L/file.h $L/memory.h $L/bag.h $L/hashtable.h
 
@@ -37,10 +38,10 @@ all: crawler
 
 # expects a file `test.names` to exist; it can contain any text.
 test: crawler testing.sh
-	./testing.sh 
+	bash -v testing.sh 
 
 run: crawler
-	./crawler $(SEED_DOMAIN)/$(URL)/ $(URL)-depth-$(DEPTH) $(DEPTH)
+	./crawler $(SEED_DOMAIN)/$(URL)/ $(URL)-depth-$(DEPTH) $(DEPTH) 
 
 # expects a file `test.names` to exist; it can contain any text.
 valgrind: crawler

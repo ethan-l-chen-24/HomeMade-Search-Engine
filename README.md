@@ -23,3 +23,4 @@ It is worth noting that
     - I wasn't sure where to put the directory that webpage files are inserted into, so I placed it in
         common, for I assumed that _indexer_ and _query_ are also going to draw from those files, so
         I thought it would make sense for it to be placed in the common section
+    - I made all of my * for pointers next to the data type, I just prefer char* string in comparison to something like char *string
