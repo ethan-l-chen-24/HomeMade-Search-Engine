@@ -8,7 +8,7 @@ C = ../common
 
 OBJS = crawler.o $L/file.o $L/memory.o  $C/pagedir.o
 LIBS = -lm
-LLIBS = $L/libcs50-given.a
+LLIBS = $L/libcs50.a $C/common.a
 
 # uncomment the following to turn on verbose memory logging
 # recomment -DTEST to turn off testing output in stdout

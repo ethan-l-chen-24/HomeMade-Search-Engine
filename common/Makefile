@@ -9,13 +9,19 @@ LIBS = -lm
 
 LIB = common.a
 
+# build archive file
 $(LIB): $(OBJS)
 	ar cr $(LIB) $(OBJS)
 
-pagedir.o: pagedir.h
+pagedir.o: pagedir.h ../libcs50/memory.h
 
-.PHONY: clean
+.PHONY: clean sourcelist
 
+# list all the sources and docs in this directory.
+sourcelist: Makefile *.md *.c *.h
+	@echo $^
+
+# clean up after our compilation
 clean:
 	rm -f core
 	rm -f $(LIB) *~ *.o
