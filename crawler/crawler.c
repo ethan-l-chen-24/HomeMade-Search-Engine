@@ -149,7 +149,7 @@ bool crawler(char* seedURL, char* pageDir, int maxDepth)
  * Pseudocode:
  *      1. get a webpage from the bag, fetch its HTML, and save its data to a file
  *      2. if still less than the current depth, get all of the URLs embedded in the HTML
- *      3. for each URL, check if it is internal (within cs50 domain), normalized, and not 
+ *      3. for each URL, check if it is internal (within cs50tse domain), normalized, and not 
  *              already checked
  *      4. create a new webpage for that URL and insert it into the bag
  *      5. delete each webpage before getting another webpage
@@ -186,8 +186,11 @@ void processWebpages(hashtable_t* visitedURLs, bag_t* toCrawl, int* idCounter, c
             // get all of the URLs embedded in the webpage
             char* nextURL;
             while ((nextURL = pageScanner(newPage, &pos)) != NULL) {
-                // check if within cs50 domain and normalized
+                // check if within cs50tse domain and normalized
                 if (!IsInternalURL(nextURL)) {
+                    // optional print statement when URL can't be normalized
+                    // or is not within cs50tse domain, UNCOMMENT FOR USE
+                    //printf("URL %s is invalid!", nextURL);
                     count_free(nextURL);
                     continue;
                 }
