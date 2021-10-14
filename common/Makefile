@@ -4,8 +4,8 @@
 # updated by Xia Zhou, July 2016, 2018, January 2019
 # edited for common by Ethan Chen, Oct. 2021
 
-OBJS = pagedir.o
-LIBS = -lm
+OBJS = pagedir.o ../libcs50/webpage.h
+LIBS = 
 
 LIB = common.a
 
@@ -13,7 +13,7 @@ LIB = common.a
 $(LIB): $(OBJS)
 	ar cr $(LIB) $(OBJS)
 
-pagedir.o: pagedir.h ../libcs50/memory.h
+pagedir.o: pagedir.h ../libcs50/webpage.h
 
 .PHONY: clean sourcelist
 

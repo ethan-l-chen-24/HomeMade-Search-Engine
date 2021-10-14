@@ -11,6 +11,7 @@
 #include <string.h>
 #include "pagedir.h"
 #include "../libcs50/memory.h"
+#include "../libcs50/webpage.h"
 
 /************** validDirectory() ******************/
 // see pagedir.h for description
@@ -35,7 +36,7 @@ bool validDirectory(char* directoryName)
         return true;
     } else {
         // if it fails, print error and return false for use in crawler.c
-        fprintf(stderr, "Error: directory %s is invalid!", directoryName);
+        fprintf(stderr, "Error: directory %s is invalid!\n", directoryName);
         return false;
     }
 }

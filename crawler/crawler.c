@@ -118,17 +118,15 @@ int main(int argc, char* argv[])
 bool crawler(char* seedURL, char* pageDir, int maxDepth) 
 {
     if (seedURL != NULL && pageDir != NULL) {
-
         // check if the directory is valid by creating a file labeled .crawler
         if (!validDirectory(pageDir)) {
-            fprintf(stderr, "Error: The directory %s does not exist\n", pageDir);
             return false;
         }
 
         // initialize the id counter, bag, and table
         int idCounter = 1;
         bag_t* toCrawl = bag_new();
-        hashtable_t* visitedURLs = hashtable_new(30);
+        hashtable_t* visitedURLs = hashtable_new(100);
         if (toCrawl == NULL || visitedURLs == NULL) {
             // make sure the items are created, handle errors
             fprintf(stderr, "Error: Out of memory\n");
@@ -148,7 +146,7 @@ bool crawler(char* seedURL, char* pageDir, int maxDepth)
 
         // run crawl algorithm
         processWebpages(visitedURLs, toCrawl, &idCounter, pageDir, maxDepth);
-        
+
         freeStructs(visitedURLs, toCrawl);
         return true;
     } else {
@@ -181,12 +179,14 @@ void processWebpages(hashtable_t* visitedURLs, bag_t* toCrawl, int* idCounter, c
     // go through as long as still webpages in the bag
     webpage_t* newPage;
     while ((newPage = bag_extract(toCrawl)) != NULL) {
+       
         // fetch the HTML of the page
         if (!pageFetcher(newPage)) {
             // if unable to, delete the webpage to free memory and continue to next loop
             webpage_delete(newPage);
             continue;
         }
+        
         // save the page's data to a file in the directory
         if (!pageSaver(newPage, idCounter, pageDir)) {
             // if unable, delete webpage to free memory and continue to next loop
@@ -240,6 +240,7 @@ bool pageFetcher(webpage_t* page)
 {
     if (page != NULL) {
         // fetch the HTML from the webpage
+        
         if (!webpage_fetch(page)) {
             char* URL = webpage_getURL(page);
             fprintf(stderr, "Error: URL %s was not reachable\n", URL);

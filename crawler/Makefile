@@ -6,15 +6,14 @@
 L = ../libcs50
 C = ../common
 
-OBJS = crawler.o $L/file.o $L/memory.o  $C/pagedir.o
-LIBS = -lm
-LLIBS = $L/libcs50.a $C/common.a
+OBJS = crawler.o 
+LIBS = $L/libcs50.a $C/common.a
 
 # uncomment the following to turn on verbose memory logging
 # recomment -DTEST to turn off testing output in stdout
 TESTING=-DTEST #-DMEMTEST
 
-CFLAGS = -Wall -pedantic -std=c11 -ggdb $(TESTING) -I../lib
+CFLAGS = -Wall -pedantic -std=c11 -ggdb $(TESTING) -I$L -I$C
 CC = gcc
 MAKE = make
 # for memory-leak tests
@@ -24,9 +23,6 @@ VALGRIND = valgrind --leak-check=full --show-leak-kinds=all
 SEED_DOMAIN = http://cs50tse.cs.dartmouth.edu/tse
 URL = letters
 DEPTH = 2
-
-crawler: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LLIBS) $(LIBS) -o $@ 
 
 .PHONY: all test valgrind clean run
 
@@ -48,3 +44,6 @@ clean:
 	rm -f *~ *.o
 	rm -f settest
 	rm -f core
+
+crawler: $(OBJS) $(LIBS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
