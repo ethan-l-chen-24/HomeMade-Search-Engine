@@ -39,3 +39,35 @@ bool validDirectory(char* directoryName)
         return false;
     }
 }
+
+/************** writeToDirectory() ******************/
+// see pagedir.h for description
+bool writeToDirectory(char* filepath, char* pageDir, webpage_t* page, int* id) {
+    FILE *fp = fopen(filepath, "w");
+    if (fp != NULL) {
+        // get the URL, depth, and HTML from the webpage
+        char* pageURL = webpage_getURL(page);
+        int pageDepth = webpage_getDepth(page);
+        char* pageHTML = webpage_getHTML(page);
+
+        // print the URL, depth, and HTML to the file
+        if(pageURL != NULL) fprintf(fp, "%s\n", pageURL);
+        fprintf(fp, "%d\n", pageDepth);
+	    if(pageHTML != NULL) fprintf(fp, "%s", pageHTML);
+            
+        fclose(fp); // close the file
+
+        // testing
+        #ifdef TEST
+            printf("Saved ../common/%s/%d\n", pageDir, *id);
+        #endif
+
+        *id += 1; // increment the id
+        return true;
+    } else {
+        // handle errors
+        fprintf(stderr, "Error: could not create file %s\n", filepath);
+        return false;
+    }
+    
+}

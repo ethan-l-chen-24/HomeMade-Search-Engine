@@ -10,15 +10,25 @@
 #define __PAGE_DIR
 
 #include <stdbool.h>
+#include "../libcs50/webpage.h"
 
 /******************* functions *******************/
 
-/******************* validDirectory ********************/
+/******************* validDirectory() ********************/
 /* Function used to check if a directory exists
  * 
  * Simultaneously writes an arbitrary file called '.crawler' to that directory
  * if it does exist, otherwise prints an error and returns false
 */
 bool validDirectory(char* directoryName);
+
+/***************** writeToDirectory() ***********************/
+/* Function used to save the contents of a webpage to a file at
+ * a given filepath
+ *
+ * checks if it is possible, and prints the URL, id, and HTML of a 
+ * webpage
+*/
+bool writeToDirectory(char* filepath, char* pageDir, webpage_t* page, int* id);
 
 #endif

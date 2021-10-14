@@ -1,8 +1,8 @@
-# Makefile for 'set' module
+# Makefile for 'crawler' module
 #
 # David Kotz, April 2016, 2017, 2019, 2021
 # updated by Xia Zhou, July 2016, 2018, January 2019
-# edited for set by Ethan Chen, Oct. 2021
+# edited for crawler by Ethan Chen, Oct. 2021
 L = ../libcs50
 C = ../common
 
@@ -27,10 +27,6 @@ DEPTH = 2
 
 crawler: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LLIBS) $(LIBS) -o $@ 
-
-crawler.o:  $L/file.h $L/memory.h $L/bag.h $L/hashtable.h
-
-$C/pagedir.o: $C/pagedir.h
 
 .PHONY: all test valgrind clean run
 

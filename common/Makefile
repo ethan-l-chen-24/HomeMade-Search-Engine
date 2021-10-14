@@ -1,13 +1,21 @@
-# Makefile for 'set' module
+# Makefile for 'common' module
 #
 # David Kotz, April 2016, 2017, 2019, 2021
 # updated by Xia Zhou, July 2016, 2018, January 2019
-# edited for set by Ethan Chen, Oct. 2021
-L = ../libcs50
-C = ../common
+# edited for common by Ethan Chen, Oct. 2021
 
-OBJS = crawler.o $L/file.o $L/memory.o  $C/pagedir.o
+OBJS = pagedir.o
 LIBS = -lm
-LLIBS = $L/libcs50-given.a
 
-# uncomment the following to turn on verbose memory logging
+LIB = common.a
+
+$(LIB): $(OBJS)
+	ar cr $(LIB) $(OBJS)
+
+pagedir.o: pagedir.h
+
+.PHONY: clean
+
+clean:
+	rm -f core
+	rm -f $(LIB) *~ *.o

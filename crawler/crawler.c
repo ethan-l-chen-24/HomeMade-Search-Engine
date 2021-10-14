@@ -281,9 +281,7 @@ char* pageScanner(webpage_t* page, int* pos)
  * Pseudocode:
  *      1. check if inputs are valid
  *      2. build the string
- *      3. open the file, if not possible, throw errors
- *      4. print the appropriate lines to the file
- *      5. increment the id number for future pages
+ *      3. write the file to the directory
  * 
  * Assumptions:
  *      1. inputs are valid, otherwise throw errors  
@@ -294,31 +292,11 @@ bool pageSaver(webpage_t* page, int* id, char* pageDir)
 
         // build the string and open the file
         char* fname = stringBuilder(id, pageDir);
-        FILE *fp = fopen(fname, "w");
-        if (fname != NULL) count_free(fname); // free the memory from the filename 
-        if (fp != NULL) {
-            // get the URL, depth, and HTML from the webpage
-            char* pageURL = webpage_getURL(page);
-            int pageDepth = webpage_getDepth(page);
-            char* pageHTML = webpage_getHTML(page);
-
-            // print the URL, depth, and HTML to the file
-            if(pageURL != NULL) fprintf(fp, "%s\n", pageURL);
-            fprintf(fp, "%d\n", pageDepth);
-	        if(pageHTML != NULL) fprintf(fp, "%s", pageHTML);
-            
-	        fclose(fp); // close the file
-
-            // testing
-            #ifdef TEST
-                printf("Saved ../common/%s/%d\n", pageDir, *id);
-            #endif
-
-            *id += 1; // increment the id
+        if(writeToDirectory(fname, pageDir, page, id)) {
+            if (fname != NULL) count_free(fname); // free the memory from the filename 
             return true;
         } else {
-            // handle errors
-            fprintf(stderr, "Error: could not create file %s\n", fname);
+            if (fname != NULL) count_free(fname);
             return false;
         }
     } else {
