@@ -11,6 +11,14 @@ After the crawler completes a cycle, the result should be a directory with one f
 
 ### Assumptions
 
+The `crawler.c` should handle most edge cases, but for proper execution, it certainly assumes many things. It assumes
+* the right number of arguments are given (3)
+* the `seedURL`exists, as does the target directory
+* there is enough memory on the computer to handle the tasks
+* all of the necessary .o files exist for compilation
+
+Additionally, because we used a _bag_ to store the webpages, we cannot expect the order of the extracted webpages to be consistently the same (although since our bag is a LinkedList it technically will always be the same). Thus, target output (in theory) may differ based on random factors.
+
 ### Files
 
 * `Makefile` - compilation procedure
@@ -22,6 +30,10 @@ After the crawler completes a cycle, the result should be a directory with one f
 
 ### Compilation
 
-to compile, call `make all` or `make crawler.o`
+To compile, call `make all` or `make crawler.o`
+
+### Testing
+
+See `TESTING.md`
 
 
