@@ -3,11 +3,7 @@
 
 ### crawler
 
-The *crawler* module is the first part of the Tiny Search Engine.
-It "crawls" a website for URLs and extracts those that are within the _cs50tse_ domain.
-It then continues to search each of those extracted webpages until a certain _depth_ is reached.
-As it searches, it also writes a file to a given _directory_ with the URL, depth, and HTML of each website.
-After the crawler completes a cycle, the result should be a directory with one file for each website searched, labeled with a unique _id_ number, counting up from 0.
+Refer to `README.md` for specifics on the specs.
 
 ### Usage
 
@@ -24,19 +20,19 @@ bool pageSaver(webpage_t* page, int* id, char* pageDir);
 
 ### Implementation
 
-### Assumptions
+The crawler is implemented according to the pseudocode given in the lab description.
 
-### Files
+The data structures used in this implementation were a `struct bag` and `struct hashtable` as defined in `bag.h` and `hashtable.h`, respectively.
 
-* `Makefile` - compilation procedure
-* `crawler.c` - the implementation
-* `README.md` - extra info about the module
-* `testing.sh` - shell testing script
-* `testing.out` - result of `make test &> testing.out`
-* `TESTING.md` - a description of the testing
+The algorithm works as so: 
+* Parse the command line and validate the parameters
+* make a webpage for the _seedURL_, marked with depth = 0
+* add that page to the `bag` of webpages to crawl
+* add that _URL_ to the `hashtable` of URLs seen
+* loop through the `bag` until empty, each time extracting a webpage
+* fetch the _HTML_ of that page and then save it to the document
+* if the `depth` of that webpage is less than the maximum, scan through the webpage's _HTML_ for all links
+* extract those links, check that they are not normalized or internal, and insert them into the `hashtable`
+* make a webpage for that _URL_ at `depth` + 1 and add it to the `bag`
 
-### Compilation
-
-to compile, call `make all` or `make crawler.o`
-
-### Testing
+For more specific pseudocode on each method, refer to the comments above each method in the `crawler.c` file 
