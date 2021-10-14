@@ -16,3 +16,10 @@ For this project, I attribute a few sources
     - finally, the support of my friends and family. Thank you mom and dad, even though
         I never even mentioned this project to you, for your unconditional love and
         psychopathic help throughout it all
+
+It is worth noting that
+    - I used all camelCase for this code. I know that the other modules that were given are all in snake   
+        case, but I can't stand the look of it, so sorry for that inconsistency!
+    - I wasn't sure where to put the directory that webpage files are inserted into, so I placed it in
+        common, for I assumed that _indexer_ and _query_ are also going to draw from those files, so
+        I thought it would make sense for it to be placed in the common section

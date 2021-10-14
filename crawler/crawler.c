@@ -23,10 +23,10 @@
 /************* function prototypes ********************/
 
 bool crawler(char* seedURL, char* pageDir, int depth);
+void processWebpages(hashtable_t* visitedURLs, bag_t* toCrawl, int* idCounter, char* pageDir, int maxDepth);
 bool pageFetcher(webpage_t* page);
 char* pageScanner(webpage_t* page, int* pos);
 bool pageSaver(webpage_t* page, int* id, char* pageDir);
-void processWebpages(hashtable_t* visitedURLs, bag_t* toCrawl, int* idCounter, char* pageDir, int maxDepth);
 
 /************* local function prototypes ********************/
 
