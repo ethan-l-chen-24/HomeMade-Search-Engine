@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
     // allocate memory and copy string for seedURL
     char* seedURLArg = argv[1];
     char* seedURL = count_malloc(strlen(seedURLArg) + 1);
-    if(seedURL == NULL) {
+    if (seedURL == NULL) {
         fprintf(stderr, "Error: out of memory\n");
         return 1;
     } 
@@ -80,12 +80,12 @@ int main(int argc, char* argv[])
     }
 
     // check for positive non-negative maxDepth
-    if(maxDepth < 0) {
+    if (maxDepth < 0) {
         fprintf(stderr, "Error: maxDepth must be non-negative\n");
         free(seedURL);
         return 1;
     }
-    if(!IsInternalURL(seedURL)) {
+    if (!IsInternalURL(seedURL)) {
         free(seedURL);
         return 1;
     }
@@ -290,7 +290,7 @@ bool pageSaver(webpage_t* page, int* id, char* pageDir)
     if (page != NULL && id != NULL && pageDir != NULL) {
         // build the string and open the file
         char* fname = stringBuilder(id, pageDir);
-        if(writeToDirectory(fname, page, id)) {
+        if (writeToDirectory(fname, page, id)) {
             if (fname != NULL) count_free(fname); // free the memory from the filename 
             #ifdef TEST
                 printf("Saved ../common/%s/%d\n", pageDir, *id-1);
@@ -326,7 +326,7 @@ bool pageSaver(webpage_t* page, int* id, char* pageDir)
 */
 char* stringBuilder(int* id, char* pageDir) 
 {
-    if(pageDir != NULL && id != NULL) {
+    if (pageDir != NULL && id != NULL) {
 
         // count the number of characters/digits in the id
         int idLen = 0;

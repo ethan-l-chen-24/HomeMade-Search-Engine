@@ -29,8 +29,8 @@ bool validDirectory(char* directoryName)
 
     // check if that directory exists by attempting to write to that file
     FILE *fp = fopen(testFile, "w");
-    if(testFile != NULL) free(testFile);
-    if(fp != NULL) {
+    if (testFile != NULL) free(testFile);
+    if (fp != NULL) {
         // success, write arbitrary lines in that file
         fprintf(fp, "This file is created by 'pagedir' to check if this directory exists");
         fclose(fp);
@@ -44,7 +44,8 @@ bool validDirectory(char* directoryName)
 
 /************** writeToDirectory() ******************/
 // see pagedir.h for description
-bool writeToDirectory(char* filepath, webpage_t* page, int* id) {
+bool writeToDirectory(char* filepath, webpage_t* page, int* id) 
+{
     FILE *fp = fopen(filepath, "w");
     if (fp != NULL) {
         // get the URL, depth, and HTML from the webpage
@@ -53,9 +54,9 @@ bool writeToDirectory(char* filepath, webpage_t* page, int* id) {
         char* pageHTML = webpage_getHTML(page);
 
         // print the URL, depth, and HTML to the file
-        if(pageURL != NULL) fprintf(fp, "%s\n", pageURL);
+        if (pageURL != NULL) fprintf(fp, "%s\n", pageURL);
         fprintf(fp, "%d\n", pageDepth);
-	    if(pageHTML != NULL) fprintf(fp, "%s", pageHTML);
+	    if (pageHTML != NULL) fprintf(fp, "%s", pageHTML);
             
         fclose(fp); // close the file
 
