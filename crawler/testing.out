@@ -209,7 +209,7 @@ SUCCESS
 
 # NONEXISTENT DIRECTORY TEST
 ./crawler http://cs50tse.cs.dartmouth.edu/tse/letters/ non-existent-dir 0
-Error: Invalid directoryError: The directory non-existent-dir does not exist
+Error: directory non-existent-dir is invalid!
 FAIL
 
 # INVALID LINK
@@ -223,10 +223,9 @@ Error: maxDepth must be non-negative
 
 # OUT OF CS50 DOMAIN
 ./crawler https://www.google.com/ default 3
-Error: seedURL https://www.google.com/ is invalid
 
 # WRONG NUMBER OF ARGUMENTS
 ./crawler sdfjkldsj sdfjkldjs 23 vdsjlkj
 Usage: ./crawler [seedURL] [pageDirectory] [maxDepth]
-Makefile:41: recipe for target 'test' failed
+Makefile:33: recipe for target 'test' failed
 make: *** [test] Error 1

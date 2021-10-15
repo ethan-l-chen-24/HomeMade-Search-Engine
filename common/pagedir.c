@@ -20,7 +20,8 @@ bool validDirectory(char* directoryName)
     // count the number of characters that will be in the filepath string
     char begin[] = "../common";
     char end[] = ".crawler";
-    int newSize = sizeof(directoryName) + sizeof(begin) + sizeof(end) + 1;
+    int counter = 0;
+    int newSize = strlen(directoryName) + strlen(begin) + strlen(end) + 3;
 
     // allocate the space and build that filepath
     char* testFile = count_malloc(newSize);
@@ -43,7 +44,7 @@ bool validDirectory(char* directoryName)
 
 /************** writeToDirectory() ******************/
 // see pagedir.h for description
-bool writeToDirectory(char* filepath, char* pageDir, webpage_t* page, int* id) {
+bool writeToDirectory(char* filepath, webpage_t* page, int* id) {
     FILE *fp = fopen(filepath, "w");
     if (fp != NULL) {
         // get the URL, depth, and HTML from the webpage
@@ -57,11 +58,6 @@ bool writeToDirectory(char* filepath, char* pageDir, webpage_t* page, int* id) {
 	    if(pageHTML != NULL) fprintf(fp, "%s", pageHTML);
             
         fclose(fp); // close the file
-
-        // testing
-        #ifdef TEST
-            printf("Saved ../common/%s/%d\n", pageDir, *id);
-        #endif
 
         *id += 1; // increment the id
         return true;

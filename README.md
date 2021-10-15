@@ -13,6 +13,7 @@ For this project, I attribute a few sources
         the way, is way too difficult in C)
     - the Makefiles from previous labs, which as usual, I copied a fair amount from
     - the Pseudocode, which I not only adapted, but modified slightly for my IMPLEMENTATION.md file
+    - Huge HUGE shoutout to Kysen for helping me debug an error in my code
     - finally, the support of my friends and family. Thank you mom and dad, even though
         I never even mentioned this project to you, for your unconditional love and
         psychopathic help throughout it all

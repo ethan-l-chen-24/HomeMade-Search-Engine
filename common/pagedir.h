@@ -29,6 +29,6 @@ bool validDirectory(char* directoryName);
  * checks if it is possible, and prints the URL, id, and HTML of a 
  * webpage
 */
-bool writeToDirectory(char* filepath, char* pageDir, webpage_t* page, int* id);
+bool writeToDirectory(char* filepath, webpage_t* page, int* id);
 
 #endif

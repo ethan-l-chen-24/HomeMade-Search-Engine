@@ -179,7 +179,6 @@ void processWebpages(hashtable_t* visitedURLs, bag_t* toCrawl, int* idCounter, c
     // go through as long as still webpages in the bag
     webpage_t* newPage;
     while ((newPage = bag_extract(toCrawl)) != NULL) {
-       
         // fetch the HTML of the page
         if (!pageFetcher(newPage)) {
             // if unable to, delete the webpage to free memory and continue to next loop
@@ -240,7 +239,6 @@ bool pageFetcher(webpage_t* page)
 {
     if (page != NULL) {
         // fetch the HTML from the webpage
-        
         if (!webpage_fetch(page)) {
             char* URL = webpage_getURL(page);
             fprintf(stderr, "Error: URL %s was not reachable\n", URL);
@@ -290,11 +288,13 @@ char* pageScanner(webpage_t* page, int* pos)
 bool pageSaver(webpage_t* page, int* id, char* pageDir) 
 {
     if (page != NULL && id != NULL && pageDir != NULL) {
-
         // build the string and open the file
         char* fname = stringBuilder(id, pageDir);
-        if(writeToDirectory(fname, pageDir, page, id)) {
+        if(writeToDirectory(fname, page, id)) {
             if (fname != NULL) count_free(fname); // free the memory from the filename 
+            #ifdef TEST
+                printf("Saved ../common/%s/%d\n", pageDir, *id-1);
+            #endif
             return true;
         } else {
             if (fname != NULL) count_free(fname);
