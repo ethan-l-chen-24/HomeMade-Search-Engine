@@ -1,7 +1,0 @@
-
-Common:
-    - Makefile for ar
-    - README.md
-
-Other:
-    - make sure that make all works!
