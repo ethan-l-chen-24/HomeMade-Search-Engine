@@ -30,7 +30,6 @@ bool pageSaver(webpage_t* page, int* id, char* pageDir);
 
 /************* local function prototypes ********************/
 
-static char* stringBuilder(int* id, char* pageDir);
 static void delete(void* item);
 static void freeStructs(hashtable_t* ht, bag_t* bag);
 
@@ -289,11 +288,13 @@ bool pageSaver(webpage_t* page, int* id, char* pageDir)
 {
     if (page != NULL && id != NULL && pageDir != NULL) {
         // build the string and open the file
-        char* fname = stringBuilder(id, pageDir);
+        char* idString = intToString(*id);
+        char* fname = stringBuilder(pageDir, idString);
+        free(idString);
         if (writeToDirectory(fname, page, id)) {
             if (fname != NULL) count_free(fname); // free the memory from the filename 
             #ifdef TEST
-                printf("Saved ../common/%s/%d\n", pageDir, *id-1);
+                printf("Saved ../data/%s/%d\n", pageDir, *id-1);
             #endif
             return true;
         } else {
@@ -303,51 +304,6 @@ bool pageSaver(webpage_t* page, int* id, char* pageDir)
     } else {
         fprintf(stderr, "Error: could not save page %s\n", webpage_getURL(page));
         return false;
-    }
-}
-
-/************** stringBuilder() ******************/
-/* creates the filepath of the file to be created based on the
- * directory name and the id of the current webpage. The path 
- * chosen was in the 'common' directory, which is located parallel
- * to the crawler directory. So, the filepath would be 
- * ../common/[pageDir]/[id]
- * 
- * Pseudocode:
- *      1. make sure the inputs are not null
- *      2. count the number of characters in the id
- *      3. create the rest of the sections of the filepath
- *      4. find the total size of the filepath and malloc
- *      5. print the appropriate filepath to the string and return
- * 
- * Assumptions:
- *      1. the common directory exists and is placed in the loc as described
- *      2. inputs are valid, errors thrown in pageSaver
-*/
-char* stringBuilder(int* id, char* pageDir) 
-{
-    if (pageDir != NULL && id != NULL) {
-
-        // count the number of characters/digits in the id
-        int idLen = 0;
-        int idCopy = *id; // create a copy object to not alter the original id
-        while (idCopy != 0) {
-            idCopy /= 10;
-            idLen++;
-        }
-        
-        // count the number of characters that will be in the final filepath string
-        char prefix[] = "../common/";
-        char slash[] = "/";
-        int destSize = idLen + strlen(pageDir) + strlen(prefix) + strlen(slash) + 1; // +1 for /0 character
-
-        // allocate the space and print the filepath to that memory
-        char* filename = count_malloc(destSize);
-        sprintf(filename, "../common/%s/%d", pageDir, *id);
-
-        return filename;
-    } else {
-        return NULL;
     }
 }
 

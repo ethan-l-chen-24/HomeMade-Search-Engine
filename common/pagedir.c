@@ -18,7 +18,7 @@
 bool validDirectory(char* directoryName) 
 {
     // count the number of characters that will be in the filepath string
-    char begin[] = "../common";
+    char begin[] = "../data";
     char end[] = ".crawler";
     int counter = 0;
     int newSize = strlen(directoryName) + strlen(begin) + strlen(end) + 3;
@@ -68,4 +68,43 @@ bool writeToDirectory(char* filepath, webpage_t* page, int* id)
         return false;
     }
     
+}
+
+/************** stringBuilder() ******************/
+// see pagedir.h for description
+char* stringBuilder(char* pageDir, char* end) 
+{
+    if (pageDir != NULL) {
+        
+        // count the number of characters that will be in the final filepath string
+        char prefix[] = "../data/";
+        char slash[] = "/";
+        int destSize = strlen(end) + strlen(pageDir) + strlen(prefix) + strlen(slash) + 1; // +1 for /0 character
+
+        // allocate the space and print the filepath to that memory
+        char* filename = count_malloc(destSize);
+        sprintf(filename, "../data/%s/%s", pageDir, end);
+        return filename;
+    } else {
+        return NULL;
+    }
+}
+
+/************** stringBuilder() ******************/
+// see pagedir.h for description
+char* intToString(int x)
+{
+    int xLen = 0;
+    int xCopy = x; // create a copy object to not alter the original id
+    while (xCopy != 0) {
+        xCopy /= 10;
+        xLen++;
+    }
+    char* xString = count_malloc(xLen + 1);
+    if(xString == NULL) {
+        fprintf(stderr, "Error: Out of memory");
+        return NULL;
+    }
+    sprintf(xString, "%d", x);
+    return xString;
 }

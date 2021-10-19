@@ -3,14 +3,14 @@
 # testing.sh - testing file for crawler module
 
 # REMOVE DIRECTORIES IFF EXIST AND MAKE NEW
-rm -rf ../common/letters-depth-[0-6]
-rm -rf ../common/toscrape-depth-[0-1]
-rm -rf ../common/crawler-depth-[0-1]
-rm -rf ../common/default
-mkdir ../common/default
-mkdir ../common/letters-depth-{0..6}
-mkdir ../common/toscrape-depth-{0..1}
-mkdir ../common/wikipedia-depth-{0..1}
+rm -rf ../data/letters-depth-[0-6]
+rm -rf ../data/toscrape-depth-[0-1]
+rm -rf ../data/crawler-depth-[0-1]
+rm -rf ../data/default
+mkdir ../data/default
+mkdir ../data/letters-depth-{0..6}
+mkdir ../data/toscrape-depth-{0..1}
+mkdir ../data/wikipedia-depth-{0..1}
 
 # LETTERS TESTS
 # -------------

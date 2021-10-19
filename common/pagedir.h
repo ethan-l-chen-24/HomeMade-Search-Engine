@@ -31,4 +31,19 @@ bool validDirectory(char* directoryName);
 */
 bool writeToDirectory(char* filepath, webpage_t* page, int* id);
 
+/***************** stringBuilder() ***********************/
+/* Function used to build the filepath of a file given
+ * a directory and a suffix
+ *
+ * returns the path
+*/
+char* stringBuilder(char* pageDir, char* end);
+
+/***************** intToString() ***********************/
+/* turns an int into a string
+ *
+ * returns the path
+*/
+char* intToString(int x);
+
 #endif

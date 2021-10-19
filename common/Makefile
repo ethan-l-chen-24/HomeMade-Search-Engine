@@ -4,7 +4,7 @@
 # updated by Xia Zhou, July 2016, 2018, January 2019
 # edited for common by Ethan Chen, Oct. 2021
 
-OBJS = pagedir.o ../libcs50/webpage.h
+OBJS = pagedir.o word.o index.o
 LIBS = 
 
 LIB = common.a
@@ -12,8 +12,6 @@ LIB = common.a
 # build archive file
 $(LIB): $(OBJS)
 	ar cr $(LIB) $(OBJS)
-
-pagedir.o: pagedir.h ../libcs50/webpage.h
 
 .PHONY: clean sourcelist
 
