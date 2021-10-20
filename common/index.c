@@ -26,6 +26,11 @@ bool saveIndex(char* filename, char* pageDir, hashtable_t* index)
     return true;
 }
 
+hashtable_t* loadIndex(char* directoryName)
+{
+    return NULL;
+}
+
 bool indexFile(FILE* fp, hashtable_t* index, int id) 
 {
     char* URL = freadlinep(fp);
@@ -74,9 +79,4 @@ static void printCTHelper(void* arg, const int key, const int count)
 {
     FILE* fp = (FILE*) arg;
 	fprintf(fp, "%d %d ", key, count);
-}
-
-hashtable_t* loadIndex(char* directoryName)
-{
-    return NULL;
 }

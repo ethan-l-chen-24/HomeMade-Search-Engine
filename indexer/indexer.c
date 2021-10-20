@@ -5,8 +5,6 @@
 #include <string.h>
 #include "../libcs50/hashtable.h"
 #include "../libcs50/counters.h"
-#include "../libcs50/webpage.h"
-#include "../libcs50/file.h"
 #include "../libcs50/memory.h"
 #include "../common/pagedir.h"
 #include "../common/word.h"
@@ -65,8 +63,8 @@ bool indexer(char* pageDir, char* indexFilename)
             return false;
         }
         hashtable_delete(index, deleteCT);
-        free(pageDir);
-        free(indexFilename);
+        count_free(pageDir);
+        count_free(indexFilename);
         return true;
     } else {
         return false;
@@ -86,16 +84,15 @@ bool buildIndex(char* pageDir, hashtable_t* index)
         printf("Reading file %s\n", file);
         indexFile(fp, index, id);
         fclose(fp);
-        free(file);
-        free(idString);
+        count_free(file);
+        count_free(idString);
 
         id++;
         idString = intToString(id);
         file = stringBuilder(pageDir, idString); // CHANGE
     }
-    fclose(fp);
-    free(file);
-    free(idString);
+    count_free(file);
+    count_free(idString);
     return true;
 }
 

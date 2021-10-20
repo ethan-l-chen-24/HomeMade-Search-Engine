@@ -7,7 +7,7 @@ L = ../libcs50
 C = ../common
 
 OBJS = indexer.o 
-LIBS = $L/libcs50.a $C/common.a
+LIBS = $C/common.a $L/libcs50.a 
 
 # uncomment the following to turn on verbose memory logging
 # recomment -DTEST to turn off testing output in stdout
@@ -20,8 +20,8 @@ MAKE = make
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all
 
 # editable test values
-PAGE_DIRECTORY = wikipedia
-DEPTH = 1
+PAGE_DIRECTORY = letters
+DEPTH = 2
 
 .PHONY: all test valgrind clean run
 
