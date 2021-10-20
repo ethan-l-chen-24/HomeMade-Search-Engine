@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
+#include "index.h"
 #include "../libcs50/hashtable.h"
 #include "../libcs50/counters.h"
 #include "../libcs50/webpage.h"
@@ -73,4 +74,9 @@ static void printCTHelper(void* arg, const int key, const int count)
 {
     FILE* fp = (FILE*) arg;
 	fprintf(fp, "%d %d ", key, count);
+}
+
+hashtable_t* loadIndex(char* directoryName)
+{
+    return NULL;
 }

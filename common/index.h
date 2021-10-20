@@ -6,8 +6,8 @@
  * Ethan Chen, October 2021
  */
 
-#ifndef __PAGE_DIR
-#define __PAGE_DIR
+#ifndef __INDEX
+#define __INDEX
 
 #include <stdbool.h>
 #include "../libcs50/webpage.h"
@@ -19,7 +19,7 @@
 /* Function used to check if a directory exists
  * 
 */
-bool saveIndex(char* directoryName);
+bool saveIndex(char* filename, char* pageDir, hashtable_t* index);
 
 /******************* validDirectory() ********************/
 /* Function used to check if a directory exists

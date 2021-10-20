@@ -6,7 +6,6 @@
 
 OBJS = pagedir.o word.o index.o
 LIBS = 
-
 LIB = common.a
 
 # build archive file
