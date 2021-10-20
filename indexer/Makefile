@@ -36,7 +36,7 @@ run: indexer
 
 # expects a file `test.names` to exist; it can contain any text.
 valgrind: indexer
-	$(VALGRIND) ./indexer $(PAGE_DIRECTORY)-depth-$(DEPTH) $(PAGE_DIRECTORY)-index-$(DEPTH)
+	$(VALGRIND) ./indexer valgrind valgrind-index
 
 clean:
 	rm -rf *.dSYM  # MacOS debugger info

@@ -39,11 +39,5 @@ bool writeToDirectory(char* filepath, webpage_t* page, int* id);
 */
 char* stringBuilder(char* pageDir, char* end);
 
-/***************** intToString() ***********************/
-/* turns an int into a string
- *
- * returns the path
-*/
-char* intToString(int x);
 
 #endif

@@ -1,3 +1,12 @@
+
+/* 
+ * index.c - library to read and write index files
+ *
+ * see index.h for more information.
+ *
+ * Ethan Chen, Oct. 2021
+ */
+
 #include <stdlib.h>
 #include <stdbool.h>
 #include "index.h"
@@ -5,57 +14,133 @@
 #include "../libcs50/counters.h"
 #include "../libcs50/webpage.h"
 #include "../libcs50/file.h"
+#include "../libcs50/memory.h"
 #include "pagedir.h"
 #include "word.h"
 
+/************* global types ****************/
+
+typedef struct index {
+    hashtable_t* table;
+} index_t;
+
+/************* local function prototypes ********************/
 
 static void printCT(void* arg, const char* key, void* item);
 static void printCTHelper(void* arg, const int key, const int count);
-static bool readFile(webpage_t* page, hashtable_t* index, int id);
+static bool readFile(webpage_t* page, index_t* index, int id);
+static void deleteCT(void* item);
 
-
-bool saveIndex(char* filename, char* pageDir, hashtable_t* index)
+/************** newIndex() ******************/
+// see index.h for description
+index_t* newIndex(const int tableSize)
 {
+    // allocate memory for the index
+    index_t* index = count_malloc(sizeof(index_t));
+    if(index != NULL) {
+        // set the inner hashtable to a new hashtable of the specified size
+        if((index->table = hashtable_new(tableSize)) != NULL) return index;
+        else return NULL;
+    } else {
+        fprintf(stderr, "Error: out of memory");
+        return NULL;
+    }
+}
+
+/************** newIndex() ******************/
+// see index.h for description
+void deleteIndex(index_t* index) 
+{
+    if(index != NULL) {
+        if(index->table != NULL) {
+            // free the hashtable
+            hashtable_delete(index->table, deleteCT);
+        }
+        // free the struct
+        free(index);
+    }
+} 
+
+/************** saveIndex() ******************/
+// see index.h for description
+bool saveIndex(char* filename, char* pageDir, index_t* index)
+{
+    // build the filepath of the index file
     char* filepath = stringBuilder(pageDir, filename);
     FILE* fp;
+    // try to open that file (should work as long as dir exists)
 	if((fp = fopen(filepath, "w")) != NULL) {
-		hashtable_iterate(index, fp, printCT);
+        // iterate through the table and print the file in the format specified
+		hashtable_iterate(index->table, fp, printCT);
         fclose(fp);
 	}
     free(filepath);
     return true;
 }
 
-hashtable_t* loadIndex(char* directoryName)
+/************** loadIndex() ******************/
+// see index.h for description
+index_t* loadIndex(char* directoryName)
 {
-    return NULL;
+    
 }
 
-bool indexFile(FILE* fp, hashtable_t* index, int id) 
+/************** indexFile() ******************/
+// see index.h for description
+bool indexCrawlerFile(FILE* fp, index_t* index, int id) 
 {
+    // read the first line of the file as the URL and turn into webpage
     char* URL = freadlinep(fp);
     webpage_t* page = webpage_new(URL, 0, NULL);
+    // check if it is normalized and internal
+    if(!IsInternalURL(URL)) {
+        fprintf(stderr, "Error: URL %s is invalid\n", URL);
+        return false;
+    }
+    // fetch the pages HTML
     if(!webpage_fetch(page)) {
         fprintf(stderr, "Error: page %s cannot be fetched\n", URL);
         return false;
     }
-    readFile(page, index, id);
+    // read the words in the file and insert them into the index
+    if(!readWordsInFile(page, index, id)) {
+        fprintf(stderr, "Error: page %s cannot be read\n", URL);
+        return false;
+    }
+    // delete the webpage and its inner hashtable
     webpage_delete(page);
     return true;
 }
 
-static bool readFile(webpage_t* page, hashtable_t* index, int id)
+/************** readWordsInFile() ******************/
+/*
+ * increments through every word in the file and inserts it into the index
+ *
+ * Pseudocode:
+ *      1. loop over all of the words
+ *      2. make the word lowercase
+ *      3. check if the word already exists in the index
+ *      4. if it doesn't create an entry with a counterset as the item
+ *      5. if it does, load that counterset
+ *      6. insert the id into that counterset
+*/
+static bool readWordsInFile(webpage_t* page, index_t* index, int id)
 {
     int loc = 0;
     char* word;
+    // read through every WORD in the webpage
     while ((word = webpage_getNextWord(page, &loc)) != NULL) {
+        // make the word lowercase
         normalizeWord(word);
-        void* item = hashtable_find(index, word);
+        // check if the item exists in the index
+        void* item = hashtable_find(index->table, word);
         if (item == NULL) {
+            // if it doesn't create an entry for the word in the index and insert the id
             counters_t* wordCounter = counters_new();
             counters_add(wordCounter, id);
-            hashtable_insert(index, word, wordCounter);
+            hashtable_insert(index->table, word, wordCounter);
         } else {
+            // if it already exists, add the id to the counters
             counters_t* wordCounter = (counters_t*) item;
             counters_add(wordCounter, id);
         }
@@ -64,19 +149,54 @@ static bool readFile(webpage_t* page, hashtable_t* index, int id)
     return true;
 }
 
+/************** printCT() ******************/
+/*
+ * prints out the index in the correct formatting
+ *
+ * Formatting:
+ *      should print every word, followed by a sequence of pairs of id numbers and counts
+ *      separated by spaces
+ *  
+ * Examples:
+ *      word [id] [count] [id] [count] [id] [count]
+ *      hello 2 3 3 7 4 1
+ *      world 3 4 4 3 7 5 5 9
+*/
 static void printCT(void* arg, const char* key, void* item) 
 {
-	FILE* fp = (FILE*) arg;
-    if(item != NULL) {
-	    fprintf(fp, "%s ", key);
-	    counters_t* ctrs = (counters_t*) item;
-	    counters_iterate(ctrs, arg, printCTHelper);
+    if(arg != NULL) {
+        // cast the arg to a file
+	    FILE* fp = (FILE*) arg;
+        if(item != NULL) {
+            // print the key (word)
+	        fprintf(fp, "%s ", key);
+            // iterate through the counters and print the key and item
+	        counters_t* ctrs = (counters_t*) item;
+	        counters_iterate(ctrs, arg, printCTHelper);
+        }
+        // line break
+	    fprintf(fp, "\n");
     }
-	fprintf(fp, "\n");
 }
 
+/************** printCTHelper() ******************/
+/* a helper that helps print out the counterset */
 static void printCTHelper(void* arg, const int key, const int count) 
 {
-    FILE* fp = (FILE*) arg;
-	fprintf(fp, "%d %d ", key, count);
+    if(arg != NULL) {
+        // print the key and count to the file
+        FILE* fp = (FILE*) arg;
+	    fprintf(fp, "%d %d ", key, count);
+    }
+}
+
+/************* deleteCT() *************/
+/* a helper function to help the hashtable delete its counter objects */
+static void deleteCT(void* item)
+{
+    // cast to a counters struct so we can delete it
+	counters_t* ct = item;
+	if (ct != NULL) {
+		counters_delete(ct);
+	}
 }

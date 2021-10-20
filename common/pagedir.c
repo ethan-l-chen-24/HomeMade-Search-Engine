@@ -89,22 +89,3 @@ char* stringBuilder(char* pageDir, char* end)
         return NULL;
     }
 }
-
-/************** stringBuilder() ******************/
-// see pagedir.h for description
-char* intToString(int x)
-{
-    int xLen = 0;
-    int xCopy = x; // create a copy object to not alter the original id
-    while (xCopy != 0) {
-        xCopy /= 10;
-        xLen++;
-    }
-    char* xString = count_malloc(xLen + 1);
-    if(xString == NULL) {
-        fprintf(stderr, "Error: Out of memory");
-        return NULL;
-    }
-    sprintf(xString, "%d", x);
-    return xString;
-}

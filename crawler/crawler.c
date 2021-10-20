@@ -19,6 +19,7 @@
 #include "../libcs50/bag.h"
 #include "../libcs50/hashtable.h"
 #include "../common/pagedir.h"
+#include "../common/word.h"
 
 /************* function prototypes ********************/
 
