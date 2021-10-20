@@ -37,7 +37,7 @@ index_t* newIndex(const int tableSize)
 {
     // allocate memory for the index
     index_t* index = count_malloc(sizeof(index_t));
-    if(index != NULL) {
+    if(index != NULL) { 
         // set the inner hashtable to a new hashtable of the specified size
         if((index->table = hashtable_new(tableSize)) != NULL) return index;
         else return NULL;
