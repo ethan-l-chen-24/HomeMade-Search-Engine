@@ -41,7 +41,8 @@ void deleteIndex(index_t* index);
 bool saveIndexToFile(char* filename, index_t* index);
 
 /******************* loadIndex() ********************/
-/* Function used to read an index file and load the hashtable
+/* Function used to read an index file and load the data
+ * into a hashtable
  *
  * Pseudocode:
  *      1. create a new index hashtable

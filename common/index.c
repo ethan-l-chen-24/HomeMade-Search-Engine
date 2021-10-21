@@ -26,6 +26,7 @@ typedef struct index {
 
 /************* local function prototypes ********************/
 
+static void loadWordInIndex(index_t* index, char* word, FILE* fp);
 static void printCT(void* arg, const char* key, void* item);
 static void printCTHelper(void* arg, const int key, const int count);
 static bool readWordsInFile(webpage_t* page, index_t* index, int id);
@@ -82,43 +83,33 @@ bool saveIndexToFile(char* filename, index_t* index)
 // see index.h for description
 index_t* loadIndex(char* filepath)
 {
+    // create the index
     index_t* index = newIndex(800);
     if(index == NULL) {
         fprintf(stderr, "Error: Out of memory");
         return NULL;
     }
+
+    // build the filepath
     char* indexFilePath = stringBuilder(NULL, filepath);
     if(indexFilePath == NULL) {
         fprintf(stderr, "filepath could not be built");
         return NULL;
     }
+
+    // open the index file
     printf("Reading file %s\n", indexFilePath);
     FILE* fp = fopen(indexFilePath, "r");
     count_free(indexFilePath);
     if(fp != NULL) {
+        // read the first word in the line as long as it exists
+        // and put that word into the index
         char* word;
-        while((word = freadwordp(fp)) != NULL) {
-            counters_t* wordFreqCtr = counters_new();
-            if(wordFreqCtr == NULL) return NULL;
-            if(!hashtable_insert(index->table, word, wordFreqCtr)) {
-                fprintf(stderr, "Error: invalid file; duplicate words");
-                fclose(fp);
-                count_free(word);
-                deleteIndex(index);
-                return NULL;
-            }
-            count_free(word);
-    
-            int id;
-            int count;
-            while(fscanf(fp, "%d %d ", &id, &count) == 2) {
-                printf("%d %d\n", id, count);
-                counters_set(wordFreqCtr, id, count);
-            }
-        }
+        while((word = freadwordp(fp)) != NULL) loadWordInIndex(index, word, fp); 
         fclose(fp);
         return index;
     } else {
+        // handle errors, free memory
         deleteIndex(index);
         fprintf(stderr, "Error: invalid filepath");
         return NULL;
@@ -138,6 +129,37 @@ bool indexWebpage(index_t* index, webpage_t* webpage, int id)
     // delete the webpage and its inner hashtable
     webpage_delete(webpage);
     return true;
+}
+
+/************** readWordsInFile() ******************/
+/*
+ * adds a word to the index
+ *
+ * Pseudocode:
+ *      1. creates a counterset
+ *      2. inserts the counterset into hashtable as a value with 
+ *          the word as the key
+ *      3. scan for pairs of ints and add them to the counterset
+*/
+static void loadWordInIndex(index_t* index, char* word, FILE* fp) 
+{
+    // create a new counter to insert into the index
+    counters_t* wordFreqCtr = counters_new();
+    if(wordFreqCtr == NULL) return;
+    // insert the word into the hashtable
+    if(!hashtable_insert(index->table, word, wordFreqCtr)) {
+        fprintf(stderr, "Error: duplicate words");
+    }
+    count_free(word);
+    
+    // scan the rest of the line for pairs of ints, stop when no longer found
+    int id;
+    int count;
+    while(fscanf(fp, "%d %d ", &id, &count) == 2) {
+        // add the pairs to the index where the first is the id and the 
+        // second is the count
+        counters_set(wordFreqCtr, id, count);
+    }
 }
 
 /************** readWordsInFile() ******************/
