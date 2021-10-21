@@ -6,7 +6,7 @@
 L = ../libcs50
 C = ../common
 
-OBJS = indexer.o 
+OBJS = indexer.o indextest.o
 LIBS = $C/common.a $L/libcs50.a 
 
 # uncomment the following to turn on verbose memory logging
@@ -23,18 +23,20 @@ VALGRIND = valgrind --leak-check=full --show-leak-kinds=all
 PAGE_DIRECTORY = letters
 DEPTH = 2
 
-.PHONY: all test valgrind clean run
+.PHONY: all shelltest runindextest valgrind clean run
 
 all: indexer indextest
 
-# expects a file `test.names` to exist; it can contain any text.
+# expects a file script 'testing.sh' to exist; it can contain any text.
 test: indexer testing.sh
 	bash -v testing.sh 
+
+runindextest: indextest
+	./indextest $(PAGE_DIRECTORY)-index-$(DEPTH) $(PAGE_DIRECTORY)-index-$(DEPTH)-test
 
 run: indexer
 	./indexer $(PAGE_DIRECTORY)-depth-$(DEPTH) $(PAGE_DIRECTORY)-index-$(DEPTH)
 
-# expects a file `test.names` to exist; it can contain any text.
 valgrind: indexer
 	$(VALGRIND) ./indexer valgrind valgrind-index
 
@@ -45,8 +47,8 @@ clean:
 	rm -f core
 
 indexer: $(OBJS) $(LIBS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
+	$(CC) $(CFLAGS) indexer.o $(LIBS) -o $@
 
 indextest: $(OBJS) $(LIBS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
+	$(CC) $(CFLAGS) indextest.o $(LIBS) -o $@
 

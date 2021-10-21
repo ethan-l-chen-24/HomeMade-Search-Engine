@@ -46,7 +46,9 @@ bool saveIndexToFile(char* filename, index_t* index);
  * Pseudocode:
  *      1. create a new index hashtable
  *      2. build the filepath
- *      3. 
+ *      3. read the first word of each line and add it to the index
+ *      4. scan the file for pairs of ints and add it to the word's counter
+ *      5. repeat until the file has been completely read
 */
 index_t* loadIndex(char* filepath);
 

@@ -66,6 +66,8 @@ int main(const int argc, char* argv[])
 
     // check if the directory exists
     if(!pageDirValidate(pageDir)) {
+        count_free(indexFilename);
+        count_free(pageDir);
         return false;
     }
 
@@ -94,10 +96,14 @@ bool indexer(char* pageDir, char* indexFilename)
         index_t* index = newIndex(800);
         // build the index from the crawler files
         if(!buildIndex(pageDir, index)) {
+            count_free(indexFilename);
+            count_free(pageDir);
             return false;
         }
         // save the index to the given filename
         if(!saveIndexToFile(indexFilename, index)) {
+            count_free(indexFilename);
+            count_free(pageDir);
             return false;
         }
         // free up memory
@@ -106,6 +112,8 @@ bool indexer(char* pageDir, char* indexFilename)
         count_free(indexFilename);
         return true;
     } else {
+        if(indexFilename != NULL) count_free(indexFilename);
+        if(pageDir != NULL) count_free(pageDir);
         fprintf(stderr, "Error: Null-Pointer Exception");
         return false;
     }

@@ -31,7 +31,7 @@ bool validDirectory(char* directoryName)
 
     // check if that directory exists by attempting to write to that file
     FILE *fp = fopen(testFile, "w");
-    if (testFile != NULL) free(testFile);
+    if (testFile != NULL) count_free(testFile);
     if (fp != NULL) {
         // success, write arbitrary lines in that file
         fprintf(fp, "This file is created by 'pagedir' to check if this directory exists");
@@ -79,8 +79,16 @@ bool pageDirValidate(char* pageDir)
     char* crawlerFile = ".crawler";
     char* filepath = stringBuilder(pageDir, crawlerFile);
     // try to open the file (in read mode)
-    if(stringBuilder != NULL && fopen(filepath, "r") != NULL) {
-        return true;
+    if(stringBuilder != NULL) {
+        FILE* fp;
+        if((fp = fopen(filepath, "r")) != NULL) {
+            count_free(filepath);
+            fclose(fp);
+            return true;
+        } else {
+            count_free(filepath);
+            return false;
+        }
     } else {
         return false;
     }
@@ -99,12 +107,14 @@ webpage_t* loadPageToWebpage(char* pageDir, int* id) {
 
     // build the filepath
     char* filepath = stringBuilder(pageDir, idString);
+    count_free(idString);
     if(filepath == NULL) return NULL;
 
     // open the crawler file
     FILE* fp;
     if ((fp = fopen(filepath, "r")) != NULL) {
         printf("Reading file %s\n", filepath);
+        count_free(filepath);
         // read the first line of the file as the URL
         char* URL = freadlinep(fp);
         fclose(fp);
@@ -127,6 +137,7 @@ webpage_t* loadPageToWebpage(char* pageDir, int* id) {
         return page;
     } else {
         fprintf(stderr, "could not load webpage of URL %s", filepath);
+        count_free(filepath);
         return NULL;
     }
 

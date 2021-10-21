@@ -67,7 +67,6 @@ bool saveIndexToFile(char* filename, index_t* index)
 {
     // build the filepath of the index file
     char* filepath = stringBuilder(NULL, filename);
-    printf("%s", filepath);
     FILE* fp;
     // try to open that file (should work as long as dir exists)
 	if((fp = fopen(filepath, "w")) != NULL) {
@@ -93,24 +92,34 @@ index_t* loadIndex(char* filepath)
         fprintf(stderr, "filepath could not be built");
         return NULL;
     }
+    printf("Reading file %s\n", indexFilePath);
     FILE* fp = fopen(indexFilePath, "r");
+    count_free(indexFilePath);
     if(fp != NULL) {
         char* word;
         while((word = freadwordp(fp)) != NULL) {
             counters_t* wordFreqCtr = counters_new();
             if(wordFreqCtr == NULL) return NULL;
             if(!hashtable_insert(index->table, word, wordFreqCtr)) {
-                fprintf(stderr, "Error: could not insert into index");
+                fprintf(stderr, "Error: invalid file; duplicate words");
+                fclose(fp);
+                count_free(word);
+                deleteIndex(index);
                 return NULL;
             }
+            count_free(word);
     
             int id;
             int count;
             while(fscanf(fp, "%d %d ", &id, &count) == 2) {
+                printf("%d %d\n", id, count);
                 counters_set(wordFreqCtr, id, count);
             }
         }
+        fclose(fp);
+        return index;
     } else {
+        deleteIndex(index);
         fprintf(stderr, "Error: invalid filepath");
         return NULL;
     }
