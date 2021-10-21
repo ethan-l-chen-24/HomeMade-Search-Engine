@@ -46,7 +46,7 @@ bool saveIndex(char* filename, char* pageDir, index_t* index);
  *      1. 
  *      2. 
 */
-index_t* loadIndex(char* directoryName);
+index_t* loadIndex(char* filepath);
 
 /******************* indexCrawlerFile() ********************/
 /* Takes a file in the crawler format and loads its words into the hashtable

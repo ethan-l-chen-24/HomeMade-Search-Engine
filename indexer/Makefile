@@ -25,7 +25,7 @@ DEPTH = 2
 
 .PHONY: all test valgrind clean run
 
-all: indexer
+all: indexer indextest
 
 # expects a file `test.names` to exist; it can contain any text.
 test: indexer testing.sh
@@ -45,5 +45,8 @@ clean:
 	rm -f core
 
 indexer: $(OBJS) $(LIBS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
+
+indextest: $(OBJS) $(LIBS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
 

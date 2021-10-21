@@ -80,7 +80,7 @@ bool saveIndex(char* filename, char* pageDir, index_t* index)
 
 /************** loadIndex() ******************/
 // see index.h for description
-index_t* loadIndex(char* directoryName)
+index_t* loadIndex(char* filename)
 {
     
 }
