@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include "../common/index.h"
 
+bool indexTest(char* newFile, index_t* index);
+
 int main(const int argc, char* argv[]) 
 {
     char* program = argv[0];
@@ -30,7 +32,9 @@ int main(const int argc, char* argv[])
     index_t* index = loadIndex(oldFile);
     if (index != NULL) {
         if (saveIndexToFile(newFile, index)) {
-            
+            return 0;
+        } else {
+            return 1;
         }
     }
 }

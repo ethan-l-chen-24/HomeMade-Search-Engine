@@ -79,7 +79,7 @@ bool pageDirValidate(char* pageDir)
     char* crawlerFile = ".crawler";
     char* filepath = stringBuilder(pageDir, crawlerFile);
     // try to open the file (in read mode)
-    if(stringBuilder != NULL && open(filepath, "r") != NULL) {
+    if(stringBuilder != NULL && fopen(filepath, "r") != NULL) {
         return true;
     } else {
         return false;
