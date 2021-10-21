@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "../common/index.h"
 
 int main(const int argc, char* argv[]) 
 {
@@ -12,21 +13,24 @@ int main(const int argc, char* argv[])
 
     // allocate memory and copy string for pageDir
     char* oldFileArg = argv[1];
-    char* oldFile = count_malloc(strlen(oldFileArg) + 1);
+    char* oldFile = stringBuilder(NULL, oldFileArg);
     if (oldFile == NULL) {
         fprintf(stderr, "Error: out of memory\n");
         return 1;
     } 
-    strcpy(oldFile, oldFileArg);
 
     // allocate memory and copy string for indexFilename
     char* newFileArg = argv[2];
-    char* newFile = count_malloc(strlen(newFileArg) + 1);
+    char* newFile = stringBuilder(NULL, newFileArg);
     if (newFile == NULL) {
         fprintf(stderr, "Error: out of memory\n");
         return 1;
     } 
-    strcpy(newFile, newFileArg);
 
-    
+    index_t* index = loadIndex(oldFile);
+    if (index != NULL) {
+        if (saveIndexToFile(newFile, index)) {
+            
+        }
+    }
 }

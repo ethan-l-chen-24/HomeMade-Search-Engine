@@ -28,7 +28,7 @@ typedef struct index {
 
 static void printCT(void* arg, const char* key, void* item);
 static void printCTHelper(void* arg, const int key, const int count);
-static bool readFile(webpage_t* page, index_t* index, int id);
+static bool readWordsInFile(webpage_t* page, index_t* index, int id);
 static void deleteCT(void* item);
 
 /************** newIndex() ******************/
@@ -63,10 +63,11 @@ void deleteIndex(index_t* index)
 
 /************** saveIndex() ******************/
 // see index.h for description
-bool saveIndex(char* filename, char* pageDir, index_t* index)
+bool saveIndexToFile(char* filename, index_t* index)
 {
     // build the filepath of the index file
-    char* filepath = stringBuilder(pageDir, filename);
+    char* filepath = stringBuilder(NULL, filename);
+    printf("%s", filepath);
     FILE* fp;
     // try to open that file (should work as long as dir exists)
 	if((fp = fopen(filepath, "w")) != NULL) {
@@ -78,37 +79,55 @@ bool saveIndex(char* filename, char* pageDir, index_t* index)
     return true;
 }
 
-/************** loadIndex() ******************/
+/************** loadIndex() ******************/ // COMMENT THIS 
 // see index.h for description
-index_t* loadIndex(char* filename)
+index_t* loadIndex(char* filepath)
 {
+    index_t* index = newIndex(800);
+    if(index == NULL) {
+        fprintf(stderr, "Error: Out of memory");
+        return NULL;
+    }
+    char* indexFilePath = stringBuilder(NULL, filepath);
+    if(indexFilePath == NULL) {
+        fprintf(stderr, "filepath could not be built");
+        return NULL;
+    }
+    FILE* fp = fopen(indexFilePath, "r");
+    if(fp != NULL) {
+        char* word;
+        while((word = freadwordp(fp)) != NULL) {
+            counters_t* wordFreqCtr = counters_new();
+            if(wordFreqCtr == NULL) return NULL;
+            if(!hashtable_insert(index->table, word, wordFreqCtr)) {
+                fprintf(stderr, "Error: could not insert into index");
+                return NULL;
+            }
     
+            int id;
+            int count;
+            while(fscanf(fp, "%d %d ", &id, &count) == 2) {
+                counters_set(wordFreqCtr, id, count);
+            }
+        }
+    } else {
+        fprintf(stderr, "Error: invalid filepath");
+        return NULL;
+    }
 }
 
-/************** indexFile() ******************/
+/************** indexWebpage() ******************/
 // see index.h for description
-bool indexCrawlerFile(FILE* fp, index_t* index, int id) 
+bool indexWebpage(index_t* index, webpage_t* webpage, int id) 
 {
-    // read the first line of the file as the URL and turn into webpage
-    char* URL = freadlinep(fp);
-    webpage_t* page = webpage_new(URL, 0, NULL);
-    // check if it is normalized and internal
-    if(!IsInternalURL(URL)) {
-        fprintf(stderr, "Error: URL %s is invalid\n", URL);
-        return false;
-    }
-    // fetch the pages HTML
-    if(!webpage_fetch(page)) {
-        fprintf(stderr, "Error: page %s cannot be fetched\n", URL);
-        return false;
-    }
+    char* URL = webpage_getURL(webpage);
     // read the words in the file and insert them into the index
-    if(!readWordsInFile(page, index, id)) {
+    if(!readWordsInFile(webpage, index, id)) {
         fprintf(stderr, "Error: page %s cannot be read\n", URL);
         return false;
     }
     // delete the webpage and its inner hashtable
-    webpage_delete(page);
+    webpage_delete(webpage);
     return true;
 }
 

@@ -12,6 +12,7 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include "../libcs50/webpage.h"
 
 /**************** global types ****************/
 typedef struct index index_t; // holds the hashtable used for indexing
@@ -37,26 +38,25 @@ void deleteIndex(index_t* index);
  *      2. Iterate through the items in the hashtable
  *      3. Print the word followed by the counters key and item using CTprint
 */
-bool saveIndex(char* filename, char* pageDir, index_t* index);
+bool saveIndexToFile(char* filename, index_t* index);
 
 /******************* loadIndex() ********************/
 /* Function used to read an index file and load the hashtable
  *
  * Pseudocode:
- *      1. 
- *      2. 
+ *      1. create a new index hashtable
+ *      2. build the filepath
+ *      3. 
 */
 index_t* loadIndex(char* filepath);
 
-/******************* indexCrawlerFile() ********************/
-/* Takes a file in the crawler format and loads its words into the hashtable
+/******************* indexWebpage() ********************/
+/* Takes a webpage and loads its words into the hashtable
  *
  * Pseudocode:
- *      1.  open the file and read the first line
- *      2. rebuild the webpage struct, validate, and fetch the HTML
- *      3. read the file's words and insert them into the hashmap
- *      4. delete the webpage
+ *      1. read the words in the file if possible and load the index
+ *      2. delete the webpage
 */
-bool indexCrawlerFile(FILE* fp, index_t* index, int id);
+bool indexWebpage(index_t* index, webpage_t* webpage, int id);
 
 #endif

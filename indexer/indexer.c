@@ -14,10 +14,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "../libcs50/counters.h"
 #include "../libcs50/memory.h"
 #include "../common/pagedir.h"
-#include "../common/word.h"
 #include "../common/index.h"
 
 /************* function prototypes ********************/
@@ -67,7 +65,7 @@ int main(const int argc, char* argv[])
     strcpy(indexFilename, indexFnameArg);
 
     // check if the directory exists
-    if(!validDirectory(pageDir)) {
+    if(!pageDirValidate(pageDir)) {
         return false;
     }
 
@@ -99,7 +97,7 @@ bool indexer(char* pageDir, char* indexFilename)
             return false;
         }
         // save the index to the given filename
-        if(!saveIndex(indexFilename, pageDir, index)) {
+        if(!saveIndexToFile(indexFilename, index)) {
             return false;
         }
         // free up memory
@@ -119,10 +117,9 @@ bool indexer(char* pageDir, char* indexFilename)
  * files to index and the name of the index file to write
  * 
  * Pseudocode:
- *      1. Given the directory, build the filepath directory/1
- *      2. open the file if possible and index the data
- *      3. increment to the next file, filepath directory/2...
- *      4. increment until the file doesn't exist
+ *      1. Given the directory, load the webpage
+ *      2. Open the file if possible and index the data
+ *      3. Continue until the webpage no longer exists
  * 
  * Assumptions:
  *      1. All of the files inside of the directory are labeled 1-numFiles
@@ -131,32 +128,17 @@ bool buildIndex(char* pageDir, index_t* index)
 {
     // validate parameters
     if(pageDir != NULL && index != NULL) {
-        // begin at file id 1
-        int id = 1;
 
-        // build the filepath
-        char* idString = intToString(id);
-        char* file = stringBuilder(pageDir, idString);
-
-        // loop through as long as the file exists
-        FILE* fp;
-        while ((fp = fopen(file, "r")) != NULL) {
-            printf("Reading file %s\n", file);
-            // index the file's data
-            indexCrawlerFile(fp, index, id);
-            // free up memory
-            fclose(fp);
-            count_free(file);
-            count_free(idString);
-
-            // increment to the next case (next ID)
-            id++;
-            idString = intToString(id);
-            file = stringBuilder(pageDir, idString);
+        // loop through as long as the file exists 
+        int id = 1; 
+        // load the crawler files into webpages as long as they exist
+        webpage_t* crawlerPage;  
+        while ((crawlerPage = loadPageToWebpage(pageDir, &id)) != NULL) {
+            // index them
+            if(!indexWebpage(index, crawlerPage, id)) {
+                fprintf(stderr, "Error: couldn't index page");
+            }
         }
-        // free up memory
-        count_free(file);
-        count_free(idString);
         return true;
     } else {
         fprintf(stderr, "Error: Null-Pointer Exception");
