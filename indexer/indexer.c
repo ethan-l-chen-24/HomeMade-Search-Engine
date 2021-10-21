@@ -1,5 +1,5 @@
 /* 
- * indexer.c - crawler module for tiny search engine 
+ * indexer.c - indexer module for tiny search engine 
  *
  * given a directory previously accessed and filled by the crawler, the indexer reads
  * each of the files, rebuilds the webpage, and extracts every word from the HTML to build

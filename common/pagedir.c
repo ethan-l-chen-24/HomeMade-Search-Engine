@@ -96,7 +96,8 @@ bool pageDirValidate(char* pageDir)
 
 /************** loadPageToWebpage() ******************/
 // see pagedir.h for description
-webpage_t* loadPageToWebpage(char* pageDir, int* id) {
+webpage_t* loadPageToWebpage(char* pageDir, int* id) 
+{
     // turn the id int into a string
     char* idString = intToString(*id);
     if(idString == NULL) {
@@ -140,7 +141,6 @@ webpage_t* loadPageToWebpage(char* pageDir, int* id) {
         count_free(filepath);
         return NULL;
     }
-
 }
 
 /************** stringBuilder() ******************/
