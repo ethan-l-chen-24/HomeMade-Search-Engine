@@ -10,13 +10,14 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "index.h"
-#include "hashtable.h"
-#include "counters.h"
-#include "webpage.h"
-#include "file.h"
-#include "memory.h"
 #include "pagedir.h"
 #include "word.h"
+#include "../libcs50/hashtable.h"
+#include "../libcs50/counters.h"
+#include "../libcs50/webpage.h"
+#include "../libcs50/file.h"
+#include "../libcs50/memory.h"
+
 
 /************* global types ****************/
 
@@ -122,7 +123,7 @@ index_t* loadIndex(char* filepath)
     // build the filepath
     char* indexFilePath = stringBuilder(NULL, filepath);
     if (indexFilePath == NULL) {
-        fprintf(stderr, "filepath could not be built");
+        fprintf(stderr, "filepath could not be built\n");
         return NULL;
     }
 

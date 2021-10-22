@@ -41,3 +41,4 @@ It is worth noting that
     - I changed the output directory of crawler from common to data
     - I rearranged some of the crawler methods and added some new helper methods to the common directory (don't worry, crawler still works)
     - I was not able to fix the problem when it comes to the include statement and absolute paths. It seemed to me that even though there were no visible (red squiggly) errors, it simply would not compile without the absolute filepath
+    - I added some of my own methods outisde of the requirements. Namely, I made the intToString() method in word.c and stringBuilder() in pagedir.c, as both methods are used very frequently throughout all modules

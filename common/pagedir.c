@@ -10,10 +10,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "pagedir.h"
-#include "memory.h"
-#include "webpage.h"
-#include "file.h"
 #include "word.h"
+#include "../libcs50/memory.h"
+#include "../libcs50/webpage.h"
+#include "../libcs50/file.h"
+
 
 /************** validDirectory() ******************/
 // see pagedir.h for description
@@ -137,7 +138,7 @@ webpage_t* loadPageToWebpage(char* pageDir, int* id)
         }
         return page;
     } else {
-        fprintf(stderr, "could not load webpage of URL %s", filepath);
+        fprintf(stderr, "could not load webpage of URL %s\n", filepath);
         count_free(filepath);
         return NULL;
     }

@@ -12,7 +12,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "word.h"
-#include "memory.h"
+#include "../libcs50/memory.h"
 
 /************** normalizeWord() ******************/
 // see word.h for description
