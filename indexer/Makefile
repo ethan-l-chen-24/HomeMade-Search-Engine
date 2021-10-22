@@ -7,7 +7,7 @@ L = ../libcs50
 C = ../common
 
 OBJS = indexer.o indextest.o
-LIBS = $C/common.a $L/libcs50.a 
+LIBS = $L/libcs50.a $C/common.a
 
 # uncomment the following to turn on verbose memory logging
 # recomment -DTEST to turn off testing output in stdout
@@ -25,7 +25,7 @@ DEPTH = 2
 
 .PHONY: all test runindextest valgrind valgrind2 clean run
 
-all: indexer indextest
+all: indexer indextest $L/libcs50.a $C/common.a
 
 # expects a file script 'testing.sh' to exist; it can contain any text.
 test: indexer testing.sh
