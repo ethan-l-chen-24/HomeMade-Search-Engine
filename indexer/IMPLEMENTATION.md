@@ -3,7 +3,15 @@
 
 ### Implementation
 
-Here are short function descriptions of those that are relevant to the indexer.
+The indexer is implemented in _C_ using _VSCode_ as an editor. It was also developed using MacOS.
+
+The indexer is implemented with respect to the design specs in `DESIGN.md`.
+
+The major data structure, as mentioned, is a `struct index` as defined in `index.h`. It is a wrapper struct for a `struct hashtable` as defined in `hashtable.h`, but its methods initialize it more specifically as a `struct hashtable` with a `char*` as its key (as usual) and a `struct counter` as its value. The `struct counters` is defined in `counters.h`
+
+### Functions
+
+Here are the function declarations of those necessary to indexer.
 
 #### index.h
 ```c
@@ -29,3 +37,5 @@ char* intToString(int x);
 ```
 
 ### Usage
+
+The _indexer_ module implemented in `indexer.c` provides the main `indexer()` method that can be used in other modules. However, the majority of the methods created for the indexer are in the _common_ directory, as shown above. These can be called from any other module as long as the makefile imports the `common.a` archive correctly.
