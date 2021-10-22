@@ -10,13 +10,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "index.h"
-#include "pagedir.h"
-#include "word.h"
-#include "../libcs50/hashtable.h"
-#include "../libcs50/counters.h"
-#include "../libcs50/webpage.h"
-#include "../libcs50/file.h"
-#include "../libcs50/memory.h"
+#include <pagedir.h>
+#include <word.h>
+#include <hashtable.h>
+#include <counters.h>
+#include <webpage.h>
+#include <file.h>
+#include <memory.h>
 
 
 /************* global types ****************/

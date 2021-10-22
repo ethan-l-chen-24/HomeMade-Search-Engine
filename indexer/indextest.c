@@ -14,9 +14,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "index.h"
-#include "pagedir.h"
-#include "memory.h"
+#include <index.h>
+#include <pagedir.h>
+#include <memory.h>
 
 /************* function prototypes ********************/
 

@@ -35,9 +35,15 @@ And some helper modules that provide data structures:
 
 1. _index_ of words and their associated files and frequencies
 
-Those helper modules also provide very important functions for loading, reading, and writing the _index_ to a file. See `index.h` for more information.
+The _index_ module, as well as a few others also provide very important functions for loading, reading, and writing the _index_ to a file. See `index.h`, `word.h`, and `pagedir.h` for more information. Here are short function descriptions of those that are relevant to the indexer.
 
-1. 
+```c
+static void loadWordInIndex(index_t* index, char* word, FILE* fp); 
+static void printCT(void* arg, const char* key, void* item);
+static void printCTHelper(void* arg, const int key, const int count);
+static bool readWordsInFile(webpage_t* page, index_t* index, int id);
+static void deleteCT(void* item);
+```
 
 ### Pseudo-Code for logic/algorithmic flow
 
@@ -68,6 +74,10 @@ _Integration testing._ Assemble the indexer and test it as a whole. In each case
 
 3. Test the indexer with a pageDir that exists but isn't a crawler directory
 
-4. Test the indexer on all of the crawler directories made by `make test` in the crawler module
+4. Test the indexer with the incorrect number of arguments
 
-5. Run the same tests on indextest to test the code and also prove that the loadIndex method works well
+5. Test the indexer on all of the crawler directories made by `make test` in the crawler module
+
+6. Test valgrind using `make valgrind`
+
+7. Run the same tests on indextest to test the code and also prove that the loadIndex method works well

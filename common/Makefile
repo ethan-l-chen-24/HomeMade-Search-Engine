@@ -5,11 +5,11 @@
 # edited for common by Ethan Chen, Oct. 2021
 
 OBJS = pagedir.o word.o index.o
-LIBS = $L/libcs50.a $C/common.a
+LIBS = $L/libcs50.a 
 LIB = common.a
 
 # build archive file
-$(LIB): $(OBJS) 
+$(LIB): $(OBJS) $(LIBS)
 	ar cr $(LIB) $(OBJS)
 
 .PHONY: clean sourcelist

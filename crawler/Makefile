@@ -7,7 +7,7 @@ L = ../libcs50
 C = ../common
 
 OBJS = crawler.o 
-LIBS = $L/libcs50.a $C/common.a
+LIBS = $C/common.a $L/libcs50.a 
 
 # uncomment the following to turn on verbose memory logging
 # recomment -DTEST to turn off testing output in stdout

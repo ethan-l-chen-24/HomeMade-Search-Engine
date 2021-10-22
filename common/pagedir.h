@@ -10,7 +10,7 @@
 #define __PAGE_DIR
 
 #include <stdbool.h>
-#include "../libcs50/webpage.h"
+#include <webpage.h>
 
 /******************* functions *******************/
 

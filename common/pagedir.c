@@ -10,10 +10,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "pagedir.h"
-#include "word.h"
-#include "../libcs50/memory.h"
-#include "../libcs50/webpage.h"
-#include "../libcs50/file.h"
+#include <word.h>
+#include <memory.h>
+#include <webpage.h>
+#include <file.h>
 
 
 /************** validDirectory() ******************/

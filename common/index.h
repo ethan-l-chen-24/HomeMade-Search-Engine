@@ -13,7 +13,7 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include "../libcs50/webpage.h"
+#include <webpage.h>
 
 /**************** global types ****************/
 typedef struct index index_t; // holds the hashtable used for indexing

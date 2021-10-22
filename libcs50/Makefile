@@ -38,7 +38,7 @@ hashtable.o: hashtable.h set.h jhash.h
 jhash.o: jhash.h
 memory.o: memory.h
 set.o: set.h
-webpage.o:  webpage.h
+webpage.o: webpage.h
 
 .PHONY: clean sourcelist
 
