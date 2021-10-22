@@ -27,7 +27,6 @@ cross 5 2 7 4 8 2
 compatible 6 2 7 1 
 consistently 7 1 
 encompasses 8 1 
-cl 8 1 
 polymer 8 1 
 notes 3 3 4 2 5 2 7 2 8 4 
 authors 3 1 5 1 
@@ -138,7 +137,6 @@ requirements 4 1 5 5 6 1 7 2 8 2
 threshold 4 4 
 serving 5 4 
 dependent 6 2 7 1 
-et 4 1 7 1 
 clinton 5 1 6 1 
 tabard 5 1 
 safe 7 1 
@@ -190,7 +188,6 @@ alternative 4 3 6 1 8 1
 present 4 1 5 1 6 2 7 1 8 2 
 humor 5 1 
 manchester 5 2 
-dd 6 1 
 verilog 7 5 
 erase 8 1 
 zentralblatt 8 2 
@@ -220,7 +217,6 @@ stadium 5 1
 likeness 5 1 
 additionally 7 1 
 applying 3 1 4 1 7 1 
-p 3 2 4 3 5 10 6 2 7 6 8 17 
 compiling 3 1 
 interaction 3 1 4 1 5 1 6 2 7 1 8 5 
 boot 6 2 
@@ -230,7 +226,6 @@ cliffs 7 3
 oxford 5 1 
 worldwide 6 2 8 1 
 addressability 7 1 
-q 3 1 4 1 5 1 6 1 7 1 8 1 
 indexed 3 1 
 moreover 3 1 
 removeafter 3 1 
@@ -254,7 +249,6 @@ elected 5 5
 hottest 5 1 
 tradition 5 7 7 2 
 advancement 5 2 
-nj 7 3 
 wgcategorytreepagecategoryoptions 3 1 4 1 5 1 6 1 7 1 8 1 
 coding 3 1 8 5 
 turning 3 1 
@@ -431,7 +425,6 @@ drivers 6 1
 advocacy 6 1 8 1 
 reckoner 8 1 
 possibly 3 2 4 1 7 1 8 1 
-nd 4 4 5 2 7 5 8 3 
 inspiration 5 1 
 seat 5 2 
 understanding 5 1 8 2 
@@ -465,7 +458,6 @@ emulate 6 1
 little 6 1 7 1 8 1 
 bletchley 8 1 
 correction 8 1 
-en 3 8 4 6 5 7 6 8 7 8 8 9 
 ahead 4 2 
 probable 4 1 
 conscious 4 1 
@@ -529,7 +521,6 @@ embedded 6 1 7 10 8 1
 delimiters 7 2 
 filmed 8 1 
 cache 3 4 4 14 5 2 6 2 7 2 8 2 
-rd 3 1 4 1 7 2 
 vldb 4 1 
 liberal 5 5 8 1 
 fave 5 1 
@@ -541,7 +532,6 @@ francisco 8 1
 position 3 3 4 3 
 degrades 4 3 
 sampling 4 1 
-km 5 9 
 sought 5 4 
 celebration 5 2 
 sting 5 1 
@@ -551,7 +541,6 @@ graham 5 1 8 1
 cli 6 1 7 1 
 similarity 7 1 
 overwritten 7 1 
-np 8 3 
 lies 8 1 
 diagram 3 4 4 1 
 increases 3 1 4 3 
@@ -604,18 +593,15 @@ allocator 3 1 4 1
 donald 3 1 4 1 5 1 8 2 
 ostensibly 5 1 
 beer 5 2 
-lp 5 1 6 1 
 morten 5 1 
 formal 7 1 8 13 
 synonyms 7 1 
 underlie 8 1 
-ce 8 1 
 breaking 8 1 
 indices 3 3 4 2 
 firstname 3 2 
 represented 4 1 5 1 6 1 8 1 
 colliding 4 1 
-ti 4 1 5 1 6 1 7 1 8 1 
 controlled 6 1 
 declaration 7 6 
 documenting 8 1 
@@ -684,7 +670,6 @@ asked 7 3
 mathematically 8 1 
 directly 3 5 4 1 7 4 8 1 
 line 3 1 4 1 5 2 6 8 7 11 
-th 3 2 4 4 5 13 6 2 7 3 8 1 
 inefficient 3 1 4 1 
 dictionary 3 1 4 1 6 1 7 1 
 abolish 5 1 
@@ -708,14 +693,11 @@ challenged 3 1 4 1 5 1 7 4
 california 3 1 5 1 6 1 7 1 8 1 
 manner 3 1 4 1 
 head 3 12 4 3 5 1 6 1 
-n 3 27 4 34 5 6 6 3 7 10 8 5 
-cd 4 1 5 1 6 3 7 1 8 1 
 tables 4 43 
 collegium 5 1 
 literature 5 1 8 1 
 speakers 5 1 
 carelessly 7 1 
-qt 7 1 
 imagine 8 1 
 technicism 8 1 
 maintained 3 2 7 1 
@@ -741,7 +723,6 @@ characteristics 4 1 7 4 8 1
 stepping 4 1 
 secure 5 1 
 posing 5 1 
-dr 5 5 7 2 
 voices 5 1 
 aiding 8 1 
 work 3 2 4 1 5 2 6 2 7 2 8 3 
@@ -750,7 +731,6 @@ asymptotic 3 1
 foundation 3 1 4 1 5 5 6 1 7 1 8 2 
 southern 5 1 
 reusable 7 1 
-pp 3 8 4 11 5 1 7 1 8 1 
 portugu 3 1 4 1 5 1 6 1 7 1 8 1 
 phone 4 1 
 collision 4 17 
@@ -763,7 +743,6 @@ britannica 5 2
 bsczi 8 1 
 actual 3 2 4 1 6 1 7 3 
 finite 4 1 
-go 5 2 7 4 
 survey 5 1 8 2 
 kicks 5 1 
 pascal 6 1 7 4 8 3 
@@ -813,7 +792,6 @@ sectors 8 1
 though 3 1 5 1 6 1 7 1 
 every 3 6 4 4 5 1 7 1 8 2 
 wasting 3 1 
-jr 3 2 5 2 
 defensive 5 2 
 unknown 3 2 4 1 5 1 6 1 7 1 8 1 
 known 3 6 4 5 5 10 6 2 7 8 8 1 
@@ -849,9 +827,7 @@ collins 3 1 5 1 8 1
 became 5 4 6 5 7 1 8 6 
 cms 6 1 
 selects 7 1 
-lm 7 1 
 shortcomings 7 1 
-of 2 1 3 241 4 188 5 432 6 155 7 253 8 289 
 pay 4 1 5 1 6 1 
 germany 4 1 5 2 8 1 
 succession 5 3 
@@ -915,7 +891,6 @@ sufficiently 4 1
 fall 4 2 5 8 
 intercollegiate 5 1 
 cabinet 5 1 
-cc 6 1 
 bitc 7 1 
 accardin 8 1 
 texts 8 1 
@@ -1008,7 +983,6 @@ any 3 12 4 12 5 5 6 2 7 18 8 4
 skew 3 2 
 viola 4 1 
 jenkins 4 1 
-st 5 7 6 1 7 3 8 1 
 originating 5 1 
 encoded 7 1 8 1 
 finding 3 4 4 2 
@@ -1041,7 +1015,6 @@ shorter 8 1
 strengths 3 1 
 inline 3 1 7 2 
 sort 4 2 6 1 
-lt 4 2 7 8 
 sinha 4 1 
 collegiate 5 3 
 substitute 7 1 8 1 
@@ -1059,7 +1032,6 @@ movement 5 1 6 2
 bicentennial 5 1 
 strategic 5 1 8 1 
 workbench 6 1 
-un 6 1 
 statement 6 1 7 13 
 boarisch 8 1 
 develop 3 1 7 1 8 2 
@@ -1094,7 +1066,6 @@ deallocated 3 1 7 1
 clifford 3 3 4 1 
 eisenhower 5 1 
 lds 5 1 
-xv 6 1 
 calculating 8 4 
 four 4 1 5 5 8 2 
 famously 5 1 
@@ -1108,7 +1079,6 @@ issues 3 1 7 4 8 2
 searching 4 3 6 1 
 passes 4 1 7 1 
 engineering 4 1 5 9 6 1 8 80 
-bu 5 1 8 1 
 modular 6 3 
 aho 6 1 
 atomic 7 2 
@@ -1133,9 +1103,7 @@ strong 5 2 8 1
 branding 6 3 
 mechanization 8 1 
 challenges 8 4 
-d 3 2 4 4 5 22 6 8 7 13 8 13 
 same 3 22 4 18 5 2 6 8 7 6 8 2 
-no 3 8 4 7 5 3 6 7 7 9 8 3 
 useful 3 3 6 1 7 6 8 4 
 aaron 4 1 
 ivy 5 19 
@@ -1191,7 +1159,6 @@ senator 5 1
 vassar 5 1 
 examining 5 1 8 1 
 stallings 6 1 7 1 
-ro 6 1 8 1 
 column 7 1 
 presentations 8 1 
 pros 3 1 
@@ -1282,7 +1249,6 @@ tenure 5 2
 tenured 5 2 
 bearing 5 2 6 1 
 donahoe 5 1 
-mb 6 1 7 1 
 decree 6 1 
 lpc 7 3 
 ameliorated 7 1 
@@ -1372,11 +1338,9 @@ mit 3 5 4 8 5 2 7 1 8 3
 community 3 1 4 1 5 10 6 1 7 2 8 3 
 motto 5 6 
 southeast 5 1 
-ge 5 1 6 1 
 intel 6 1 7 1 
 performs 7 1 8 1 
 orientation 7 1 8 1 
-op 7 2 
 naur 8 3 
 ecological 8 2 
 mwmath 3 1 
@@ -1389,7 +1353,6 @@ appealed 6 1
 origin 7 1 
 fields 3 14 5 2 8 14 
 package 3 1 6 1 
-md 3 1 
 puritan 5 1 
 reverend 5 1 
 law 5 2 
@@ -1413,7 +1376,6 @@ pine 5 2
 objectives 5 1 
 dartmouthsports 5 1 
 protocols 6 2 
-ip 6 2 
 nic 8 1 
 resolves 3 1 
 greatly 3 1 
@@ -1479,7 +1441,6 @@ lesson 5 1
 popularity 6 1 7 3 
 codelite 7 1 
 opportunities 8 1 
-sa 3 2 4 2 5 3 6 2 7 2 8 2 
 particularly 4 6 5 1 7 1 8 1 
 engraving 5 1 
 offered 5 2 
@@ -1562,6 +1523,7 @@ highest 5 3
 parke 5 1 
 registration 5 1 
 vita 5 1 
+258 4 185 5 202 6 105 7 206 8 120 
 watchlisthidepatrolled 3 1 4 1 5 1 6 1 7 1 8 1 
 divided 4 1 5 1 8 2 
 compact 4 4 
@@ -1670,7 +1632,6 @@ interacting 8 1
 removed 3 7 4 4 7 6 
 encourage 5 1 7 1 
 production 5 1 6 1 
-ha 5 1 
 caps 6 2 
 miscellaneous 6 2 
 prints 7 1 
@@ -1680,7 +1641,6 @@ true 3 25 4 24 5 24 6 25 7 27 8 25
 hidesig 3 1 4 1 5 1 6 1 7 1 8 1 
 not 3 21 4 23 5 6 6 8 7 46 8 7 
 quad 3 1 
-x 3 2 4 3 5 1 6 15 7 25 8 4 
 title 3 1 4 1 5 2 6 4 7 1 8 1 
 loses 4 1 
 veasey 5 1 
@@ -1715,7 +1675,6 @@ mid 5 1 6 1
 tsch 6 1 
 invoke 7 1 
 emili 8 1 
-to 3 190 4 147 5 156 6 105 7 222 8 93 
 strongly 5 1 6 1 8 1 
 eberhart 5 2 
 returns 5 1 
@@ -1738,7 +1697,6 @@ admission 5 1
 treasury 5 4 
 children 5 1 
 approves 5 1 
-am 5 1 6 1 
 osborne 5 1 
 pamphlet 5 1 
 occitan 6 1 7 1 8 1 
@@ -1768,7 +1726,6 @@ sporting 5 1
 discipline 7 1 8 10 
 builder 7 1 
 electro 8 1 
-so 3 3 4 11 5 2 6 3 7 2 8 1 
 usually 3 8 4 7 5 1 7 4 8 3 
 glare 5 1 
 pushed 6 1 
@@ -1890,7 +1847,6 @@ establishments 5 3
 philip 5 1 
 training 5 1 
 dedication 5 1 
-fg 6 1 
 drawn 7 1 
 claude 8 2 
 optical 8 1 
@@ -1903,7 +1859,6 @@ agreement 7 1
 relies 7 1 
 developmental 8 1 
 petri 8 1 
-ap 8 2 
 unsourced 3 1 4 9 6 6 7 4 8 6 
 fewer 3 1 4 1 
 wildcard 6 1 
@@ -1954,7 +1909,6 @@ projects 5 2 6 2 7 1 8 2
 meals 5 1 
 nyregion 5 1 
 concord 5 2 
-ls 6 2 
 nonstandard 7 1 
 lifetime 7 1 
 netherlands 8 1 
@@ -1972,7 +1926,6 @@ charged 5 1
 singles 5 1 
 fraternities 5 3 
 bartlett 5 1 
-wg 7 4 
 technocratic 8 1 
 like 3 1 4 3 5 2 6 21 7 9 8 1 
 landis 5 2 
@@ -2018,7 +1971,6 @@ tail 3 8 6 1
 postgraduates 5 1 
 financial 5 10 8 2 
 academia 5 2 6 1 8 2 
-sh 6 1 
 wgbreakframes 3 1 4 1 5 1 6 1 7 1 8 1 
 much 3 4 4 2 5 2 6 2 7 3 8 5 
 making 3 1 4 1 6 1 7 1 8 5 
@@ -2082,7 +2034,6 @@ emmy 5 1
 subsequently 6 1 7 2 
 latest 7 1 
 habitats 8 1 
-ze 8 1 
 tours 3 1 4 1 5 1 6 1 7 1 8 1 
 additions 3 1 5 1 
 certification 6 4 
@@ -2114,7 +2065,6 @@ meehan 5 1
 formulated 8 1 
 payload 3 2 
 exceptionally 3 1 
-l 3 10 4 3 5 8 6 3 7 5 8 9 
 james 3 1 5 11 
 usage 4 2 5 2 6 2 7 3 8 2 
 supposed 4 1 5 1 
@@ -2181,7 +2131,6 @@ conspired 5 1
 projecting 5 1 
 textual 6 1 
 crucial 8 2 
-ai 8 3 
 string 3 7 4 9 7 6 
 categories 3 2 4 2 5 2 6 4 7 2 8 2 
 printed 6 1 
@@ -2224,7 +2173,6 @@ releasing 7 1
 guerre 8 1 
 indicating 3 2 7 2 
 salary 5 1 
-do 3 12 4 3 7 6 8 7 
 added 3 5 4 1 5 1 6 4 7 3 
 file 3 7 4 4 5 1 6 20 7 5 8 1 
 indirection 4 1 
@@ -2255,7 +2203,6 @@ cols 3 1 4 1 5 1 6 1 7 1 8 1
 adapted 3 1 
 sahni 4 1 
 historical 5 3 8 1 
-os 6 19 7 1 
 presenting 6 1 
 tput 6 1 
 lcc 7 1 
@@ -2279,7 +2226,6 @@ unixes 6 1
 concerned 8 1 
 available 2 1 3 8 4 1 5 2 6 4 7 8 8 2 
 numberheadings 3 1 4 1 5 1 6 1 7 1 8 1 
-k 4 14 5 5 6 2 7 24 8 2 
 tribal 5 1 
 woodward 5 4 
 parity 5 1 
@@ -2290,14 +2236,12 @@ gries 8 1
 encouraging 8 1 
 fragmented 3 1 
 somenode 3 7 
-ch 3 1 7 2 8 1 
 foot 5 2 
 producing 5 1 6 1 
 companies 5 1 8 1 
 hindi 6 1 
 hello 7 8 
 geany 7 1 
-us 3 2 5 4 6 2 7 1 8 1 
 user 3 9 4 9 5 9 6 24 7 12 8 11 
 western 3 2 5 2 
 exact 4 4 7 1 
@@ -2325,7 +2269,6 @@ happened 5 1
 interchangeable 7 1 
 lawlis 7 1 
 proper 3 2 4 1 
-t 3 3 4 5 5 16 6 19 7 9 8 7 
 decreased 4 1 
 hops 4 1 
 laboratories 5 1 6 3 7 1 
@@ -2352,7 +2295,6 @@ designer 5 2
 jack 5 2 
 online 6 1 
 gentoo 6 1 
-rm 6 1 
 reliable 3 1 4 2 7 5 8 2 
 portion 3 2 7 2 
 throughout 3 1 5 2 
@@ -2366,9 +2308,7 @@ dougherty 5 1
 gauntlet 5 1 
 folding 8 2 
 neurophysiology 8 1 
-zh 3 2 4 2 5 2 6 2 7 2 8 2 
 suggests 4 1 
-re 4 3 5 1 
 rochester 4 1 
 sussman 8 2 
 datum 3 2 
@@ -2376,14 +2316,12 @@ separate 3 7 4 16 5 1 6 3 7 4 8 2
 thing 3 1 7 2 
 advantage 3 2 4 4 7 2 
 opened 5 3 
-fa 5 1 
 frat 5 2 
 solaris 6 7 7 2 
 primitives 7 1 
 young 8 1 
 comparable 4 1 
 whereby 4 1 
-al 4 1 7 1 
 approval 5 2 
 appointed 5 1 
 ask 5 1 
@@ -2486,7 +2424,6 @@ binary 3 6 4 5 6 5 7 2 8 1
 registered 3 1 4 1 5 1 6 2 7 1 8 1 
 ordinances 5 1 
 ltd 5 1 
-du 6 1 
 brezhoneg 6 1 7 1 8 1 
 rust 7 2 
 filename 7 1 
@@ -2502,14 +2439,12 @@ phrase 5 2
 jaschik 5 1 
 hit 5 1 
 wgrelevantpagename 3 1 4 1 5 1 6 1 7 1 8 1 
-we 3 12 4 1 5 1 6 3 8 3 
 recent 3 1 4 2 5 2 6 2 7 2 8 2 
 wikisource 5 1 8 1 
 scully 5 1 
 inability 7 1 
 proposed 8 1 
 calculi 8 2 
-j 3 1 4 7 5 9 6 3 7 7 8 8 
 entrepreneurship 5 1 
 austin 6 1 
 decimal 7 1 
@@ -2548,7 +2483,6 @@ industry 5 1 6 3 8 2
 monthly 5 2 
 leede 5 2 
 killall 6 1 
-az 6 1 7 1 8 1 
 github 7 1 
 transport 8 2 
 reallocated 3 1 
@@ -2569,7 +2503,6 @@ say 7 1
 accidentally 7 1 
 grand 8 1 
 parsers 8 1 
-tg 3 2 4 2 5 2 6 2 7 2 8 2 
 remlinger 5 2 
 summary 5 1 
 interfaces 6 2 7 2 8 1 
@@ -2585,12 +2518,10 @@ levenez 6 1
 pxe 6 1 
 supercomputers 7 1 
 underscore 7 1 
-i 3 9 4 2 5 5 6 7 7 21 8 2 
 never 3 2 4 2 5 2 7 2 
 storing 3 1 4 3 6 1 8 1 
 glove 5 1 
 rage 5 1 
-bg 5 1 6 1 
 srpskohrvatski 5 1 6 1 7 1 8 1 
 plural 6 2 
 robotic 8 2 
@@ -2744,7 +2675,6 @@ terminal 3 1 6 1 7 1
 participation 5 3 
 studying 5 3 8 1 
 lithograph 5 1 
-ii 5 1 7 1 8 2 
 berkeley 6 3 7 2 8 1 
 declaring 7 1 
 item 3 1 4 12 5 1 6 1 7 1 8 1 
@@ -2773,7 +2703,6 @@ softball 5 2
 postscript 6 1 
 workaround 7 1 
 christoph 8 1 
-iu 3 2 4 2 5 2 6 2 7 2 8 2 
 insufficient 3 1 
 proved 5 1 6 1 
 ohio 5 3 
@@ -2879,11 +2808,11 @@ officially 5 2 6 1
 unsafe 7 2 
 heavily 8 1 
 neashce 8 1 
+138 6 33 7 37 8 36 
 variants 3 5 4 1 5 1 6 4 7 1 8 1 
 practice 4 2 5 2 6 1 7 2 8 2 
 mandate 4 1 
 issued 4 1 5 1 
-ex 5 2 6 1 
 overlooking 5 1 
 boudreaux 5 1 
 vote 5 2 
@@ -2893,7 +2822,6 @@ plattd 6 1
 execution 7 8 
 giannini 7 1 
 rahul 7 1 
-ac 8 1 
 progressivism 8 1 
 educating 5 1 
 lawson 5 1 
@@ -2922,7 +2850,6 @@ allocating 4 1 7 1
 relative 5 1 
 undefined 7 3 
 signify 3 1 
-as 3 44 4 38 5 79 6 67 7 101 8 60 
 now 3 1 5 2 6 6 7 5 8 3 
 lack 3 1 5 2 7 1 
 desktop 3 1 4 1 5 1 6 3 7 1 8 1 
@@ -2936,7 +2863,6 @@ reading 4 2 5 4 6 2 7 2 8 2
 lyrics 5 2 
 attached 5 1 
 conforming 7 3 
-vs 3 10 
 problem 3 7 4 1 6 3 7 2 8 4 
 saves 4 2 
 football 5 8 
@@ -2964,7 +2890,6 @@ ink 6 1
 strawberry 8 1 
 cryogenics 8 1 
 made 2 1 3 1 5 1 6 3 7 5 8 2 
-ur 3 1 4 1 5 1 6 1 7 1 8 1 
 feb 3 1 4 2 5 1 6 1 7 1 8 2 
 pearson 4 4 5 1 6 1 7 1 
 absence 4 1 
@@ -3073,7 +2998,6 @@ errors 5 2 7 5 8 2
 lund 5 1 
 suggestions 6 1 
 feedback 6 1 
-co 2 1 5 3 6 1 
 forceeditsummary 3 1 4 1 5 1 6 1 7 1 8 1 
 echo 3 24 4 24 5 24 6 25 7 24 8 24 
 choices 3 1 4 1 
@@ -3081,7 +3005,6 @@ become 4 2 5 4 6 1 7 4 8 3
 considerations 4 1 
 shaddai 5 1 
 running 6 2 8 2 
-io 7 1 
 waterloo 3 1 4 1 
 serious 4 1 
 philosophical 4 1 
@@ -3147,14 +3070,12 @@ rewarded 8 1
 data 3 94 4 34 5 1 6 3 7 26 8 26 
 entire 3 3 4 1 5 1 6 2 7 2 
 having 3 6 5 2 7 2 8 1 
-v 3 1 4 1 5 16 6 19 7 3 8 4 
 probability 4 1 
 scotford 5 1 
 legends 5 1 
 phenomenon 6 1 7 1 
 instances 7 1 
 manufacture 8 1 
-s 3 13 4 18 5 138 6 33 7 37 8 36 
 solved 3 1 
 schema 3 1 4 1 5 1 6 1 7 1 8 1 
 update 5 1 7 1 8 1 
@@ -3175,7 +3096,6 @@ switch 6 1 7 3
 gnat 7 1 
 blaise 8 2 
 utmost 8 1 
-c 2 1 3 14 4 18 5 21 6 16 7 377 8 5 
 extendwatchlist 3 1 4 1 5 1 6 1 7 1 8 1 
 convenient 3 1 7 2 8 1 
 variable 3 5 4 2 7 13 
@@ -3211,13 +3131,11 @@ lieu 5 1
 anselm 5 1 
 uyghurche 8 1 
 dansk 3 1 4 1 6 1 7 1 8 1 
-rk 3 1 4 1 5 1 6 1 7 1 8 1 
 critical 4 3 5 1 8 1 
 libhashish 4 1 
 profile 5 1 6 1 
 sudo 6 1 
 visualage 7 1 
-ps 3 1 4 1 5 1 6 2 7 1 8 1 
 preferable 3 1 4 1 
 committee 5 3 7 6 8 1 
 sold 6 3 
@@ -3256,7 +3174,6 @@ endowments 5 3
 trustee 5 1 
 adoption 5 1 6 1 7 2 8 3 
 french 8 2 
-es 4 1 5 1 
 augustus 5 1 
 continuation 6 2 
 opening 7 1 
@@ -3291,7 +3208,6 @@ dramatic 7 1
 recovered 7 1 
 friedman 8 1 
 disciples 5 1 
-tb 6 1 7 1 
 fill 3 1 4 1 
 memorial 5 12 
 historic 5 2 6 1 
@@ -3303,8 +3219,6 @@ specifier 7 2
 stages 8 1 
 profession 8 1 
 watchlisthideown 3 1 4 1 5 1 6 1 7 1 8 1 
-or 3 65 4 50 5 16 6 13 7 60 8 24 
-h 3 2 4 6 5 4 6 2 7 6 8 3 
 augenstein 4 1 
 referred 5 1 6 1 7 6 8 1 
 promote 5 1 
@@ -3333,7 +3247,6 @@ attended 5 2
 braces 7 2 
 goto 7 2 8 1 
 quantification 8 1 
-aa 3 2 4 2 5 1 6 1 7 1 8 1 
 ext 3 14 4 13 5 13 6 13 7 13 8 13 
 joins 3 1 
 consider 3 1 4 1 8 1 
@@ -3382,7 +3295,6 @@ barry 5 1
 shifts 7 1 
 rid 3 1 
 play 4 1 5 2 6 1 
-m 4 5 5 8 6 10 7 13 8 3 
 nathaniel 5 2 
 alcohol 5 1 
 cksum 6 1 
@@ -3421,10 +3333,8 @@ current 3 4 4 2 5 4 6 3 7 4 8 6
 copied 3 1 4 1 7 2 
 supplied 4 1 7 1 
 databases 4 1 8 7 
-ny 5 1 
 offline 2 1 
 concerns 3 1 
-ed 3 3 4 4 5 5 6 2 7 11 8 4 
 professor 5 6 8 1 
 hailed 8 1 
 nothing 8 1 
@@ -3488,7 +3398,6 @@ accelerates 3 1
 schemes 3 1 4 3 
 sparsehash 4 3 
 magazine 4 1 5 5 
-uk 5 2 8 2 
 court 5 4 6 1 
 eugene 5 1 
 brains 5 1 
@@ -3496,7 +3405,6 @@ concha 5 1
 rewrite 7 1 
 postprocessed 8 1 
 arranged 8 1 
-a 3 258 4 185 5 202 6 105 7 206 8 120 
 appending 3 4 
 upload 3 1 4 1 5 1 6 1 7 1 8 1 
 magyar 3 1 4 1 6 1 7 1 8 1 
@@ -3516,6 +3424,7 @@ lacks 7 1
 threading 7 1 
 exploration 8 1 
 placement 8 1 
+102 6 34 7 26 8 39 
 loader 3 5 4 5 5 5 6 6 7 6 8 5 
 ire 3 3 
 operation 3 6 4 11 5 1 6 2 
@@ -3532,7 +3441,6 @@ optimal 3 2 4 1
 sophisticated 4 1 8 1 
 aims 6 1 7 1 8 3 
 invariables 6 1 
-mv 6 1 
 optimization 7 1 8 1 
 escape 7 1 
 richie 7 1 
@@ -3609,7 +3517,6 @@ break 5 1 7 2
 virginia 5 4 
 linkable 6 1 
 licensee 6 1 
-mi 7 1 
 shownumberswatching 3 1 4 1 5 1 6 1 7 1 8 1 
 john 3 3 4 1 5 18 6 1 7 1 
 had 3 1 4 2 5 8 6 11 7 7 8 3 
@@ -3628,7 +3535,6 @@ enabled 3 1 4 1 5 1 6 1 7 1 8 3
 elementary 3 1 8 2 
 hashed 3 1 4 9 
 forbes 5 4 
-hp 6 8 
 advance 4 1 
 endurance 5 3 
 downhill 5 1 
@@ -3645,7 +3551,6 @@ heapsort 3 1
 unlike 4 1 5 1 6 1 7 5 
 mohegan 5 1 
 emblem 5 1 
-me 5 1 6 1 
 flynn 5 1 
 ralph 5 1 
 inuktitut 8 1 
@@ -3653,7 +3558,6 @@ djbx 4 1
 desegregate 5 1 
 blog 5 1 
 qaraqalpaqsha 6 1 
-pl 7 3 
 emphasize 8 3 
 firstnode 3 12 
 resemblance 5 1 
@@ -3683,7 +3587,6 @@ sep 3 1 4 1 5 1 6 1 7 1 8 2
 storage 3 27 4 4 5 1 6 3 7 7 8 1 
 positions 3 1 4 1 
 discrete 4 1 
-qs 5 4 
 encyclop 5 2 
 networked 5 1 
 cron 6 2 
@@ -3699,7 +3602,6 @@ revised 7 3 8 1
 letters 7 1 
 productivity 8 1 
 charinsert 3 2 4 2 5 2 6 2 7 2 8 2 
-js 3 2 4 2 5 2 6 2 7 3 8 2 
 necessary 3 2 4 1 5 1 6 1 7 3 
 thfe 3 1 
 defaulttracking 4 1 5 1 6 1 7 1 8 1 
@@ -3707,7 +3609,6 @@ proportion 4 3 5 1
 emissions 5 1 
 resembles 6 1 
 inter 6 5 
-ld 6 1 
 hdl 7 2 
 cheminformatics 8 1 
 ethics 8 1 
@@ -3751,7 +3652,6 @@ considered 4 2 6 1 7 1 8 6
 datastructures 4 1 
 wallace 5 1 
 met 5 1 6 1 
-sc 7 3 
 matlab 7 1 
 tokens 3 2 4 2 5 2 6 2 7 2 8 2 
 creation 3 1 4 2 5 2 6 2 8 3 
@@ -3772,6 +3672,7 @@ surpassed 5 1
 ausmus 5 3 
 fiedler 5 2 
 symptoms 7 1 
+241 4 188 5 432 6 155 7 253 8 289 
 form 3 4 4 1 5 4 6 3 7 9 8 3 
 ibm 3 1 4 1 5 1 6 3 7 2 8 11 
 outing 5 12 
@@ -3788,13 +3689,11 @@ inadequate 6 1
 amsterdam 7 1 
 cobol 7 1 
 marker 3 1 
-lg 4 3 
 acres 5 5 
 reproduced 5 1 
 awaited 5 1 
 manifest 7 1 
 goals 8 2 
-if 3 39 4 47 5 6 6 7 7 21 8 8 
 eace 3 1 
 etc 3 2 4 1 6 3 7 1 8 1 
 state 3 2 4 1 5 7 6 2 7 2 8 2 
@@ -3804,7 +3703,6 @@ milk 5 1
 gregory 5 1 
 behrens 5 1 
 bosanski 6 1 7 1 8 1 
-mw 3 14 4 14 5 14 6 14 7 14 8 14 
 indiana 3 1 4 1 5 1 
 after 3 10 5 6 6 2 7 4 8 2 
 deletion 3 2 4 3 
@@ -3830,7 +3728,6 @@ value 3 7 4 14 7 23
 appeared 3 3 5 3 6 2 7 2 
 been 3 1 4 1 5 15 6 8 7 14 8 10 
 instructions 4 1 7 2 8 2 
-bn 4 1 
 anne 5 1 
 xcode 7 1 
 automation 8 2 
@@ -3984,29 +3881,24 @@ preserving 5 1
 skiing 5 6 
 nanometer 5 1 
 keyword 7 6 
-kk 3 3 4 3 5 3 6 3 7 3 8 3 
 significantly 3 2 4 1 6 1 7 1 8 1 
 wrote 4 1 5 1 6 1 8 1 
 announced 5 2 6 1 
 forrestal 5 2 
 negatives 7 1 
 petroleum 8 1 
-an 3 42 4 34 5 28 6 21 7 49 8 17 
 where 3 8 4 9 5 4 7 6 8 3 
-na 3 2 
 kruse 3 1 
 nikolas 4 3 
 modifiable 6 1 
 fiji 6 1 
 methodology 8 1 
-w 3 2 4 3 5 8 6 4 7 6 8 2 
 birth 3 1 
 mutation 3 1 
 consing 4 1 
 house 5 7 
 researchers 5 1 6 1 8 1 
 grounds 5 1 
-ux 6 7 
 bulkdelcourses 3 1 4 1 5 1 6 1 7 1 8 1 
 commonly 3 1 4 1 5 2 7 5 8 1 
 arose 4 1 
@@ -4074,12 +3966,10 @@ she 8 1
 bibliographies 8 1 
 enotifrevealaddr 3 1 4 1 5 1 6 1 7 1 8 1 
 supported 3 2 5 3 7 4 
-ol 3 1 4 1 5 1 6 1 7 1 8 1 
 turn 4 1 5 1 7 1 
 except 4 1 
 owen 5 2 
 transgenders 5 1 
-la 5 1 8 1 
 games 8 5 
 abelson 8 1 
 publish 3 1 4 1 5 1 6 1 7 1 8 1 
@@ -4117,7 +4007,6 @@ paper 3 1 6 1
 unrolled 3 3 4 1 
 earl 5 3 
 biotechnology 8 2 
-sr 3 2 4 2 5 3 6 2 7 2 8 2 
 also 3 13 4 22 5 22 6 20 7 17 8 23 
 split 3 1 6 1 7 2 
 subtrees 3 1 
@@ -4158,7 +4047,6 @@ player 5 2
 legal 7 1 
 aboutcs 8 1 
 than 3 7 4 17 5 7 6 8 7 8 8 15 
-ca 3 3 4 3 5 3 6 3 7 3 8 5 
 pristine 3 1 4 1 5 1 6 1 7 1 8 1 
 consists 3 3 5 1 6 1 8 1 
 handy 3 1 
@@ -4245,7 +4133,6 @@ specification 6 5 7 8 8 2
 royalties 6 1 
 essence 8 1 
 neolithic 8 1 
-o 3 7 4 15 5 4 6 8 7 5 8 1 
 ensures 3 2 4 1 
 network 3 1 4 2 5 8 6 7 8 4 
 choosing 4 2 7 2 
@@ -4308,7 +4195,6 @@ borland 7 1
 systematic 8 2 
 wishing 8 1 
 website 2 3 5 1 6 1 7 2 8 1 
-on 3 28 4 28 5 102 6 34 7 26 8 39 
 desired 3 1 4 3 6 1 7 2 
 chi 4 2 
 mckenzie 4 1 
@@ -4317,7 +4203,6 @@ developer 6 2 7 1
 specify 7 4 
 deal 7 1 8 2 
 healthcare 8 1 
-u 3 13 4 13 5 20 6 13 7 15 8 18 
 traverses 4 2 
 tap 5 1 
 prizes 5 1 
@@ -4360,7 +4245,6 @@ underline 3 1 4 1 5 1 6 1 7 1 8 1
 obtaining 3 1 
 trade 3 1 
 isbn 3 8 4 8 5 5 6 6 7 12 8 11 
-id 3 1 6 1 8 1 
 ordered 4 5 
 partially 5 1 7 1 
 fisher 5 1 
@@ -4402,6 +4286,7 @@ starring 5 1
 multitasking 6 2 
 conversions 7 2 
 variadic 7 1 
+190 4 147 5 156 6 105 7 222 8 93 
 external 3 19 4 10 5 9 6 5 7 6 8 9 
 middle 3 2 
 granted 3 1 5 2 
@@ -4412,7 +4297,6 @@ unnamed 7 1
 launched 8 1 
 jacquard 8 1 
 tandem 8 1 
-he 3 2 5 2 6 2 8 5 
 marking 3 1 
 factor 3 1 4 25 8 2 
 cumming 6 1 
@@ -4505,7 +4389,6 @@ renewable 8 1
 minimize 4 1 6 1 
 careful 4 1 7 1 
 metropolitan 5 1 
-z 6 2 7 2 
 unification 7 1 
 insights 8 3 
 absent 8 1 
@@ -4519,6 +4402,7 @@ perez 5 1
 tatar 5 1 6 1 7 1 8 1 
 drives 6 1 
 multimedia 8 1 
+104 4 176 5 66 6 27 7 118 8 71 
 terminator 3 1 7 1 
 allen 3 2 5 3 8 2 
 small 3 3 4 11 5 2 6 4 7 1 
@@ -4578,7 +4462,6 @@ partisan 8 1
 simon 3 2 
 through 3 8 5 3 6 3 7 2 8 2 
 attempts 4 1 5 1 7 2 
-nh 5 2 
 luigi 5 1 
 union 5 8 7 5 
 micrometers 5 1 
@@ -4612,7 +4495,6 @@ journalists 5 1
 pipes 6 2 
 evaluating 7 2 
 ceramic 8 1 
-ep 3 4 4 4 5 4 6 4 7 4 8 4 
 kernel 3 1 6 17 7 2 
 lind 4 1 
 summer 5 5 
@@ -4699,7 +4581,6 @@ optional 7 2
 reuse 7 2 
 herb 7 1 
 wikibits 3 1 4 1 5 1 6 1 7 1 8 1 
-it 3 38 4 34 5 27 6 15 7 27 8 26 
 might 3 2 7 2 8 2 
 stop 5 1 6 1 
 launch 6 1 
@@ -4730,7 +4611,6 @@ licensing 6 1
 fedora 6 1 
 unicode 7 3 
 infinitely 8 1 
-xr 2 1 
 enwiki 3 2 4 2 5 2 6 2 7 2 8 2 
 aee 3 1 
 shrink 4 1 
@@ -4882,7 +4762,6 @@ highly 4 1 8 1
 moosilauke 5 3 
 degree 5 5 7 1 8 4 
 stepped 8 1 
-rf 8 1 
 relocatable 3 1 
 step 3 1 4 1 5 1 8 1 
 results 4 2 7 5 
@@ -4900,12 +4779,10 @@ mapping 4 1 8 1
 unused 4 2 
 optimized 4 1 
 undergraduates 5 3 
-ad 6 1 7 1 
 cddl 6 1 
 vocational 8 1 
 methodologies 8 1 
 animatronics 8 1 
-in 3 165 4 153 5 242 6 77 7 142 8 143 
 sequences 4 1 7 1 
 souza 5 2 
 gail 5 1 
@@ -4939,7 +4816,6 @@ donated 5 1
 devised 5 2 7 1 
 mountains 5 3 
 dragon 5 1 
-wc 6 1 
 based 3 2 4 2 5 5 6 5 7 10 8 3 
 organized 4 1 
 styles 5 1 
@@ -5047,14 +4923,12 @@ accord 5 2
 intramural 5 2 
 thanasis 5 1 
 principles 6 2 7 1 8 1 
-uz 3 2 4 2 5 2 6 2 7 2 8 2 
 forward 3 5 5 2 
 trick 3 1 
 removebeginning 3 3 
 doug 4 1 
 tour 5 1 
 filesystem 6 3 
-nm 6 1 
 copyrights 6 1 
 imaginary 7 1 
 mechanical 3 2 8 8 
@@ -5090,7 +4964,6 @@ converting 7 1 8 1
 invalid 7 1 
 dovzan 8 1 
 words 3 1 4 2 5 3 7 1 8 1 
-ji 3 1 
 owns 5 1 6 1 
 advancing 5 1 
 teens 5 1 
@@ -5142,7 +5015,6 @@ significant 4 1 6 1 8 4
 esfahani 5 1 
 idhlig 5 1 
 sketched 8 1 
-is 3 104 4 176 5 66 6 27 7 118 8 71 
 contain 3 5 6 1 7 4 
 locations 3 1 4 3 5 2 6 1 
 amount 3 4 4 1 6 2 8 2 
@@ -5154,7 +5026,6 @@ evolutionary 8 2
 starting 3 2 4 3 5 3 6 1 8 2 
 important 5 2 6 4 7 1 8 9 
 minicomputers 7 1 
-mx 4 1 
 supply 4 1 
 founded 5 7 8 3 
 stories 5 3 
@@ -5236,7 +5107,6 @@ docketing 6 1
 inventions 7 2 
 superset 7 5 
 equivalence 7 1 
-er 3 1 
 highlights 3 1 
 complexity 3 5 4 2 6 1 8 6 
 administrative 5 3 6 1 
@@ -5303,10 +5173,10 @@ circumscribed 5 1
 omitted 7 2 
 applies 7 1 
 milestones 8 1 
+377 8 5 
 yields 3 1 5 1 
 offers 5 6 
 valgrind 7 1 
-tc 7 3 
 structural 8 1 
 watchlisthideliu 3 1 4 1 5 1 6 1 7 1 8 1 
 search 3 12 4 18 5 2 6 2 7 3 8 6 
@@ -5320,7 +5190,6 @@ becoming 8 1
 leeuwen 8 2 
 person 3 7 
 wanted 3 1 
-b 3 2 4 12 5 38 6 3 7 13 8 8 
 arise 4 1 
 roberto 4 1 
 potentially 5 4 7 3 8 1 
@@ -5399,7 +5268,6 @@ elects 5 1
 linuxjournal 7 1 
 slides 8 1 
 degrees 5 3 8 1 
-da 5 1 
 ioctl 6 1 
 builtins 6 2 
 preprocessing 7 2 
@@ -5433,7 +5301,6 @@ html 3 1 4 1 5 2 6 1 7 1 8 2
 michael 4 1 5 4 
 video 4 2 5 1 8 4 
 colgate 5 2 
-ms 6 1 
 paradigms 8 5 
 multitude 8 1 
 modified 3 2 4 2 5 3 6 1 7 1 8 2 
@@ -5448,7 +5315,6 @@ openbsd 6 2
 namespace 7 1 
 designing 8 2 
 format 3 1 4 1 5 1 6 4 7 3 8 1 
-at 3 37 4 21 5 53 6 22 7 22 8 16 
 flex 3 3 
 press 3 3 4 1 5 16 7 1 8 7 
 creative 3 1 4 1 5 2 6 1 7 2 8 1 
@@ -5483,7 +5349,6 @@ unixware 6 1
 executed 7 1 
 inherent 7 1 
 traders 8 1 
-e 3 14 4 16 5 30 6 16 7 14 8 17 
 between 3 2 4 6 5 2 6 3 7 8 8 6 
 management 3 1 5 1 6 4 7 2 8 6 
 organizing 3 1 8 1 
@@ -5492,7 +5357,6 @@ customization 5 1
 winners 5 3 
 glabe 5 1 
 holy 5 2 
-vb 7 1 
 whilst 8 1 
 png 3 1 4 1 5 1 6 1 7 1 8 1 
 least 3 2 4 2 5 2 6 1 
@@ -5547,7 +5411,6 @@ troy 6 1
 details 7 1 
 identifying 8 1 
 inevitability 8 1 
-ar 3 1 4 1 5 1 6 2 7 1 8 1 
 note 3 2 4 2 8 3 
 keg 5 4 
 traditional 5 4 
@@ -5560,8 +5423,6 @@ machines 3 2 6 1 8 7
 remain 3 1 4 1 
 celebrations 5 1 
 proceed 5 1 
-ns 5 1 
-vm 6 1 
 weakly 7 1 
 analytical 8 3 
 contentious 8 1 
@@ -5611,7 +5472,6 @@ dratch 5 1
 champions 5 3 
 bottled 6 1 
 accordance 6 1 
-ve 3 2 8 1 
 reasons 3 1 5 1 6 1 7 1 8 1 
 failed 5 1 
 walking 5 1 
@@ -5704,7 +5564,6 @@ delaware 5 1
 biondi 5 1 
 gone 6 1 
 owner 6 1 
-ln 6 1 
 literal 7 2 
 roche 2 1 
 goingnative 3 1 
@@ -5719,7 +5578,6 @@ legge 5 2
 edward 5 1 
 diffusion 8 1 
 technomancy 8 1 
-g 3 3 4 6 5 5 6 7 7 4 8 5 
 pool 3 3 4 2 5 2 
 typically 3 3 4 3 5 1 7 9 8 2 
 multimap 3 1 4 3 
@@ -5836,7 +5694,6 @@ educate 5 1
 blocking 6 1 
 shqip 6 1 7 1 8 1 
 imposed 7 1 
-by 2 1 3 61 4 54 5 51 6 39 7 81 8 29 
 null 3 23 4 3 5 3 6 3 7 12 8 3 
 resize 4 4 
 unlikely 4 1 
@@ -5891,7 +5748,6 @@ points 3 4 5 1 7 6
 but 3 9 4 20 5 7 6 12 7 24 8 8 
 setting 3 1 8 1 
 kenneth 3 1 
-td 5 1 
 toolchain 6 1 
 config 3 1 4 1 5 1 6 1 7 1 8 1 
 using 3 30 4 14 5 1 6 5 7 27 8 7 
@@ -5921,7 +5777,6 @@ constitution 5 1
 characterized 6 2 
 packaged 6 1 
 powerful 6 1 7 1 8 1 
-su 6 1 
 they 3 9 4 8 5 1 6 1 7 16 8 7 
 vacant 3 1 
 widespread 5 1 6 2 8 1 
@@ -5942,6 +5797,7 @@ brother 5 1
 domain 5 1 6 1 8 1 
 device 6 7 
 containers 6 1 
+165 4 153 5 242 6 77 7 142 8 143 
 corporation 3 1 6 1 
 compared 4 1 6 1 7 1 8 1 
 hashtable 4 3 
@@ -5952,7 +5808,6 @@ perspective 6 1 8 3
 ephemeralization 8 1 
 shock 8 1 
 wgisredirect 3 1 4 1 5 1 6 1 7 1 8 1 
-up 3 6 4 6 5 3 6 1 7 2 8 1 
 former 3 2 5 9 6 1 
 zobel 4 1 
 moran 4 1 
@@ -5964,7 +5819,6 @@ ssh 6 1
 wizard 3 2 4 2 5 2 6 2 7 2 8 2 
 unspent 5 1 
 benefits 5 1 
-pc 7 1 
 bidgoli 7 1 
 refer 3 3 5 2 6 2 7 1 8 1 
 look 3 2 4 2 5 2 6 1 
@@ -5996,8 +5850,6 @@ providence 5 1
 formatting 6 3 7 1 
 logname 6 1 
 discarded 7 1 
-cx 7 1 
-au 8 1 
 generally 3 2 4 2 5 1 6 1 7 3 8 1 
 sharing 3 2 5 2 6 10 
 birthday 4 1 
@@ -6012,7 +5864,6 @@ keep 3 5 4 4
 provide 4 4 6 2 7 7 
 irrelevant 4 1 
 harries 4 1 
-vi 4 1 5 1 6 2 7 1 8 1 
 col 5 1 
 evolution 6 4 8 1 
 nor 7 1 
@@ -6023,7 +5874,6 @@ forensic 5 1
 migration 6 1 
 slackware 6 1 
 offerings 6 1 
-ka 6 1 7 1 8 1 
 volatility 8 1 
 realization 8 1 
 computerhistory 8 2 
@@ -6034,7 +5884,6 @@ joined 5 1
 pioneered 5 1 
 occasion 5 1 
 sphinx 5 1 
-bc 6 2 
 divide 6 1 
 workstation 6 2 
 meinel 8 1 
@@ -6055,7 +5904,6 @@ exited 7 1
 worst 3 3 4 15 
 luhn 4 1 
 predate 8 1 
-dc 3 1 4 2 5 2 6 4 7 2 8 2 
 each 3 23 4 22 5 3 6 3 7 5 8 3 
 support 3 7 4 1 5 1 6 2 7 14 8 4 
 circumstances 3 1 
@@ -6101,13 +5949,11 @@ island 5 1
 interview 5 3 6 3 7 1 
 disappearing 5 1 
 champion 5 1 
-cp 6 3 
 newnode 3 19 
 build 3 2 6 2 8 1 
 lazy 4 1 
 susan 5 4 
 gilman 5 1 
-cm 6 1 
 pidof 6 1 
 abbreviated 8 1 
 geotechnical 8 1 
@@ -6148,7 +5994,6 @@ capabilities 6 2 7 2
 beos 6 1 
 amended 7 1 
 frequently 7 3 
-cs 3 3 4 2 5 2 7 4 8 5 
 reallocation 3 3 
 chapel 3 1 
 purely 3 1 
@@ -6196,7 +6041,6 @@ evolved 6 2
 ambiguity 7 2 
 most 3 4 4 8 5 14 6 8 7 23 8 5 
 anita 3 1 
-r 3 3 4 9 5 6 7 23 8 2 
 northern 5 3 
 microkernel 6 3 
 benet 6 1 
@@ -6257,7 +6101,6 @@ yong 5 2
 continuity 5 1 
 redefine 6 1 
 uname 6 1 
-ku 3 2 4 2 5 2 6 2 7 2 8 2 
 simply 3 2 4 1 5 1 8 1 
 http 3 1 4 2 5 2 6 2 7 1 8 6 
 hashfunc 4 1 
@@ -6287,7 +6130,6 @@ remainder 4 1
 verlag 4 1 8 1 
 campus 5 45 8 1 
 countries 6 2 8 1 
-f 3 7 4 3 5 9 6 3 7 3 8 3 
 pointers 3 4 4 5 7 34 
 growing 3 1 4 1 8 1 
 kinds 4 2 6 1 8 1 
@@ -6378,7 +6220,6 @@ analogous 8 1
 ways 3 2 6 1 7 3 8 1 
 operator 4 1 7 5 
 edu 4 1 5 3 7 2 8 5 
-ng 4 1 5 1 6 4 7 4 8 1 
 lowe 5 2 
 leadership 5 1 
 unit 7 1 8 2 
@@ -6387,7 +6228,6 @@ witold 4 1
 agreeable 5 1 
 sun 6 1 7 1 
 cryptographic 4 1 
-gt 7 10 
 dobb 7 1 
 works 3 3 4 4 
 spire 4 1 
@@ -6406,7 +6246,6 @@ printable 3 1 4 1 5 1 6 1 7 1 8 1
 performed 4 1 7 5 
 permits 4 1 5 1 7 3 
 boehme 4 1 
-el 5 1 
 central 5 1 6 1 8 3 
 dereferencing 7 1 
 suggested 8 4 
@@ -6439,7 +6278,6 @@ statesman 5 1
 strung 6 1 
 animals 8 1 
 revealed 8 2 
-tr 4 1 6 1 7 1 
 grafton 5 2 
 renewed 5 1 
 topics 8 4 
@@ -6501,7 +6339,6 @@ examines 8 1
 justin 4 1 
 corporate 5 1 
 connectivity 6 1 
-df 6 1 
 floating 7 2 
 view 3 5 4 4 5 5 6 5 7 4 8 6 
 levels 3 1 4 1 5 1 6 2 7 2 8 2 
@@ -6636,13 +6473,11 @@ circular 3 25 4 1
 processor 3 1 4 1 
 existing 3 2 4 1 5 1 6 2 7 5 
 patent 3 2 5 1 
-de 5 1 6 1 8 3 
 arrived 6 1 
 ubuntu 6 1 
 basa 7 1 
 technophobia 8 1 
 xavier 2 1 
-be 3 86 4 68 5 10 6 19 7 83 8 27 
 easier 3 2 4 1 
 suppose 3 2 
 decades 3 1 5 1 
@@ -6658,6 +6493,7 @@ shanmugasundaram 3 1
 frederick 5 2 
 meant 6 1 
 temporary 7 1 
+101 8 60 
 raise 5 2 
 scholarship 5 1 
 security 6 1 7 1 8 7 

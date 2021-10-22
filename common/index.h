@@ -13,7 +13,7 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <webpage.h>
+#include "webpage.h"
 
 /**************** global types ****************/
 typedef struct index index_t; // holds the hashtable used for indexing
@@ -73,6 +73,6 @@ index_t* loadIndex(char* filepath);
  *      1. read the words in the file if possible and load the index
  *      2. delete the webpage
 */
-bool indexWebpage(index_t* index, webpage_t* webpage, int id);
+bool indexWebpage(index_t* index, webpage_t* webpage, int* id);
 
 #endif

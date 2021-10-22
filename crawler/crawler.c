@@ -14,12 +14,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <webpage.h>
-#include <memory.h>
-#include <bag.h>
-#include <hashtable.h>
-#include <pagedir.h>
-#include <word.h>
+#include "webpage.h"
+#include "memory.h"
+#include "bag.h"
+#include "hashtable.h"
+#include "pagedir.h"
+#include "word.h"
 
 /************* function prototypes ********************/
 

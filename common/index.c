@@ -9,15 +9,15 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "index.h"
-#include <pagedir.h>
-#include <word.h>
-#include <hashtable.h>
-#include <counters.h>
-#include <webpage.h>
-#include <file.h>
-#include <memory.h>
-
+#include "pagedir.h"
+#include "word.h"
+#include "hashtable.h"
+#include "counters.h"
+#include "webpage.h"
+#include "file.h"
+#include "memory.h"
 
 /************* global types ****************/
 
@@ -30,7 +30,7 @@ typedef struct index {
 static void loadWordInIndex(index_t* index, char* word, FILE* fp);
 static void printCT(void* arg, const char* key, void* item);
 static void printCTHelper(void* arg, const int key, const int count);
-static bool readWordsInFile(webpage_t* page, index_t* index, int id);
+static void readWordsInFile(webpage_t* page, index_t* index, int* id);
 static void deleteCT(void* item);
 
 /************** newIndex() ******************/
@@ -74,9 +74,9 @@ bool buildIndexFromCrawler(char* pageDir, index_t* index)
         int id = 1; 
         // load the crawler files into webpages as long as they exist
         webpage_t* crawlerPage;  
-        while ((crawlerPage = loadPageToWebpage(pageDir, &id)) != NULL) {
+        while ((crawlerPage = loadPageToWebpage(pageDir, id)) != NULL) {
             // index them
-            if (!indexWebpage(index, crawlerPage, id)) {
+            if (!indexWebpage(index, crawlerPage, &id)) {
                 fprintf(stderr, "Error: couldn't index page");
             }
         }
@@ -148,15 +148,11 @@ index_t* loadIndex(char* filepath)
 
 /************** indexWebpage() ******************/
 // see index.h for description
-bool indexWebpage(index_t* index, webpage_t* webpage, int id) 
+bool indexWebpage(index_t* index, webpage_t* webpage, int* id) 
 {
-    if (index == NULL || webpage == NULL || id < 0) return false;
-    char* URL = webpage_getURL(webpage);
+    if (index == NULL || webpage == NULL || *id < 0) return false;
     // read the words in the file and insert them into the index
-    if (!readWordsInFile(webpage, index, id)) {
-        fprintf(stderr, "Error: page %s cannot be read\n", URL);
-        return false;
-    }
+    readWordsInFile(webpage, index, id);
     // delete the webpage and its inner hashtable
     webpage_delete(webpage);
     return true;
@@ -164,7 +160,7 @@ bool indexWebpage(index_t* index, webpage_t* webpage, int id)
 
 /************** loadWordInIndex() ******************/
 /*
- * adds a word to the index
+ * adds a word to the index from the index file
  *
  * Pseudocode:
  *      1. creates a counterset
@@ -174,6 +170,7 @@ bool indexWebpage(index_t* index, webpage_t* webpage, int id)
 */
 static void loadWordInIndex(index_t* index, char* word, FILE* fp) 
 {
+    if (index == NULL || word == NULL || fp == NULL) return;
     // create a new counter to insert into the index
     counters_t* wordFreqCtr = counters_new();
     if (wordFreqCtr == NULL) return;
@@ -205,31 +202,36 @@ static void loadWordInIndex(index_t* index, char* word, FILE* fp)
  *      5. if it does, load that counterset
  *      6. insert the id into that counterset
 */
-static bool readWordsInFile(webpage_t* page, index_t* index, int id)
+static void readWordsInFile(webpage_t* page, index_t* index, int* id)
 {
-    if (page == NULL || index == NULL || id < 0) return false;
+    if (page == NULL || index == NULL || *id < 0) return;
 
     int loc = 0;
     char* word;
     // read through every WORD in the webpage
     while ((word = webpage_getNextWord(page, &loc)) != NULL) {
-        // make the word lowercase
+        // make the word lowercase and check length
         normalizeWord(word);
+        if (strlen(word) < 3) {
+            count_free(word);
+            continue;
+        }
         // check if the item exists in the index
         void* item = hashtable_find(index->table, word);
         if (item == NULL) {
             // if it doesn't create an entry for the word in the index and insert the id
             counters_t* wordCounter = counters_new();
-            counters_add(wordCounter, id);
+            counters_add(wordCounter, *id);
             hashtable_insert(index->table, word, wordCounter);
         } else {
             // if it already exists, add the id to the counters
             counters_t* wordCounter = (counters_t*) item;
-            counters_add(wordCounter, id);
+            counters_add(wordCounter, *id);
         }
         count_free(word);
     }
-    return true;
+    // increment id
+    (*id)++;
 }
 
 /************** printCT() ******************/

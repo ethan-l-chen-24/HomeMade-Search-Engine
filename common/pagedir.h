@@ -10,7 +10,7 @@
 #define __PAGE_DIR
 
 #include <stdbool.h>
-#include <webpage.h>
+#include "webpage.h"
 
 /******************* functions *******************/
 
@@ -49,7 +49,7 @@ bool pageDirValidate(char* pageDir);
  *      3. try to open the file
  *      4. if the URL is valid, create the webpage, fetch the HTML, and return
 */
-webpage_t* loadPageToWebpage(char* pageDir, int* id);
+webpage_t* loadPageToWebpage(char* pageDir, int id);
 
 /***************** stringBuilder() ***********************/
 /* Function used to build the filepath of a file given

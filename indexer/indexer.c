@@ -13,10 +13,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
-#include <memory.h>
-#include <pagedir.h>
-#include <index.h>
+#include "string.h"
+#include "memory.h"
+#include "pagedir.h"
+#include "index.h"
 
 /************* function prototypes ********************/
 
@@ -71,8 +71,12 @@ int main(const int argc, char* argv[])
     }
 
     // run the indexer
-    if (indexer(pageDir, indexFilename)) return 0;
-    else return 1;
+    if (indexer(pageDir, indexFilename)) {
+        printf("SUCCESS!\n\n");
+        return 0;
+    } else {
+        return 1;
+    }
 }
 
 /************** indexer() ******************/

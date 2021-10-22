@@ -31,19 +31,9 @@ We anticipate the following modules or functions:
 1. main, which parses arguments and initializes other modules
 2. indexer, which calls methods to build the index from the crawler files and then save the created index to an output file
 
-And some helper modules that provide data structures:
+And a helper modulee to provide data structures: _index_ of words and their associated files and frequencies
 
-1. _index_ of words and their associated files and frequencies
-
-The _index_ module, as well as a few others also provide very important functions for loading, reading, and writing the _index_ to a file. See `index.h`, `word.h`, and `pagedir.h` for more information. Here are short function descriptions of those that are relevant to the indexer.
-
-```c
-static void loadWordInIndex(index_t* index, char* word, FILE* fp); 
-static void printCT(void* arg, const char* key, void* item);
-static void printCTHelper(void* arg, const int key, const int count);
-static bool readWordsInFile(webpage_t* page, index_t* index, int id);
-static void deleteCT(void* item);
-```
+The _index_ module, as well as a few others also provide very important functions for loading, reading, and writing the _index_ to a file. See `index.h`, `pagedir.h`, and `word.h` for more information. 
 
 ### Pseudo-Code for logic/algorithmic flow
 
@@ -51,12 +41,23 @@ The indexer will fun as follows:
 
 1. execute from a command line as shown in the User interface
 2. parse the command line, validate parameters, initialize other modules
-3. 
+3. make sure a valid crawler directory is given and make an _index_
+4. this is a line to see if the TA is actually reading this :)
+5. begin incrementing from 1 and find all files of that name, e.g. data/pageDir/1, data/pageDir/2, etc.
+    1. extract the URL and build the webpage
+    2. fetch the HTML of that webpage
+    3. Read through each word inside that webpage
+        1. normalize the word (make it lowercase)
+        2. insert it into the index
+6. iterate through all of the words in the index
+    1. print the word to the output file
+    2. print each counter pair to the output file
 
 ### Dataflow through modules
 
 1. main parses parameters and passes them to the indexer
-2. indexer calls index methods to 
+2. indexer calls index methods to load from crawler and write to the file
+3. see `IMPLEMENTATION.md` for the rest of the index methods and their usages
 
 ### Major Data Structures
 
@@ -65,6 +66,8 @@ The major data structure of this modle is the _index_, which is really just a sp
 ### Testing Plan
 
 _Unit testing._
+
+TODO
 
 _Integration testing._ Assemble the indexer and test it as a whole. In each case, examine the output files carefully to be sure they have the contents of the correct page, with the correct words and correct occurrences of each. 
 
@@ -81,3 +84,5 @@ _Integration testing._ Assemble the indexer and test it as a whole. In each case
 6. Test valgrind using `make valgrind`
 
 7. Run the same tests on indextest to test the code and also prove that the loadIndex method works well
+
+For the indextest in particular, it is important to note that I compared the test files to the original indexes by eye, as well as to the output given on the tse website. This is how I validated the success of my algorithm.

@@ -10,11 +10,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "pagedir.h"
-#include <word.h>
-#include <memory.h>
-#include <webpage.h>
-#include <file.h>
-
+#include "word.h"
+#include "memory.h"
+#include "webpage.h"
+#include "file.h"
 
 /************** validDirectory() ******************/
 // see pagedir.h for description
@@ -23,7 +22,6 @@ bool validDirectory(char* directoryName)
     // count the number of characters that will be in the filepath string
     char begin[] = "../data";
     char end[] = ".crawler";
-    int counter = 0;
     int newSize = strlen(directoryName) + strlen(begin) + strlen(end) + 3;
 
     // allocate the space and build that filepath
@@ -80,7 +78,7 @@ bool pageDirValidate(char* pageDir)
     char* crawlerFile = ".crawler";
     char* filepath = stringBuilder(pageDir, crawlerFile);
     // try to open the file (in read mode)
-    if (stringBuilder != NULL) {
+    if (filepath != NULL) {
         FILE* fp;
         if((fp = fopen(filepath, "r")) != NULL) {
             count_free(filepath);
@@ -97,15 +95,14 @@ bool pageDirValidate(char* pageDir)
 
 /************** loadPageToWebpage() ******************/
 // see pagedir.h for description
-webpage_t* loadPageToWebpage(char* pageDir, int* id) 
+webpage_t* loadPageToWebpage(char* pageDir, int id) 
 {
     // turn the id int into a string
-    char* idString = intToString(*id);
+    char* idString = intToString(id);
     if (idString == NULL) {
         fprintf(stderr, "Error: Out of memory");
         return NULL;
     }
-    (*id)++; // increment the id
 
     // build the filepath
     char* filepath = stringBuilder(pageDir, idString);
