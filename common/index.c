@@ -62,7 +62,31 @@ void deleteIndex(index_t* index)
     }
 } 
 
-/************** saveIndex() ******************/
+/************** buildIndexFromCrawler() ******************/
+// see index.h for description
+bool buildIndexFromCrawler(char* pageDir, index_t* index) 
+{
+    // validate parameters
+    if (pageDir != NULL && index != NULL) {
+
+        // loop through as long as the file exists 
+        int id = 1; 
+        // load the crawler files into webpages as long as they exist
+        webpage_t* crawlerPage;  
+        while ((crawlerPage = loadPageToWebpage(pageDir, &id)) != NULL) {
+            // index them
+            if (!indexWebpage(index, crawlerPage, id)) {
+                fprintf(stderr, "Error: couldn't index page");
+            }
+        }
+        return true;
+    } else {
+        fprintf(stderr, "Error: Null-Pointer Exception");
+        return false;
+    }
+}
+
+/************** saveIndexToFile() ******************/
 // see index.h for description
 bool saveIndexToFile(char* filename, index_t* index)
 {
@@ -137,7 +161,7 @@ bool indexWebpage(index_t* index, webpage_t* webpage, int id)
     return true;
 }
 
-/************** readWordsInFile() ******************/
+/************** loadWordInIndex() ******************/
 /*
  * adds a word to the index
  *

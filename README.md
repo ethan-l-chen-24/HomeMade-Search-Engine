@@ -35,6 +35,7 @@ For this project, I attribute a few sources
     - Jack McGary for helping me understand the lab during office hours
     - Professor Prioleau for fixing my compilation error in my makefile
     - finally, the support of my friends and family. Jeff, this one is for you
+    - the Lab instructions, from which I copied some text when writing my design spec file
 
 It is worth noting that
     - I changed the output directory of crawler from common to data

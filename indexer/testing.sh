@@ -36,6 +36,9 @@
 # NONEXISTENT DIRECTORY TEST
 ./indexer non-existent-dir filename
 
+# DIRECTORY THAT ISN'T A CRAWLER
+./indexer dummy filename
+
 # WRONG NUMBER OF ARGUMENTS
 ./indexer sdfjkldsj sdfjkldjs 23 vdsjlkj thislabiskillingme
 

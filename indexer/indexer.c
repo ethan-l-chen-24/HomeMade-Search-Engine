@@ -21,7 +21,6 @@
 /************* function prototypes ********************/
 
 bool indexer(char* pageDir, char* indexFilename);
-bool buildIndex(char* pageDir, index_t* index);
 
 /************** main() ******************/
 /* the "testing" function/main function, which takes two arguments 
@@ -98,7 +97,7 @@ bool indexer(char* pageDir, char* indexFilename)
             return false;
         }
         // build the index from the crawler files
-        if (!buildIndex(pageDir, index)) {
+        if (!buildIndexFromCrawler(pageDir, index)) {
             count_free(indexFilename);
             count_free(pageDir);
             return false;
@@ -117,41 +116,6 @@ bool indexer(char* pageDir, char* indexFilename)
     } else {
         if (indexFilename != NULL) count_free(indexFilename);
         if (pageDir != NULL) count_free(pageDir);
-        fprintf(stderr, "Error: Null-Pointer Exception");
-        return false;
-    }
-}
-
-/************** buildIndex() ******************/
-/* the "testing" function/main function, which takes two arguments 
- * as inputs (other than the executable call), the directory containing the
- * files to index and the name of the index file to write
- * 
- * Pseudocode:
- *      1. Given the directory, load the webpage
- *      2. Open the file if possible and index the data
- *      3. Continue until the webpage no longer exists
- * 
- * Assumptions:
- *      1. All of the files inside of the directory are labeled 1-numFiles
-*/
-bool buildIndex(char* pageDir, index_t* index) 
-{
-    // validate parameters
-    if (pageDir != NULL && index != NULL) {
-
-        // loop through as long as the file exists 
-        int id = 1; 
-        // load the crawler files into webpages as long as they exist
-        webpage_t* crawlerPage;  
-        while ((crawlerPage = loadPageToWebpage(pageDir, &id)) != NULL) {
-            // index them
-            if (!indexWebpage(index, crawlerPage, id)) {
-                fprintf(stderr, "Error: couldn't index page");
-            }
-        }
-        return true;
-    } else {
         fprintf(stderr, "Error: Null-Pointer Exception");
         return false;
     }
