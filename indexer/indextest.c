@@ -14,9 +14,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "../common/index.h"
-#include "../common/pagedir.h"
-#include "../libcs50/memory.h"
+#include "index.h"
+#include "pagedir.h"
+#include "memory.h"
 
 /************* function prototypes ********************/
 

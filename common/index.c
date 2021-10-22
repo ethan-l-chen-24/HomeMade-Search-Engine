@@ -10,11 +10,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "index.h"
-#include "../libcs50/hashtable.h"
-#include "../libcs50/counters.h"
-#include "../libcs50/webpage.h"
-#include "../libcs50/file.h"
-#include "../libcs50/memory.h"
+#include "hashtable.h"
+#include "counters.h"
+#include "webpage.h"
+#include "file.h"
+#include "memory.h"
 #include "pagedir.h"
 #include "word.h"
 
@@ -58,7 +58,7 @@ void deleteIndex(index_t* index)
             hashtable_delete(index->table, deleteCT);
         }
         // free the struct
-        free(index);
+        count_free(index);
     }
 } 
 
@@ -75,7 +75,7 @@ bool saveIndexToFile(char* filename, index_t* index)
 		hashtable_iterate(index->table, fp, printCT);
         fclose(fp);
 	}
-    free(filepath);
+    count_free(filepath);
     return true;
 }
 
@@ -194,7 +194,7 @@ static bool readWordsInFile(webpage_t* page, index_t* index, int id)
             counters_t* wordCounter = (counters_t*) item;
             counters_add(wordCounter, id);
         }
-        free(word);
+        count_free(word);
     }
     return true;
 }

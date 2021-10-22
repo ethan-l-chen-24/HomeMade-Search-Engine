@@ -14,12 +14,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "../libcs50/webpage.h"
-#include "../libcs50/memory.h"
-#include "../libcs50/bag.h"
-#include "../libcs50/hashtable.h"
-#include "../common/pagedir.h"
-#include "../common/word.h"
+#include "webpage.h"
+#include "memory.h"
+#include "bag.h"
+#include "hashtable.h"
+#include "pagedir.h"
+#include "word.h"
 
 /************* function prototypes ********************/
 
