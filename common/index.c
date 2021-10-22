@@ -30,7 +30,7 @@ typedef struct index {
 static void loadWordInIndex(index_t* index, char* word, FILE* fp);
 static void printCT(void* arg, const char* key, void* item);
 static void printCTHelper(void* arg, const int key, const int count);
-static void readWordsInFile(webpage_t* page, index_t* index, int* id);
+static void readWordsInWebpage(webpage_t* page, index_t* index, int* id);
 static void deleteCT(void* item);
 
 /************** newIndex() ******************/
@@ -152,7 +152,7 @@ bool indexWebpage(index_t* index, webpage_t* webpage, int* id)
 {
     if (index == NULL || webpage == NULL || *id < 0) return false;
     // read the words in the file and insert them into the index
-    readWordsInFile(webpage, index, id);
+    readWordsInWebpage(webpage, index, id);
     // delete the webpage and its inner hashtable
     webpage_delete(webpage);
     return true;
@@ -190,7 +190,7 @@ static void loadWordInIndex(index_t* index, char* word, FILE* fp)
     }
 }
 
-/************** readWordsInFile() ******************/
+/************** readWordsInWebpage() ******************/
 /*
  * increments through every word in the file and inserts it into the index
  *
@@ -202,7 +202,7 @@ static void loadWordInIndex(index_t* index, char* word, FILE* fp)
  *      5. if it does, load that counterset
  *      6. insert the id into that counterset
 */
-static void readWordsInFile(webpage_t* page, index_t* index, int* id)
+static void readWordsInWebpage(webpage_t* page, index_t* index, int* id)
 {
     if (page == NULL || index == NULL || *id < 0) return;
 

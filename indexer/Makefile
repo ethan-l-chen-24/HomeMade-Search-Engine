@@ -48,6 +48,8 @@ clean:
 	rm -f *~ *.o
 	rm -f settest
 	rm -f core
+	rm -f indexer
+	rm -f indextest
 
 indexer: $(OBJS) $(LIBS)
 	$(CC) $(CFLAGS) indexer.o $(LIBS) -o $@

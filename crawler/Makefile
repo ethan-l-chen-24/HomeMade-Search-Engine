@@ -44,6 +44,7 @@ clean:
 	rm -f *~ *.o
 	rm -f settest
 	rm -f core
+	rm -f crawler
 
 crawler: $(OBJS) $(LIBS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
