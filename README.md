@@ -30,4 +30,13 @@ It is worth noting that
 
 ### Lab 5
 For this project, I attribute a few sources
-    - the course notes, especially  
+    - the previously lab, from which I took heavily
+    - The comments from my grader on Lab 4, (which hopefully I have fixed)
+    - Jack McGary for helping me understand the lab during office hours
+    - Professor Prioleau for fixing my compilation error in my makefile
+    - finally, the support of my friends and family. Jeff, this one is for you
+
+It is worth noting that
+    - I changed the output directory of crawler from common to data
+    - I rearranged some of the crawler methods and added some new helper methods to the common directory (don't worry, crawler still works)
+    - I was not able to fix the problem when it comes to the include statement and absolute paths. It seemed to me that even though there were no visible (red squiggly) errors, it simply would not compile without the absolute filepath
