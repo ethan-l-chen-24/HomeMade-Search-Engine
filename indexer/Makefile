@@ -23,7 +23,7 @@ VALGRIND = valgrind --leak-check=full --show-leak-kinds=all
 PAGE_DIRECTORY = letters
 DEPTH = 2
 
-.PHONY: all shelltest runindextest valgrind clean run
+.PHONY: all test runindextest valgrind valgrind2 clean run
 
 all: indexer indextest
 
@@ -39,6 +39,9 @@ run: indexer
 
 valgrind: indexer
 	$(VALGRIND) ./indexer valgrind valgrind-index
+
+valgrind2: indextest
+	$(VALGRIND) ./indexer valgrind-index valgrind-index-test
 
 clean:
 	rm -rf *.dSYM  # MacOS debugger info
