@@ -30,7 +30,7 @@ index_t* newIndex(const int tableSize);
 /* deletes an index struct */
 void deleteIndex(index_t* index);
 
-/******************* saveIndex() ********************/
+/******************* saveIndexToFile() ********************/
 /* Function used to save an index hashtable to a file in a given directory
  *
  *  Pseudocode:

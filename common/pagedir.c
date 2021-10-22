@@ -79,7 +79,7 @@ bool pageDirValidate(char* pageDir)
     char* crawlerFile = ".crawler";
     char* filepath = stringBuilder(pageDir, crawlerFile);
     // try to open the file (in read mode)
-    if(stringBuilder != NULL) {
+    if (stringBuilder != NULL) {
         FILE* fp;
         if((fp = fopen(filepath, "r")) != NULL) {
             count_free(filepath);
@@ -100,7 +100,7 @@ webpage_t* loadPageToWebpage(char* pageDir, int* id)
 {
     // turn the id int into a string
     char* idString = intToString(*id);
-    if(idString == NULL) {
+    if (idString == NULL) {
         fprintf(stderr, "Error: Out of memory");
         return NULL;
     }
@@ -109,7 +109,7 @@ webpage_t* loadPageToWebpage(char* pageDir, int* id)
     // build the filepath
     char* filepath = stringBuilder(pageDir, idString);
     count_free(idString);
-    if(filepath == NULL) return NULL;
+    if (filepath == NULL) return NULL;
 
     // open the crawler file
     FILE* fp;
@@ -120,18 +120,18 @@ webpage_t* loadPageToWebpage(char* pageDir, int* id)
         char* URL = freadlinep(fp);
         fclose(fp);
         // check if it is normalized and internal
-        if(!IsInternalURL(URL)) {
+        if (!IsInternalURL(URL)) {
             fprintf(stderr, "Error: URL %s is invalid\n", URL);
             return NULL;
         }
         // build the webpage
         webpage_t* page = webpage_new(URL, 0, NULL);
-        if(page == NULL) {
+        if (page == NULL) {
             fprintf(stderr, "Error: could not build webpage %s\n", URL);
             return NULL;
         }
         // fetch the pages HTML
-        if(!webpage_fetch(page)) {
+        if (!webpage_fetch(page)) {
             fprintf(stderr, "Error: page %s cannot be fetched\n", URL);
             return NULL;
         }
@@ -160,7 +160,7 @@ char* stringBuilder(char* pageDir, char* end)
         return filename;
     } else {
         // if pageDir is null, write directly to data directory
-        if(end != NULL) {
+        if (end != NULL) {
             char prefix[] = "../data";
             int destSize = strlen(end) + strlen(prefix) + 2; // +1 for /0 character
             char* filename = count_malloc(destSize);

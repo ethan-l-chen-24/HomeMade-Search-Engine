@@ -38,9 +38,9 @@ index_t* newIndex(const int tableSize)
 {
     // allocate memory for the index
     index_t* index = count_malloc(sizeof(index_t));
-    if(index != NULL) { 
+    if (index != NULL) { 
         // set the inner hashtable to a new hashtable of the specified size
-        if((index->table = hashtable_new(tableSize)) != NULL) return index;
+        if ((index->table = hashtable_new(tableSize)) != NULL) return index;
         else return NULL;
     } else {
         fprintf(stderr, "Error: out of memory");
@@ -52,8 +52,8 @@ index_t* newIndex(const int tableSize)
 // see index.h for description
 void deleteIndex(index_t* index) 
 {
-    if(index != NULL) {
-        if(index->table != NULL) {
+    if (index != NULL) {
+        if (index->table != NULL) {
             // free the hashtable
             hashtable_delete(index->table, deleteCT);
         }
@@ -67,10 +67,13 @@ void deleteIndex(index_t* index)
 bool saveIndexToFile(char* filename, index_t* index)
 {
     // build the filepath of the index file
+    if (filename == NULL || index == NULL) return false;
     char* filepath = stringBuilder(NULL, filename);
+    if (filepath == NULL) return false;
+
     FILE* fp;
     // try to open that file (should work as long as dir exists)
-	if((fp = fopen(filepath, "w")) != NULL) {
+	if ((fp = fopen(filepath, "w")) != NULL) {
         // iterate through the table and print the file in the format specified
 		hashtable_iterate(index->table, fp, printCT);
         fclose(fp);
@@ -83,16 +86,18 @@ bool saveIndexToFile(char* filename, index_t* index)
 // see index.h for description
 index_t* loadIndex(char* filepath)
 {
+    if (filepath == NULL) return NULL;
+
     // create the index
     index_t* index = newIndex(800);
-    if(index == NULL) {
+    if (index == NULL) {
         fprintf(stderr, "Error: Out of memory");
         return NULL;
     }
 
     // build the filepath
     char* indexFilePath = stringBuilder(NULL, filepath);
-    if(indexFilePath == NULL) {
+    if (indexFilePath == NULL) {
         fprintf(stderr, "filepath could not be built");
         return NULL;
     }
@@ -101,11 +106,11 @@ index_t* loadIndex(char* filepath)
     printf("Reading file %s\n", indexFilePath);
     FILE* fp = fopen(indexFilePath, "r");
     count_free(indexFilePath);
-    if(fp != NULL) {
+    if (fp != NULL) {
         // read the first word in the line as long as it exists
         // and put that word into the index
         char* word;
-        while((word = freadwordp(fp)) != NULL) loadWordInIndex(index, word, fp); 
+        while ((word = freadwordp(fp)) != NULL) loadWordInIndex(index, word, fp); 
         fclose(fp);
         return index;
     } else {
@@ -120,9 +125,10 @@ index_t* loadIndex(char* filepath)
 // see index.h for description
 bool indexWebpage(index_t* index, webpage_t* webpage, int id) 
 {
+    if (index == NULL || webpage == NULL || id < 0) return false;
     char* URL = webpage_getURL(webpage);
     // read the words in the file and insert them into the index
-    if(!readWordsInFile(webpage, index, id)) {
+    if (!readWordsInFile(webpage, index, id)) {
         fprintf(stderr, "Error: page %s cannot be read\n", URL);
         return false;
     }
@@ -145,9 +151,9 @@ static void loadWordInIndex(index_t* index, char* word, FILE* fp)
 {
     // create a new counter to insert into the index
     counters_t* wordFreqCtr = counters_new();
-    if(wordFreqCtr == NULL) return;
+    if (wordFreqCtr == NULL) return;
     // insert the word into the hashtable
-    if(!hashtable_insert(index->table, word, wordFreqCtr)) {
+    if (!hashtable_insert(index->table, word, wordFreqCtr)) {
         fprintf(stderr, "Error: duplicate words");
     }
     count_free(word);
@@ -155,7 +161,7 @@ static void loadWordInIndex(index_t* index, char* word, FILE* fp)
     // scan the rest of the line for pairs of ints, stop when no longer found
     int id;
     int count;
-    while(fscanf(fp, "%d %d ", &id, &count) == 2) {
+    while (fscanf(fp, "%d %d ", &id, &count) == 2) {
         // add the pairs to the index where the first is the id and the 
         // second is the count
         counters_set(wordFreqCtr, id, count);
@@ -176,6 +182,8 @@ static void loadWordInIndex(index_t* index, char* word, FILE* fp)
 */
 static bool readWordsInFile(webpage_t* page, index_t* index, int id)
 {
+    if (page == NULL || index == NULL || id < 0) return false;
+
     int loc = 0;
     char* word;
     // read through every WORD in the webpage
@@ -214,26 +222,25 @@ static bool readWordsInFile(webpage_t* page, index_t* index, int id)
 */
 static void printCT(void* arg, const char* key, void* item) 
 {
-    if(arg != NULL) {
-        // cast the arg to a file
-	    FILE* fp = (FILE*) arg;
-        if(item != NULL) {
-            // print the key (word)
-	        fprintf(fp, "%s ", key);
-            // iterate through the counters and print the key and item
-	        counters_t* ctrs = (counters_t*) item;
-	        counters_iterate(ctrs, arg, printCTHelper);
-        }
-        // line break
-	    fprintf(fp, "\n");
+    if (arg == NULL || key == NULL || item == NULL) return;
+    // cast the arg to a file
+    FILE* fp = (FILE*) arg;
+    if (item != NULL) {
+        // print the key (word)
+        fprintf(fp, "%s ", key);
+        // iterate through the counters and print the key and item
+	    counters_t* ctrs = (counters_t*) item;
+        counters_iterate(ctrs, arg, printCTHelper);
     }
+    // line break
+	fprintf(fp, "\n");
 }
 
 /************** printCTHelper() ******************/
 /* a helper that helps print out the counterset */
 static void printCTHelper(void* arg, const int key, const int count) 
 {
-    if(arg != NULL) {
+    if (arg != NULL) {
         // print the key and count to the file
         FILE* fp = (FILE*) arg;
 	    fprintf(fp, "%d %d ", key, count);
@@ -244,6 +251,7 @@ static void printCTHelper(void* arg, const int key, const int count)
 /* a helper function to help the hashtable delete its counter objects */
 static void deleteCT(void* item)
 {
+    if (item == NULL) return;
     // cast to a counters struct so we can delete it
 	counters_t* ct = item;
 	if (ct != NULL) {

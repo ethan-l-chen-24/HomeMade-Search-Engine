@@ -14,8 +14,7 @@
 /******************* functions *******************/
 
 /***************** normalizeWord() ***********************/
-/* makes a word all lowercase, if the character can be made lowercase
-*/
+/* makes a word all lowercase, if the character can be made lowercase */
 void normalizeWord(char* word);
 
 /***************** intToString() ***********************/

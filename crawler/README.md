@@ -16,7 +16,7 @@ The `crawler.c` should handle most edge cases, but for proper execution, it cert
 * the `seedURL`exists, as does the target directory
 * there is enough memory on the computer to handle the tasks
 * all of the necessary .o files exist for compilation
-* the program assumes that the directory is just the name of the local directory in common, e.g. wikipedia-depth-0 rather than ../common/wikipedia-depth-0. The program automatically appends the filepath prefix
+* the program assumes that the directory is just the name of the local directory in data, e.g. wikipedia-depth-0 rather than ../data/wikipedia-depth-0. The program automatically appends the filepath prefix
 
 Additionally, because we used a _bag_ to store the webpages, we cannot expect the order of the extracted webpages to be consistently the same (although since our bag is a LinkedList it technically will always be the same). Thus, target output (in theory) may differ based on random factors.
 

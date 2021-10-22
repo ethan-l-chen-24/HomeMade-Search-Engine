@@ -36,7 +36,7 @@ This implementation, as mentioned in the lab description, decomposes the objecti
 
 For more specific pseudocode on each method, refer to the comments above each method in the `crawler.c` file. 
 
-Just a quick note on the page saver: the files were saved to a directory inside of the common folder. This is regardless of the placement of the .c file, as long as it is within a directory parallel to the comon directory.
+Just a quick note on the page saver: the files were saved to a directory inside of the data folder. This is regardless of the placement of the .c file, as long as it is within a directory parallel to the comon directory.
 
 ### Usage
 

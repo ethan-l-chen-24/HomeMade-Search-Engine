@@ -5,7 +5,7 @@
 
 Testing was implemented in this lab using a shell script called `testing.sh`. Within the shell script is several calls to the executable, compiled `crawler` file. To call the testing file, simply type `make test`. The testing output has also been printed in `testing.out` using the command `make test &> testing.out`.
 
-The test case begins by deleting and remaking each of out directories in `../common` as to ensure that all of the directories are initially empty. Then, the shell script runs a series of tests.
+The test case begins by deleting and remaking each of out directories in `../data` as to ensure that all of the directories are initially empty. Then, the shell script runs a series of tests.
 
 The first set of tests are tests on the provided TSE websites, as in the webpage `http://cs50tse.cs.dartmouth.edu/tse-output/`. By using all of the same tests (except for toscrape-depth-2 and wikipedia-depth-2, which both take far too long), I was able to compare the number of outputted files and the URLs of those files to my own, which ensured the success of my algorithm.
 

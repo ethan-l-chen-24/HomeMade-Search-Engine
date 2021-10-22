@@ -41,7 +41,7 @@ int main(const int argc, char* argv[])
 {
     char* program = argv[0];
     // check for the appropriate number of arguments
-    if(argc != 3) {
+    if (argc != 3) {
         fprintf(stderr, "Usage: %s [pageDirectory] [indexFilename]\n", program);
         return 1;
     }
@@ -65,14 +65,14 @@ int main(const int argc, char* argv[])
     strcpy(indexFilename, indexFnameArg);
 
     // check if the directory exists
-    if(!pageDirValidate(pageDir)) {
+    if (!pageDirValidate(pageDir)) {
         count_free(indexFilename);
         count_free(pageDir);
         return false;
     }
 
     // run the indexer
-    if(indexer(pageDir, indexFilename)) return 0;
+    if (indexer(pageDir, indexFilename)) return 0;
     else return 1;
 }
 
@@ -91,17 +91,20 @@ int main(const int argc, char* argv[])
 bool indexer(char* pageDir, char* indexFilename) 
 {
     // check validity of arguments
-    if(pageDir != NULL && indexFilename != NULL) {
+    if (pageDir != NULL && indexFilename != NULL) {
         // initialize the index
         index_t* index = newIndex(800);
+        if (index == NULL) {
+            return false;
+        }
         // build the index from the crawler files
-        if(!buildIndex(pageDir, index)) {
+        if (!buildIndex(pageDir, index)) {
             count_free(indexFilename);
             count_free(pageDir);
             return false;
         }
         // save the index to the given filename
-        if(!saveIndexToFile(indexFilename, index)) {
+        if (!saveIndexToFile(indexFilename, index)) {
             count_free(indexFilename);
             count_free(pageDir);
             return false;
@@ -112,8 +115,8 @@ bool indexer(char* pageDir, char* indexFilename)
         count_free(indexFilename);
         return true;
     } else {
-        if(indexFilename != NULL) count_free(indexFilename);
-        if(pageDir != NULL) count_free(pageDir);
+        if (indexFilename != NULL) count_free(indexFilename);
+        if (pageDir != NULL) count_free(pageDir);
         fprintf(stderr, "Error: Null-Pointer Exception");
         return false;
     }
@@ -135,7 +138,7 @@ bool indexer(char* pageDir, char* indexFilename)
 bool buildIndex(char* pageDir, index_t* index) 
 {
     // validate parameters
-    if(pageDir != NULL && index != NULL) {
+    if (pageDir != NULL && index != NULL) {
 
         // loop through as long as the file exists 
         int id = 1; 
@@ -143,7 +146,7 @@ bool buildIndex(char* pageDir, index_t* index)
         webpage_t* crawlerPage;  
         while ((crawlerPage = loadPageToWebpage(pageDir, &id)) != NULL) {
             // index them
-            if(!indexWebpage(index, crawlerPage, id)) {
+            if (!indexWebpage(index, crawlerPage, id)) {
                 fprintf(stderr, "Error: couldn't index page");
             }
         }

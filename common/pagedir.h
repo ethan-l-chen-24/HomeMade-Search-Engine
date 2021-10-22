@@ -1,7 +1,7 @@
 /* 
  * pagedir.h - header file for CS50 'pagedir' file in 'common' module
  *
- * provides a library for page directory functions
+ * provides a library for page directory functions within the data file
  * 
  * Ethan Chen, October 2021
  */
@@ -53,7 +53,7 @@ webpage_t* loadPageToWebpage(char* pageDir, int* id);
 
 /***************** stringBuilder() ***********************/
 /* Function used to build the filepath of a file given
- * a directory and a suffix
+ * a directory and a suffix, automatically puts in the data directory
  *
  * Note:
  *      if pageDir is null, the filepath will be ../data/end, writing

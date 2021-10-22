@@ -19,7 +19,7 @@
 void normalizeWord(char* word)
 {
     // loop through every character and make it lowercase
-    for(char* i = word; *i != '\0'; i++) {
+    for (char* i = word; *i != '\0'; i++) {
         *i = tolower(*i);
     }
 }
@@ -38,11 +38,11 @@ char* intToString(int x)
 
     // allocate memory to copy the string into
     char* xString = count_malloc(xLen + 1);
-    if(xString == NULL) {
+    if (xString == NULL) {
         fprintf(stderr, "Error: Out of memory");
         return NULL;
     }
-
+    
     // write the int as a string
     sprintf(xString, "%d", x);
     return xString;

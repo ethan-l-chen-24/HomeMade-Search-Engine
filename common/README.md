@@ -3,7 +3,7 @@
 
 ### common
 
-This is a common directory to each of the major TSE modules. It contains `pagedir.h` and `pagedir.c` at the moment, although I am sure I will be adding onto this module as we continue the Tiny Search Engine.
+This is a common directory to each of the major TSE modules. It contains `pagedir.h` and `pagedir.c`, `word.h` and `word.c`, and `index.h` and `index.c`
 
 ### Compilation
 

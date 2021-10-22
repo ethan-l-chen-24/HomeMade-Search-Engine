@@ -40,7 +40,7 @@ int main(const int argc, char* argv[])
 {
     // validate arguments
     char* program = argv[0];
-    if(argc != 3) {
+    if (argc != 3) {
         fprintf(stderr, "Usage: %s [oldIndexFilename] [newIndexFilename]", program);
         return 1;
     }
@@ -64,7 +64,7 @@ int main(const int argc, char* argv[])
     strcpy(newFile, newFileArg);
 
     // run the test
-    if(indexTest(oldFile, newFile)) return 1;
+    if (indexTest(oldFile, newFile)) return 1;
     else return 0;
 }
 
