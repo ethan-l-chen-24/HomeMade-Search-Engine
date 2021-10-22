@@ -109,7 +109,7 @@ bool saveIndexToFile(char* filename, index_t* index)
 
 /************** loadIndex() ******************/ // COMMENT THIS 
 // see index.h for description
-index_t* loadIndex(char* filepath)
+index_t* loadIndexFromFile(char* filepath)
 {
     if (filepath == NULL) return NULL;
 

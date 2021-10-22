@@ -19,14 +19,9 @@
 // see pagedir.h for description
 bool validDirectory(char* directoryName) 
 {
-    // count the number of characters that will be in the filepath string
-    char begin[] = "../data";
-    char end[] = ".crawler";
-    int newSize = strlen(directoryName) + strlen(begin) + strlen(end) + 3;
-
+    char* end = ".crawler";
     // allocate the space and build that filepath
-    char* testFile = count_malloc(newSize);
-    sprintf(testFile, "%s/%s/%s", begin, directoryName, end);
+    char* testFile = stringBuilder(directoryName, end);
 
     // check if that directory exists by attempting to write to that file
     FILE *fp = fopen(testFile, "w");

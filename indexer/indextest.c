@@ -84,7 +84,7 @@ int main(const int argc, char* argv[])
 bool indexTest(char* oldFile, char* newFile) 
 {
     // load the index from the file
-    index_t* index = loadIndex(oldFile);
+    index_t* index = loadIndexFromFile(oldFile);
     printf("Index loaded\n");
     if (index != NULL) {
         // save the index to the new file

@@ -53,7 +53,7 @@ bool saveIndexToFile(char* filename, index_t* index);
 */
 bool buildIndexFromCrawler(char* pageDir, index_t* index);
 
-/******************* loadIndex() ********************/
+/******************* loadIndexFile() ********************/
 /* Function used to read an index file and load the data
  * into a hashtable
  *
@@ -64,7 +64,7 @@ bool buildIndexFromCrawler(char* pageDir, index_t* index);
  *      4. scan the file for pairs of ints and add it to the word's counter
  *      5. repeat until the file has been completely read
 */
-index_t* loadIndex(char* filepath);
+index_t* loadIndexFromFile(char* filepath);
 
 /******************* indexWebpage() ********************/
 /* Takes a webpage and loads its words into the hashtable
