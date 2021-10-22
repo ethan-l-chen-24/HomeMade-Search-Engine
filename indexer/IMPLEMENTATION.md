@@ -11,38 +11,38 @@ The major data structure, as mentioned, is a `struct index` as defined in `index
 
 The algorithm follows the pseudocode as described in `DESIGN.md`. Here is the major data flow and pseudocode for all of the modules, including those in the `index.h` file.
 
-#### main
+#### `main`
 Runs the indexer
 
 1. validate args
 2. call pageDirValidate, and if false, return
 3. call indexer
 
-#### pageDirValidate
+#### `pageDirValidate`
 Makes sure a pageDir is a valid crawler directory
 
 1. build the filepath of the .crawler file
 2. try to read the file
 3. if it is possible, return true, otherwise return false
 
-#### indexer
+#### `indexer`
 Builds the index and then prints it out
 
 1. create a new index struct
 2. call buildIndexFromCrawler
 3. call saveIndexToFile
 
-#### buildIndexFromCrawler
+#### `buildIndexFromCrawler`
 inserts items into the index from a crawler directory
 
 1. sets the first id = 1
 2. goes through each webpage until it can't read anymore
     1. tries to index the webpage by calling indexWebpage, which will also increment the id by calling loadPageToWebpage
 
-#### indexWebpage
+#### `indexWebpage`
 this method really just calls readWordsInFile, and is not worthy of legitimate pseudocode
 
-#### readWordsInWebpage
+#### `readWordsInWebpage`
 goes through all of the words in a webpage and loads them into the index
 
 1. get words from the webpage as long as they are not null
@@ -56,7 +56,7 @@ goes through all of the words in a webpage and loads them into the index
         1. get the counter set and add the word
 2. increment the id
 
-#### loadPageToWebpage
+#### `loadPageToWebpage`
 takes a pagedirectory and id of a crawler page, retrieves the URL and builds the webpage
 
 1. builds the filepath of the crawler file
@@ -67,7 +67,7 @@ takes a pagedirectory and id of a crawler page, retrieves the URL and builds the
     4. Try to get the URL of the webpage
     5. Return the page
 
-#### saveIndexToFile
+#### `saveIndexToFile`
 takes an index  and saves it to a file
 
 1. builds the filepath of the output file
@@ -76,7 +76,7 @@ takes an index  and saves it to a file
 
 The `indextest` is not quite as worthy of mention, as it is meant as a tester for the `index` file. However, there are a couple of methods worthy of mention that will be relevant for the `query` module.
 
-#### loadIndexFromFile
+#### `loadIndexFromFile`
 Loads the index struct from an index output file
 
 1. create a new index
@@ -86,7 +86,7 @@ Loads the index struct from an index output file
 5. call loadWordInIndex and pass that word
 6. close memory
 
-#### loadWordInIndex
+#### `loadWordInIndex`
 Loads a specific word's ids and frequency into the index
 
 1. create a new counterset
