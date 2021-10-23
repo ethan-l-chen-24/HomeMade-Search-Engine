@@ -10,7 +10,7 @@
 # updated by Temi Prioleau, Oct 2021
 
 # object files, and the target library
-OBJS = bag.o counters.o file.o hashtable.o jhash.o memory.o set.o webpage.o
+OBJS = bag.o counters.o file.o hashtable.o jhash.o memory.o set.o webpage.o 
 LIB = libcs50.a
 
 # add -DNOSLEEP to disable the automatic sleep after web-page fetches

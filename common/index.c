@@ -146,6 +146,17 @@ index_t* loadIndexFromFile(char* filepath)
     }
 }
 
+/************** getHashtable() ******************/
+// see index.h for description
+hashtable_t* getHashtable(index_t* index)
+{
+    if(index != NULL) {
+        return index->table;
+    } else {
+        return NULL;
+    }
+}
+
 /************** indexWebpage() ******************/
 // see index.h for description
 bool indexWebpage(index_t* index, webpage_t* webpage, int* id) 
@@ -285,3 +296,4 @@ static void deleteCT(void* item)
 		counters_delete(ct);
 	}
 }
+

@@ -67,7 +67,7 @@ The major data structure of this modle is the _index_, which is really just a sp
 
 _Unit testing._
 
-TODO
+TODOTODOTODO
 
 _Integration testing._ Assemble the indexer and test it as a whole. In each case, examine the output files carefully to be sure they have the contents of the correct page, with the correct words and correct occurrences of each. 
 

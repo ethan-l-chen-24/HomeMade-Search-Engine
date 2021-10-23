@@ -11,15 +11,21 @@ LIB = common.a
 CFLAGS = -Wall -pedantic -std=c11 -ggdb $(TESTING) -I$L
 CC = gcc
 
+TESTING=-DUNITTEST
+
 # build archive file
 $(LIB): $(OBJS) $(LIBS)
 	ar cr $(LIB) $(LIBS) $(OBJS) 
 
-pagedir.o: pagedir.h word.h $L/memory.h $L/webpage.h $L/file.h 
-index.o: index.h pagedir.h word.h $L/hashtable.h $L/counters.h $L/webpage.h  $L/file.h $L/memory.h
-word.o: word.h $L/memory.h 
+.PHONY: all clean sourcelist test
 
-.PHONY: clean sourcelist
+all: common.a unittest
+
+unittest: unittest.o $(LIBS)
+	$(CC) $(CFLAGS) unittest.c index.o pagedir.o word.o $(LIBS) -o $@
+
+test: unittest
+	./unittest
 
 # list all the sources and docs in this directory.
 sourcelist: Makefile *.md *.c *.h

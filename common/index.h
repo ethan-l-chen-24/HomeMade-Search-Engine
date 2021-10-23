@@ -14,6 +14,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "webpage.h"
+#include "hashtable.h"
 
 /**************** global types ****************/
 typedef struct index index_t; // holds the hashtable used for indexing
@@ -41,7 +42,7 @@ void deleteIndex(index_t* index);
 */
 bool saveIndexToFile(char* filename, index_t* index);
 
-/************** buildIndex() ******************/
+/************** buildIndexFromCrawler() ******************/
 /* the "testing" function/main function, which takes two arguments 
  * as inputs (other than the executable call), the directory containing the
  * files to index and the name of the index file to write
@@ -53,7 +54,7 @@ bool saveIndexToFile(char* filename, index_t* index);
 */
 bool buildIndexFromCrawler(char* pageDir, index_t* index);
 
-/******************* loadIndexFile() ********************/
+/******************* loadIndexFromFile() ********************/
 /* Function used to read an index file and load the data
  * into a hashtable
  *
@@ -74,5 +75,9 @@ index_t* loadIndexFromFile(char* filepath);
  *      2. delete the webpage
 */
 bool indexWebpage(index_t* index, webpage_t* webpage, int* id);
+
+/******************* indexWebpage() ********************/
+/* return the index's hashtable */
+hashtable_t* getHashtable(index_t* index);
 
 #endif

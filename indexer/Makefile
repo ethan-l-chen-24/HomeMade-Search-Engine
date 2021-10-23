@@ -11,7 +11,7 @@ LIBS = $C/common.a $L/libcs50.a
 
 # uncomment the following to turn on verbose memory logging
 # recomment -DTEST to turn off testing output in stdout
-TESTING=-DTEST #-DMEMTEST
+TESTING= #-DMEMTEST
 
 CFLAGS = -Wall -pedantic -std=c11 -ggdb $(TESTING) -I$L -I$C
 CC = gcc
