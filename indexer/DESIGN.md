@@ -67,7 +67,15 @@ The major data structure of this modle is the _index_, which is really just a sp
 
 _Unit testing._
 
-TODOTODOTODO
+Unit testing was implemented within the _common_ module in the `unittest.c` file. This can be compiled by calling `make test` within the common module, and it will run 5 tests on different methods.
+
+* `newIndex()`
+* `buildIndexFromCrawler()`
+* `loadIndexFromFile()`
+* `indexWebpage()`
+* `deleteIndex()`
+
+It is worth noting that this coding was not as defensive because it is unit testing, and I believe readability to be more important in this case.
 
 _Integration testing._ Assemble the indexer and test it as a whole. In each case, examine the output files carefully to be sure they have the contents of the correct page, with the correct words and correct occurrences of each. 
 

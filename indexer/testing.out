@@ -57,5 +57,267 @@ SUCCESS!
 
 
 ./indexer letters-depth-5 letters-index-5
-Makefile:32: recipe for target 'test' failed
-make: *** [test] Interrupt
+could not load webpage of URL ../data/letters-depth-5/11
+Reading file ../data/letters-depth-5/1
+Reading file ../data/letters-depth-5/2
+Reading file ../data/letters-depth-5/3
+Reading file ../data/letters-depth-5/4
+Reading file ../data/letters-depth-5/5
+Reading file ../data/letters-depth-5/6
+Reading file ../data/letters-depth-5/7
+Reading file ../data/letters-depth-5/8
+Reading file ../data/letters-depth-5/9
+Reading file ../data/letters-depth-5/10
+SUCCESS!
+
+
+./indexer letters-depth-6 letters-index-6
+could not load webpage of URL ../data/letters-depth-6/11
+Reading file ../data/letters-depth-6/1
+Reading file ../data/letters-depth-6/2
+Reading file ../data/letters-depth-6/3
+Reading file ../data/letters-depth-6/4
+Reading file ../data/letters-depth-6/5
+Reading file ../data/letters-depth-6/6
+Reading file ../data/letters-depth-6/7
+Reading file ../data/letters-depth-6/8
+Reading file ../data/letters-depth-6/9
+Reading file ../data/letters-depth-6/10
+SUCCESS!
+
+
+# TOSCRAPE TEST
+# -------------
+./indexer toscrape-depth-0 toscrape-index-0
+could not load webpage of URL ../data/toscrape-depth-0/2
+Reading file ../data/toscrape-depth-0/1
+SUCCESS!
+
+
+./indexer toscrape-depth-1 toscrape-index-1
+could not load webpage of URL ../data/toscrape-depth-1/75
+Reading file ../data/toscrape-depth-1/1
+Reading file ../data/toscrape-depth-1/2
+Reading file ../data/toscrape-depth-1/3
+Reading file ../data/toscrape-depth-1/4
+Reading file ../data/toscrape-depth-1/5
+Reading file ../data/toscrape-depth-1/6
+Reading file ../data/toscrape-depth-1/7
+Reading file ../data/toscrape-depth-1/8
+Reading file ../data/toscrape-depth-1/9
+Reading file ../data/toscrape-depth-1/10
+Reading file ../data/toscrape-depth-1/11
+Reading file ../data/toscrape-depth-1/12
+Reading file ../data/toscrape-depth-1/13
+Reading file ../data/toscrape-depth-1/14
+Reading file ../data/toscrape-depth-1/15
+Reading file ../data/toscrape-depth-1/16
+Reading file ../data/toscrape-depth-1/17
+Reading file ../data/toscrape-depth-1/18
+Reading file ../data/toscrape-depth-1/19
+Reading file ../data/toscrape-depth-1/20
+Reading file ../data/toscrape-depth-1/21
+Reading file ../data/toscrape-depth-1/22
+Reading file ../data/toscrape-depth-1/23
+Reading file ../data/toscrape-depth-1/24
+Reading file ../data/toscrape-depth-1/25
+Reading file ../data/toscrape-depth-1/26
+Reading file ../data/toscrape-depth-1/27
+Reading file ../data/toscrape-depth-1/28
+Reading file ../data/toscrape-depth-1/29
+Reading file ../data/toscrape-depth-1/30
+Reading file ../data/toscrape-depth-1/31
+Reading file ../data/toscrape-depth-1/32
+Reading file ../data/toscrape-depth-1/33
+Reading file ../data/toscrape-depth-1/34
+Reading file ../data/toscrape-depth-1/35
+Reading file ../data/toscrape-depth-1/36
+Reading file ../data/toscrape-depth-1/37
+Reading file ../data/toscrape-depth-1/38
+Reading file ../data/toscrape-depth-1/39
+Reading file ../data/toscrape-depth-1/40
+Reading file ../data/toscrape-depth-1/41
+Reading file ../data/toscrape-depth-1/42
+Reading file ../data/toscrape-depth-1/43
+Reading file ../data/toscrape-depth-1/44
+Reading file ../data/toscrape-depth-1/45
+Reading file ../data/toscrape-depth-1/46
+Reading file ../data/toscrape-depth-1/47
+Reading file ../data/toscrape-depth-1/48
+Reading file ../data/toscrape-depth-1/49
+Reading file ../data/toscrape-depth-1/50
+Reading file ../data/toscrape-depth-1/51
+Reading file ../data/toscrape-depth-1/52
+Reading file ../data/toscrape-depth-1/53
+Reading file ../data/toscrape-depth-1/54
+Reading file ../data/toscrape-depth-1/55
+Reading file ../data/toscrape-depth-1/56
+Reading file ../data/toscrape-depth-1/57
+Reading file ../data/toscrape-depth-1/58
+Reading file ../data/toscrape-depth-1/59
+Reading file ../data/toscrape-depth-1/60
+Reading file ../data/toscrape-depth-1/61
+Reading file ../data/toscrape-depth-1/62
+Reading file ../data/toscrape-depth-1/63
+Reading file ../data/toscrape-depth-1/64
+Reading file ../data/toscrape-depth-1/65
+Reading file ../data/toscrape-depth-1/66
+Reading file ../data/toscrape-depth-1/67
+Reading file ../data/toscrape-depth-1/68
+Reading file ../data/toscrape-depth-1/69
+Reading file ../data/toscrape-depth-1/70
+Reading file ../data/toscrape-depth-1/71
+Reading file ../data/toscrape-depth-1/72
+Reading file ../data/toscrape-depth-1/73
+Reading file ../data/toscrape-depth-1/74
+SUCCESS!
+
+
+# WIKIPEDIA TESTS
+# ---------------
+./indexer wikipedia-depth-0 wikipedia-index-0
+could not load webpage of URL ../data/wikipedia-depth-0/2
+Reading file ../data/wikipedia-depth-0/1
+SUCCESS!
+
+
+./indexer wikipedia-depth-1 wikipedia-index-1
+could not load webpage of URL ../data/wikipedia-depth-1/8
+Reading file ../data/wikipedia-depth-1/1
+Reading file ../data/wikipedia-depth-1/2
+Reading file ../data/wikipedia-depth-1/3
+Reading file ../data/wikipedia-depth-1/4
+Reading file ../data/wikipedia-depth-1/5
+Reading file ../data/wikipedia-depth-1/6
+Reading file ../data/wikipedia-depth-1/7
+SUCCESS!
+
+
+# NONEXISTENT DIRECTORY TEST
+./indexer non-existent-dir filename
+
+# DIRECTORY THAT ISN'T A CRAWLER
+./indexer dummy filename
+
+# WRONG NUMBER OF ARGUMENTS
+./indexer sdfjkldsj sdfjkldjs 23 vdsjlkj thislabiskillingme
+Usage: ./indexer [pageDirectory] [indexFilename]
+
+# VALGRIND
+make valgrind
+make[1]: Entering directory '/thayerfs/home/f004h1g/cs50-dev/labs/tse-ethan-l-chen-24/indexer'
+valgrind --leak-check=full --show-leak-kinds=all ./indexer valgrind valgrind-index
+==1370== Memcheck, a memory error detector
+==1370== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1370== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==1370== Command: ./indexer valgrind valgrind-index
+==1370== 
+could not load webpage of URL ../data/valgrind/5
+Reading file ../data/valgrind/1
+Reading file ../data/valgrind/2
+Reading file ../data/valgrind/3
+Reading file ../data/valgrind/4
+SUCCESS!
+
+==1370== 
+==1370== HEAP SUMMARY:
+==1370==     in use at exit: 0 bytes in 0 blocks
+==1370==   total heap usage: 1,362 allocs, 1,362 frees, 164,937 bytes allocated
+==1370== 
+==1370== All heap blocks were freed -- no leaks are possible
+==1370== 
+==1370== For counts of detected and suppressed errors, rerun with: -v
+==1370== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+make[1]: Leaving directory '/thayerfs/home/f004h1g/cs50-dev/labs/tse-ethan-l-chen-24/indexer'
+
+########### INDEXTEST #############
+###################################
+
+# LETTERS TEST
+# -------------
+./indextest letters-index-0 letters-index-0-test
+Reading file ../data/letters-index-0
+Index loaded
+Index saved
+
+./indextest letters-index-1 letters-index-1-test
+Reading file ../data/letters-index-1
+Index loaded
+Index saved
+
+./indextest letters-index-2 letters-index-2-test
+Reading file ../data/letters-index-2
+Index loaded
+Index saved
+
+./indextest letters-index-3 letters-index-3-test
+Reading file ../data/letters-index-3
+Index loaded
+Index saved
+
+./indextest letters-index-4 letters-index-4-test
+Reading file ../data/letters-index-4
+Index loaded
+Index saved
+
+./indextest letters-index-5 letters-index-5-test
+Reading file ../data/letters-index-5
+Index loaded
+Index saved
+
+./indextest letters-index-6 letters-index-6-test
+Reading file ../data/letters-index-6
+Index loaded
+Index saved
+
+# TOSCRAPE TEST
+# -------------
+./indextest toscrape-index-0 toscrape-index-0-test
+Reading file ../data/toscrape-index-0
+Index loaded
+Index saved
+
+./indextest toscrape-index-1 toscrape-index-1-test
+Reading file ../data/toscrape-index-1
+Index loaded
+Index saved
+
+# WIKIPEDIA TESTS
+# ---------------
+./indextest wikipedia-index-0 wikipedia-index-0-test
+Reading file ../data/wikipedia-index-0
+Index loaded
+Index saved
+
+./indextest wikipedia-index-1 wikipedia-index-1-test
+Reading file ../data/wikipedia-index-1
+Index loaded
+Index saved
+
+# NONEXISTENT file
+./indextest non-existent-file filename
+Error: invalid filepathReading file ../data/non-existent-file
+Index loaded
+test failed
+# WRONG NUMBER OF ARGUMENTS
+./indextest sdfjkldsj sdfjkldjs 23 vdsjlkj thislabiskillingme
+Usage: ./indextest [oldIndexFilename] [newIndexFilename]
+# VALGRIND
+make valgrind2
+make[1]: Entering directory '/thayerfs/home/f004h1g/cs50-dev/labs/tse-ethan-l-chen-24/indexer'
+valgrind --leak-check=full --show-leak-kinds=all ./indexer valgrind-index valgrind-index-test
+==1395== Memcheck, a memory error detector
+==1395== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1395== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==1395== Command: ./indexer valgrind-index valgrind-index-test
+==1395== 
+==1395== 
+==1395== HEAP SUMMARY:
+==1395==     in use at exit: 0 bytes in 0 blocks
+==1395==   total heap usage: 4 allocs, 4 frees, 619 bytes allocated
+==1395== 
+==1395== All heap blocks were freed -- no leaks are possible
+==1395== 
+==1395== For counts of detected and suppressed errors, rerun with: -v
+==1395== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+make[1]: Leaving directory '/thayerfs/home/f004h1g/cs50-dev/labs/tse-ethan-l-chen-24/indexer'
