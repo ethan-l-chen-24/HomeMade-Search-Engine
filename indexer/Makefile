@@ -56,4 +56,3 @@ indexer: $(OBJS) $(LIBS)
 
 indextest: $(OBJS) $(LIBS)
 	$(CC) $(CFLAGS) indextest.o $(LIBS) -o $@
-
