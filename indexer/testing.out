@@ -207,11 +207,11 @@ Usage: ./indexer [pageDirectory] [indexFilename]
 make valgrind
 make[1]: Entering directory '/thayerfs/home/f004h1g/cs50-dev/labs/tse-ethan-l-chen-24/indexer'
 valgrind --leak-check=full --show-leak-kinds=all ./indexer valgrind valgrind-index
-==1370== Memcheck, a memory error detector
-==1370== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1370== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==1370== Command: ./indexer valgrind valgrind-index
-==1370== 
+==3049== Memcheck, a memory error detector
+==3049== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3049== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==3049== Command: ./indexer valgrind valgrind-index
+==3049== 
 could not load webpage of URL ../data/valgrind/5
 Reading file ../data/valgrind/1
 Reading file ../data/valgrind/2
@@ -219,15 +219,15 @@ Reading file ../data/valgrind/3
 Reading file ../data/valgrind/4
 SUCCESS!
 
-==1370== 
-==1370== HEAP SUMMARY:
-==1370==     in use at exit: 0 bytes in 0 blocks
-==1370==   total heap usage: 1,362 allocs, 1,362 frees, 164,937 bytes allocated
-==1370== 
-==1370== All heap blocks were freed -- no leaks are possible
-==1370== 
-==1370== For counts of detected and suppressed errors, rerun with: -v
-==1370== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3049== 
+==3049== HEAP SUMMARY:
+==3049==     in use at exit: 0 bytes in 0 blocks
+==3049==   total heap usage: 1,362 allocs, 1,362 frees, 164,937 bytes allocated
+==3049== 
+==3049== All heap blocks were freed -- no leaks are possible
+==3049== 
+==3049== For counts of detected and suppressed errors, rerun with: -v
+==3049== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 make[1]: Leaving directory '/thayerfs/home/f004h1g/cs50-dev/labs/tse-ethan-l-chen-24/indexer'
 
 ########### INDEXTEST #############
@@ -305,19 +305,22 @@ Usage: ./indextest [oldIndexFilename] [newIndexFilename]
 # VALGRIND
 make valgrind2
 make[1]: Entering directory '/thayerfs/home/f004h1g/cs50-dev/labs/tse-ethan-l-chen-24/indexer'
-valgrind --leak-check=full --show-leak-kinds=all ./indexer valgrind-index valgrind-index-test
-==1395== Memcheck, a memory error detector
-==1395== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1395== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==1395== Command: ./indexer valgrind-index valgrind-index-test
-==1395== 
-==1395== 
-==1395== HEAP SUMMARY:
-==1395==     in use at exit: 0 bytes in 0 blocks
-==1395==   total heap usage: 4 allocs, 4 frees, 619 bytes allocated
-==1395== 
-==1395== All heap blocks were freed -- no leaks are possible
-==1395== 
-==1395== For counts of detected and suppressed errors, rerun with: -v
-==1395== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+valgrind --leak-check=full --show-leak-kinds=all ./indextest valgrind-index valgrind-index-test
+==3070== Memcheck, a memory error detector
+==3070== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3070== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==3070== Command: ./indextest valgrind-index valgrind-index-test
+==3070== 
+Reading file ../data/valgrind-index
+Index loaded
+Index saved
+==3070== 
+==3070== HEAP SUMMARY:
+==3070==     in use at exit: 0 bytes in 0 blocks
+==3070==   total heap usage: 879 allocs, 879 frees, 40,335 bytes allocated
+==3070== 
+==3070== All heap blocks were freed -- no leaks are possible
+==3070== 
+==3070== For counts of detected and suppressed errors, rerun with: -v
+==3070== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 make[1]: Leaving directory '/thayerfs/home/f004h1g/cs50-dev/labs/tse-ethan-l-chen-24/indexer'

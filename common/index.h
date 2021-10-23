@@ -76,7 +76,7 @@ index_t* loadIndexFromFile(char* filepath);
 */
 bool indexWebpage(index_t* index, webpage_t* webpage, int* id);
 
-/******************* indexWebpage() ********************/
+/******************* getHashtable() ********************/
 /* return the index's hashtable */
 hashtable_t* getHashtable(index_t* index);
 

@@ -41,7 +41,7 @@ valgrind: indexer
 	$(VALGRIND) ./indexer valgrind valgrind-index
 
 valgrind2: indextest
-	$(VALGRIND) ./indexer valgrind-index valgrind-index-test
+	$(VALGRIND) ./indextest valgrind-index valgrind-index-test
 
 clean:
 	rm -rf *.dSYM  # MacOS debugger info

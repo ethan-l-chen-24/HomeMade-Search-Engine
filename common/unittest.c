@@ -4,7 +4,7 @@
  * Ethan Chen, Oct. 2021
  */
 
-#ifdef UNITTEST
+#if def UNITTEST
 
 #include <stdio.h>
 #include <stdio.h>
@@ -18,9 +18,9 @@
     {
         int numFailed = 0;
         index_t* i1 = newIndex(10); // FUNCTION
-        if(i1 == NULL) numFailed++;
+        if (i1 == NULL) numFailed++;
         hashtable_t* table = getHashtable(i1);
-        if(table == NULL) numFailed++;
+        if (table == NULL) numFailed++;
         deleteIndex(i1);
         return numFailed;
     }
@@ -32,24 +32,24 @@
         index_t* i2 = newIndex(800);
         buildIndexFromCrawler("letters-depth-1", i2); // FUNCTION
         hashtable_t* table = getHashtable(i2);
-        if(hashtable_find(table, "playground") == NULL) numFailed++;
-        if(hashtable_find(table, "page") == NULL) numFailed++;
-        if(hashtable_find(table, "home") == NULL) numFailed++;
-        if(hashtable_find(table, "the") == NULL) numFailed++;
-        if(hashtable_find(table, "this") == NULL) numFailed++;
-        if(hashtable_find(table, "for") == NULL) numFailed++;
-        if(hashtable_find(table, "tse") == NULL) numFailed++;
-        if(hashtable_find(table, "algorithm") == NULL) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "playground"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "page"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "home"), 1) != 2) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "home"), 2) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "algorithm"), 2) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "the"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "this"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "for"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "for"), 2) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "tse"), 1) != 1) numFailed++;
+        if (hashtable_find(table, "playground") == NULL) numFailed++;
+        if (hashtable_find(table, "page") == NULL) numFailed++;
+        if (hashtable_find(table, "home") == NULL) numFailed++;
+        if (hashtable_find(table, "the") == NULL) numFailed++;
+        if (hashtable_find(table, "this") == NULL) numFailed++;
+        if (hashtable_find(table, "for") == NULL) numFailed++;
+        if (hashtable_find(table, "tse") == NULL) numFailed++;
+        if (hashtable_find(table, "algorithm") == NULL) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "playground"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "page"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "home"), 1) != 2) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "home"), 2) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "algorithm"), 2) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "the"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "this"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "for"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "for"), 2) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "tse"), 1) != 1) numFailed++;
         deleteIndex(i2);
         return numFailed;
     }
@@ -60,24 +60,24 @@
         int numFailed = 0;
         index_t* i3 = loadIndexFromFile("letters-index-1"); // FUNCTION
         hashtable_t* table = getHashtable(i3);
-        if(hashtable_find(table, "playground") == NULL) numFailed++;
-        if(hashtable_find(table, "page") == NULL) numFailed++;
-        if(hashtable_find(table, "home") == NULL) numFailed++;
-        if(hashtable_find(table, "the") == NULL) numFailed++;
-        if(hashtable_find(table, "this") == NULL) numFailed++;
-        if(hashtable_find(table, "for") == NULL) numFailed++;
-        if(hashtable_find(table, "tse") == NULL) numFailed++;
-        if(hashtable_find(table, "algorithm") == NULL) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "playground"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "page"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "home"), 1) != 2) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "home"), 2) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "algorithm"), 2) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "the"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "this"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "for"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "for"), 2) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "tse"), 1) != 1) numFailed++;
+        if (hashtable_find(table, "playground") == NULL) numFailed++;
+        if (hashtable_find(table, "page") == NULL) numFailed++;
+        if (hashtable_find(table, "home") == NULL) numFailed++;
+        if (hashtable_find(table, "the") == NULL) numFailed++;
+        if (hashtable_find(table, "this") == NULL) numFailed++;
+        if (hashtable_find(table, "for") == NULL) numFailed++;
+        if (hashtable_find(table, "tse") == NULL) numFailed++;
+        if (hashtable_find(table, "algorithm") == NULL) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "playground"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "page"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "home"), 1) != 2) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "home"), 2) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "algorithm"), 2) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "the"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "this"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "for"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "for"), 2) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "tse"), 1) != 1) numFailed++;
         deleteIndex(i3);
         return numFailed;
     }
@@ -96,21 +96,31 @@
         int x = 1;
         indexWebpage(i4, webpage, &x); // FUNCTION
         hashtable_t* table = getHashtable(i4);
-        if(hashtable_find(table, "playground") == NULL) numFailed++;
-        if(hashtable_find(table, "page") == NULL) numFailed++;
-        if(hashtable_find(table, "home") == NULL) numFailed++;
-        if(hashtable_find(table, "the") == NULL) numFailed++;
-        if(hashtable_find(table, "this") == NULL) numFailed++;
-        if(hashtable_find(table, "for") == NULL) numFailed++;
-        if(hashtable_find(table, "tse") == NULL) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "playground"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "page"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "home"), 1) != 2) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "the"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "this"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "for"), 1) != 1) numFailed++;
-        if(counters_get((counters_t*) hashtable_find(table, "tse"), 1) != 1) numFailed++;
+        if (hashtable_find(table, "playground") == NULL) numFailed++;
+        if (hashtable_find(table, "page") == NULL) numFailed++;
+        if (hashtable_find(table, "home") == NULL) numFailed++;
+        if (hashtable_find(table, "the") == NULL) numFailed++;
+        if (hashtable_find(table, "this") == NULL) numFailed++;
+        if (hashtable_find(table, "for") == NULL) numFailed++;
+        if (hashtable_find(table, "tse") == NULL) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "playground"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "page"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "home"), 1) != 2) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "the"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "this"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "for"), 1) != 1) numFailed++;
+        if (counters_get((counters_t*) hashtable_find(table, "tse"), 1) != 1) numFailed++;
         deleteIndex(i4);
+        return numFailed;
+    }
+
+    // unit testing for the deleteIndex function
+    int test5()
+    {
+        int numFailed = 0;
+        index_t* i5 = newIndex(800);
+        deleteIndex(i5);
+        if (getHashtable(i5) == NULL) numFailed++;
         return numFailed;
     }
 
@@ -160,7 +170,18 @@
             totalFailed++;
         }
 
-        if(totalFailed == 0) {
+        // test 5
+        failed = 0;
+        failed += test5();
+        if (failed == 0) {
+            printf("Test 5 passed!\n");
+        } else {
+            printf("Test 5 failed!\n");
+            totalFailed++;
+        }
+
+        // end results
+        if (totalFailed == 0) {
             printf("All tests passed!\n");
             return 0;
         } else {
@@ -168,5 +189,5 @@
             return 1;
         }
     }
-    
-#endif
+
+#endif 
