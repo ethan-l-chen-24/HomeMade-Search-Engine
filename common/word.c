@@ -19,6 +19,7 @@
 void normalizeWord(char* word)
 {
     // loop through every character and make it lowercase
+    if(word == NULL) return;
     for (char* i = word; *i != '\0'; i++) {
         *i = tolower(*i);
     }

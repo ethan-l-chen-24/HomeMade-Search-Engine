@@ -2,18 +2,23 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <string.h>
 #include "index.h"
 #include "word.h"
 #include "pagedir.h"
 #include "file.h"
 #include "counters.h"
+#include "memory.h"
 
 bool query(char* pageDirectory, char* indexFilename);
 void processQuery(char* search, index_t* index, char* pageDirectory);
 int countWordsInQuery(char* query);
 char** parseQuery(char* query, int numWords);
+void normalizeQuery(char** words, int numWords);
+counters_t* getIDScores(char** words, index_t* index, char* pageDirectory);
 
-int main(const int argc, int* argv[])
+
+int main(const int argc, char* argv[])
 {
     char* program = argv[0];
     // check for the appropriate number of arguments
@@ -43,12 +48,13 @@ int main(const int argc, int* argv[])
     if (!pageDirValidate(pageDir)) {
         count_free(indexFilename);
         count_free(pageDir);
+        fprintf(stderr, "Error: %s is an invalid crawler directory\n", pageDir);
         return false;
     }
 
     char* trueFilename = stringBuilder(NULL, indexFilename);
     if(fopen(trueFilename, "r") == NULL) {
-        fprintf("Error: provided filename %s is invalid", indexFilename);
+        fprintf(stderr, "Error: provided filename %s is invalid\n", indexFilename);
     }
 
     // run the indexer
@@ -56,6 +62,7 @@ int main(const int argc, int* argv[])
         printf("SUCCESS!\n\n");
         return 0;
     } else {
+        printf("FAILED\n\n");
         return 1;
     }
 
@@ -84,11 +91,27 @@ bool query(char* pageDirectory, char* indexFilename)
 void processQuery(char* query, index_t* index, char* pageDirectory) 
 {
     int numWords = countWordsInQuery(query);
+
+#ifdef TEST
+    printf("there are %d nums\n", numWords);
+#endif
+
     char** words = parseQuery(query, numWords);
+    normalizeQuery(words, numWords);
+
     if(words == NULL) {
         return;
     }
-    counters_t* set = getIDScores(words, index, pageDirectory);
+
+#ifdef TEST
+    for(int i = 0; i < numWords; i++) {
+        char* word = *words;
+        words++;
+        printf("word %d: %s\n", i, word);
+    }
+#endif
+
+  //  counters_t* set = getIDScores(words, index, pageDirectory);
     // begin reading through files and assigning scores
 }
 
@@ -127,12 +150,23 @@ char** parseQuery(char* query, int numWords)
             lastSpace = true;
 
         } else {
-            fprintf(stderr, "Error: fsdjkfljdsljfl");
+            fprintf(stderr, "Error: fsdjkfljdsljfl\n");
             return NULL;
         }
     }
 
     return words;
+}
+
+void normalizeQuery(char** words, int numWords) 
+{
+    if(words == NULL) return;
+    for(int i = 0; i < numWords; i++) {
+        char* word = *words;
+        words++;
+        normalizeWord(word);
+    }
+
 }
 
 counters_t* getIDScores(char** words, index_t* index, char* pageDirectory) 

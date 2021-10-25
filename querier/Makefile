@@ -20,8 +20,7 @@ MAKE = make
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all
 
 # editable test values
-SEED_DOMAIN = http://cs50tse.cs.dartmouth.edu/tse
-URL = letters
+PAGE_DIRECTORY = letters
 DEPTH = 2
 
 .PHONY: all test valgrind clean run
@@ -33,11 +32,11 @@ test: querier testing.sh
 	bash -v testing.sh 
 
 run: querier
-	./querier ---
+	./querier $(PAGE_DIRECTORY)-depth-$(DEPTH) $(PAGE_DIRECTORY)-index-$(DEPTH)
 
 # expects a file `test.names` to exist; it can contain any text.
 valgrind: querier
-	$(VALGRIND) ./querier ---
+	$(VALGRIND) ./querier valgrind valgrind-index
 
 clean:
 	rm -rf *.dSYM  # MacOS debugger info
