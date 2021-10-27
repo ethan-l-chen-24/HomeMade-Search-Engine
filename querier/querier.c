@@ -32,7 +32,7 @@ void normalizeQuery(char** words, int numWords);
 counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDirectory);
 
 bool orSequence(counters_t* prod, counters_t* scores);
-bool andSequence(counters_t* prod, counters_t* wordCount);
+counters_t* andSequence(counters_t* prod, counters_t* wordCount);
 static void countersUnionHelper(void* arg, const int key, const int count);
 static void countersIntersectionHelper(void* arg, const int key, const int count);
 
@@ -252,34 +252,44 @@ counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDi
     hashtable_t* indexTable = getHashtable(index);
 
     bool firstInSequence = true;
+    bool lastOperator = false;
     char** wordTraverse = words;
     for(int i = 0; i < numWords; i++) {
         char* word = *wordTraverse;
         wordTraverse++;
 
-        counters_t* indexCounter = hashtable_find(indexTable, word);
-        if(indexCounter != NULL) {
-            printf("Found word %s\n", word);
-            if(strcmp(word, "and") == 0) {
-                continue;
-            } else if(strcmp(word, "or") == 0) {
-                orSequence(prod, scores);
-                counters_delete(prod);
-                prod = counters_new();
-                firstInSequence = true;
-            } else {
+        if(strcmp(word, "and") == 0) {
+            printf("ANDSEQUENCE\n");
+            if(lastOperator) ERROR;
+            if(firstInSequence) ERROR;
+            lastOperator = true;
+            continue;
+        } else if(strcmp(word, "or") == 0) {
+            printf("ORSEQUENCE\n");
+            if(lastOperator) ERROR;
+            if(firstInSequence) ERROR;
+            orSequence(prod, scores);
+            counters_delete(prod);
+            prod = counters_new();
+            firstInSequence = true;
+            lastOperator = true;
+        } else {
+            lastOperator = false;
+            counters_t* indexCounter = hashtable_find(indexTable, word);
+            if(indexCounter != NULL) {
+                printf("Found word %s\n", word);
                 if (firstInSequence) {
                     orSequence(indexCounter, prod);
                     firstInSequence = false;
                 } else {
-                    andSequence(prod, indexCounter);
+                    prod = andSequence(prod, indexCounter);
                 }
             }
-        }
 
-        printf("\nResult after query of %s\n", word);
-        counters_print(prod, stdout);
-        printf("\n\n");
+            printf("\nResult after query of %s\n", word);
+            counters_print(prod, stdout);
+            printf("\n\n");
+        }
     }
     orSequence(prod, scores);
 
@@ -291,11 +301,23 @@ counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDi
 
 bool orSequence(counters_t* prod, counters_t* scores) 
 {
+    printf("Last prod: ");
+    counters_print(prod, stdout);
+    printf("\n");
+    printf("Current score: ");
+    counters_print(scores, stdout);
+    printf("\n\n");
+
     counters_iterate(prod, scores, countersUnionHelper);
+
+    printf("Scores after union: ");
+    counters_print(scores, stdout);
+    printf("\n");
+
     return true;
 }
 
-bool andSequence(counters_t* prod, counters_t* wordCount)
+counters_t* andSequence(counters_t* prod, counters_t* wordCount)
 {
 
     printf("New word: ");
@@ -315,13 +337,12 @@ bool andSequence(counters_t* prod, counters_t* wordCount)
 
     counters_iterate(wordCount, tuple, countersIntersectionHelper);
 
-    printf("After intersection: ");
+    printf("Prod after intersection: ");
     counters_print(intersection, stdout);
     printf("\n");
 
     counters_delete(prod);
-    prod = intersection;
-    return true;
+    return intersection;
 }
 
 static void countersUnionHelper(void* arg, const int key, const int count) 
