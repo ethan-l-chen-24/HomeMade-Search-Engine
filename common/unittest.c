@@ -4,7 +4,7 @@
  * Ethan Chen, Oct. 2021
  */
 
-#if def UNITTEST
+#ifdef UNITTEST
 
 #include <stdio.h>
 #include <stdio.h>

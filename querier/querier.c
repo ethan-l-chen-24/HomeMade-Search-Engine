@@ -31,6 +31,16 @@ char** parseQuery(char* query, int numWords);
 void normalizeQuery(char** words, int numWords);
 counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDirectory);
 
+bool orSequence(counters_t* prod, counters_t* scores);
+bool andSequence(counters_t* prod, counters_t* wordCount);
+static void countersUnionHelper(void* arg, const int key, const int count);
+static void countersIntersectionHelper(void* arg, const int key, const int count);
+
+typedef struct countersTuple {
+    counters_t* counters1;
+    counters_t* counters2;
+} countersTuple_t;
+
 /************** main() ******************/
 /* the "testing" function/main function, which takes two arguments 
  * as inputs (other than the executable call), the directory containing the
@@ -125,6 +135,7 @@ bool query(char* pageDirectory, char* indexFilename)
                 processQuery(query, index, pageDirectory);
             }
         }
+        return true;
     } else {
         return false;
     }
@@ -140,7 +151,7 @@ void processQuery(char* query, index_t* index, char* pageDirectory)
     int numWords = countWordsInQuery(query);
 
 #ifdef TEST
-        printf("there are %d nums\n", numWords);
+        printf("there are %d words\n", numWords);
 #endif
 
     char** words = parseQuery(query, numWords);
@@ -151,9 +162,10 @@ void processQuery(char* query, index_t* index, char* pageDirectory)
     }
 
 #ifdef TEST
+    char** wordTraverse = words;
     for(int i = 0; i < numWords; i++) {
-        char* word = *words;
-        words++;
+        char* word = *wordTraverse;
+        wordTraverse++;
         printf("word %d: %s\n", i, word);
     }
 #endif
@@ -218,10 +230,11 @@ char** parseQuery(char* query, int numWords)
 void normalizeQuery(char** words, int numWords) 
 {
     if(words == NULL) return;
+    char** wordTraverse = words;
     for(int i = 0; i < numWords; i++) {
-        char* word = *words;
-        words++;
+        char* word = *wordTraverse;
         normalizeWord(word);
+        wordTraverse++;
     }
 
 }
@@ -234,7 +247,101 @@ void normalizeQuery(char** words, int numWords)
 counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDirectory) 
 {
     if(words == NULL || index == NULL || pageDirectory == NULL) return NULL;
-    counters_t* idScores = counters_new();
+    counters_t* prod = counters_new();
+    counters_t* scores = counters_new();
+    hashtable_t* indexTable = getHashtable(index);
 
+    bool firstInSequence = true;
+    char** wordTraverse = words;
+    for(int i = 0; i < numWords; i++) {
+        char* word = *wordTraverse;
+        wordTraverse++;
+
+        counters_t* indexCounter = hashtable_find(indexTable, word);
+        if(indexCounter != NULL) {
+            printf("Found word %s\n", word);
+            if(strcmp(word, "and") == 0) {
+                continue;
+            } else if(strcmp(word, "or") == 0) {
+                orSequence(prod, scores);
+                counters_delete(prod);
+                prod = counters_new();
+                firstInSequence = true;
+            } else {
+                if (firstInSequence) {
+                    orSequence(indexCounter, prod);
+                    firstInSequence = false;
+                } else {
+                    andSequence(prod, indexCounter);
+                }
+            }
+        }
+
+        printf("\nResult after query of %s\n", word);
+        counters_print(prod, stdout);
+        printf("\n\n");
+    }
+    orSequence(prod, scores);
+
+    counters_print(scores, stdout);
+    printf("\n");
+
+    return scores;
 }
+
+bool orSequence(counters_t* prod, counters_t* scores) 
+{
+    counters_iterate(prod, scores, countersUnionHelper);
+    return true;
+}
+
+bool andSequence(counters_t* prod, counters_t* wordCount)
+{
+
+    printf("New word: ");
+    counters_print(wordCount, stdout);
+    printf("\n");
+    printf("Current prod: ");
+    counters_print(prod, stdout);
+    printf("\n\n");
+
+    counters_t* intersection = counters_new();
+    if(intersection == NULL) return false;
+
+    countersTuple_t* tuple = count_malloc(sizeof(countersTuple_t));
+    if(tuple == NULL) return false;
+    tuple->counters1 = prod;
+    tuple->counters2 = intersection;
+
+    counters_iterate(wordCount, tuple, countersIntersectionHelper);
+
+    printf("After intersection: ");
+    counters_print(intersection, stdout);
+    printf("\n");
+
+    counters_delete(prod);
+    prod = intersection;
+    return true;
+}
+
+static void countersUnionHelper(void* arg, const int key, const int count) 
+{
+    counters_t* ctr1 = arg;
+    int count1 = counters_get(ctr1, key);
+    counters_set(ctr1, key, count1 + count);
+}
+
+static void countersIntersectionHelper(void* arg, const int key, const int count) 
+{
+    countersTuple_t* tuple = arg;
+    int count1 = counters_get(tuple->counters1, key);
+    int intersectionScore;
+    if (count1 < count) intersectionScore = count1;
+    else intersectionScore = count;
+    if(intersectionScore != 0) {
+        counters_add(tuple->counters2, key);
+        counters_set(tuple->counters2, key, intersectionScore);
+    }
+}
+
 

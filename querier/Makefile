@@ -13,7 +13,7 @@ LIBS = $C/common.a $L/libcs50.a
 # recomment -DTEST to turn off testing output in stdout
 TESTING=-DTEST #-DMEMTEST
 
-CFLAGS = -Wall -pedantic -std=c11 -ggdb $(TESTING) -I$L -I$C
+CFLAGS = -Wall -pedantic -std=c11 -ggdb $(TESTING) -I$L -I$C 
 CC = gcc
 MAKE = make
 # for memory-leak tests
@@ -21,7 +21,7 @@ VALGRIND = valgrind --leak-check=full --show-leak-kinds=all
 
 # editable test values
 PAGE_DIRECTORY = letters
-DEPTH = 2
+DEPTH = 6
 
 .PHONY: all test valgrind clean run
 
@@ -46,4 +46,4 @@ clean:
 	rm -f querier
 
 querier: $(OBJS) $(LIBS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@ 
