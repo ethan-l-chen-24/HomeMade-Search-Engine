@@ -426,7 +426,7 @@ static void rankAndPrint(counters_t* idScores, char* pageDirectory)
         counters_iterate(idScores, scoreIDArr, sortFunc);
 
     #ifdef DEBUG
-        for(int i = 0; i<scoreIDArr->size; i++) {
+        for(int i = 0; i<count; i++) {
             printf("Index %d: docID - %d, score - %d\n", i, arr[i]->docID, arr[i]->score);
         }
     #endif
@@ -482,7 +482,8 @@ static void sortFunc(void* arg, const int key, const int count)
             scoreIDArr->slotsFilled++;
             return;
         }
-
     }
+    arr[slotsFilled] = newScoreID;
+    scoreIDArr->slotsFilled++;
 }
 
