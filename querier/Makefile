@@ -20,8 +20,8 @@ MAKE = make
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all
 
 # editable test values
-PAGE_DIRECTORY = letters
-DEPTH = 6
+PAGE_DIRECTORY = toscrape
+DEPTH = 1
 
 .PHONY: all test valgrind clean run
 
