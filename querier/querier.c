@@ -24,35 +24,40 @@
 
 /************* function prototypes ********************/
 
+// query methods
 bool query(char* pageDirectory, char* indexFilename);
 void processQuery(char* search, index_t* index, char* pageDirectory);
 int countWordsInQuery(char* query);
 char** parseQuery(char* query, int numWords);
 void normalizeQuery(char** words, int numWords);
-counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDirectory);
 
-bool orSequence(counters_t* prod, counters_t* scores);
-counters_t* andSequence(counters_t* prod, counters_t* wordCount);
+// scoring methods
+counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDirectory);
+static bool orSequence(counters_t* prod, counters_t* scores);
+static counters_t* andSequence(counters_t* prod, counters_t* wordCount);
 static void countersUnionHelper(void* arg, const int key, const int count);
 static void countersIntersectionHelper(void* arg, const int key, const int count);
 
-static void rankAndPrint(counters_t* idScores, char* pageDirectory);
+// ranking and printing methods
+void rankAndPrint(counters_t* idScores, char* pageDirectory);
 static void countFunc(void* arg, const int key, const int count);
 static void sortFunc(void* arg, const int key, const int count);
 
-typedef struct countersTuple {
+/***************** local types ********************/
+
+
+typedef struct countersTuple { // stores two counters to be passed to counters_iterate
     counters_t* counters1;
     counters_t* counters2;
 } countersTuple_t;
 
-typedef struct scoreID {
+typedef struct scoreID { // stores two ints, an id and its score for a query
     int docID;
     int score;
 } scoreID_t;
 
-typedef struct scoreIDArr {
+typedef struct scoreIDArr { // stores an array of scoreIDs and keeps track of how much of the array has been filled
     scoreID_t** arr;
-    int size;
     int slotsFilled;
 } scoreIDArr_t;
 
@@ -114,10 +119,14 @@ int main(const int argc, char* argv[])
 
     // run the querier
     if (query(pageDir, indexFilename)) {
-        printf("SUCCESS!\n\n");
+        #ifdef DEBUG
+            printf("SUCCESS!\n\n");
+        #endif
         return 0;
     } else {
-        printf("FAILED\n\n");
+        #ifdef DEBUG
+            printf("FAILED\n\n");
+        #endif
         return 1;
     }
 
@@ -131,6 +140,7 @@ int main(const int argc, char* argv[])
  *      1. load the index
  *      2. keep on taking from stdin while the query is active
  *      3. process those queries
+ *      4. continue until freadlinep notices EOF
  * 
  * Assumptions:
  *      1. the user puts in valid inputs, otherwise throws errors
@@ -333,7 +343,12 @@ counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDi
     }
 }
 
-bool orSequence(counters_t* prod, counters_t* scores) 
+/************** processQuery() ******************/
+/*
+ *
+ *
+*/
+static bool orSequence(counters_t* prod, counters_t* scores) 
 {
 #ifdef DEBUG
     printf("Last prod: ");
@@ -355,7 +370,12 @@ bool orSequence(counters_t* prod, counters_t* scores)
     return true;
 }
 
-counters_t* andSequence(counters_t* prod, counters_t* wordCount)
+/************** processQuery() ******************/
+/*
+ *
+ *
+*/
+static counters_t* andSequence(counters_t* prod, counters_t* wordCount)
 {
 #ifdef DEBUG
     printf("New word: ");
@@ -386,6 +406,11 @@ counters_t* andSequence(counters_t* prod, counters_t* wordCount)
     return intersection;
 }
 
+/************** processQuery() ******************/
+/*
+ *
+ *
+*/
 static void countersUnionHelper(void* arg, const int key, const int count) 
 {
     counters_t* ctr1 = arg;
@@ -393,6 +418,11 @@ static void countersUnionHelper(void* arg, const int key, const int count)
     counters_set(ctr1, key, count1 + count);
 }
 
+/************** processQuery() ******************/
+/*
+ *
+ *
+*/
 static void countersIntersectionHelper(void* arg, const int key, const int count) 
 {
     countersTuple_t* tuple = arg;
@@ -406,7 +436,12 @@ static void countersIntersectionHelper(void* arg, const int key, const int count
     }
 }
 
-static void rankAndPrint(counters_t* idScores, char* pageDirectory)
+/************** processQuery() ******************/
+/*
+ *
+ *
+*/
+void rankAndPrint(counters_t* idScores, char* pageDirectory)
 {
     int count = 0;
     counters_iterate(idScores, &count, countFunc);
@@ -421,7 +456,6 @@ static void rankAndPrint(counters_t* idScores, char* pageDirectory)
         scoreID_t** arr = count_calloc(count, sizeof(scoreID_t*));
         scoreIDArr_t* scoreIDArr = count_malloc(sizeof(scoreIDArr_t));
         scoreIDArr->arr = arr;
-        scoreIDArr->size = count;
         scoreIDArr->slotsFilled = 0;
         counters_iterate(idScores, scoreIDArr, sortFunc);
 
@@ -447,12 +481,22 @@ static void rankAndPrint(counters_t* idScores, char* pageDirectory)
 
 }
 
+/************** processQuery() ******************/
+/*
+ *
+ *
+*/
 static void countFunc(void* arg, const int key, const int count)
 {
     int* num = arg;
     (*num)++;
 }
 
+/************** processQuery() ******************/
+/*
+ *
+ *
+*/
 static void sortFunc(void* arg, const int key, const int count)
 {
     #ifdef DEBUG
@@ -486,4 +530,3 @@ static void sortFunc(void* arg, const int key, const int count)
     arr[slotsFilled] = newScoreID;
     scoreIDArr->slotsFilled++;
 }
-
