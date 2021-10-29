@@ -36,10 +36,25 @@ counters_t* andSequence(counters_t* prod, counters_t* wordCount);
 static void countersUnionHelper(void* arg, const int key, const int count);
 static void countersIntersectionHelper(void* arg, const int key, const int count);
 
+static void rankAndPrint(counters_t* idScores, char* pageDirectory);
+static void countFunc(void* arg, const int key, const int count);
+static void sortFunc(void* arg, const int key, const int count);
+
 typedef struct countersTuple {
     counters_t* counters1;
     counters_t* counters2;
 } countersTuple_t;
+
+typedef struct scoreID {
+    int docID;
+    int score;
+} scoreID_t;
+
+typedef struct scoreIDArr {
+    scoreID_t** arr;
+    int size;
+    int slotsFilled;
+} scoreIDArr_t;
 
 /************** main() ******************/
 /* the "testing" function/main function, which takes two arguments 
@@ -124,16 +139,14 @@ bool query(char* pageDirectory, char* indexFilename)
 {
     FILE* fp = stdin;
     index_t* index = loadIndexFromFile(indexFilename);
-    bool active = true;
 
     if(index != NULL) {
-
-        while(active) {
+        printf("Query: ");
+        char* query = freadlinep(fp);
+        while(query != NULL) {
+            processQuery(query, index, pageDirectory);
             printf("Query: ");
-            char* query = freadlinep(fp);
-            if(query != NULL) {
-                processQuery(query, index, pageDirectory);
-            }
+            query = freadlinep(fp);
         }
         return true;
     } else {
@@ -150,7 +163,7 @@ void processQuery(char* query, index_t* index, char* pageDirectory)
 {
     int numWords = countWordsInQuery(query);
 
-#ifdef TEST
+#ifdef DEBUG
         printf("there are %d words\n", numWords);
 #endif
 
@@ -161,7 +174,7 @@ void processQuery(char* query, index_t* index, char* pageDirectory)
         return;
     }
 
-#ifdef TEST
+#ifdef DEBUG
     char** wordTraverse = words;
     for(int i = 0; i < numWords; i++) {
         char* word = *wordTraverse;
@@ -172,7 +185,8 @@ void processQuery(char* query, index_t* index, char* pageDirectory)
 
     counters_t* idScores = getIDScores(words, numWords, index, pageDirectory);
     if(idScores == NULL) return;
-    // begin reading through files and assigning scores
+    
+    rankAndPrint(idScores, pageDirectory);
 }
 
 /************** countWordsInQuery() ******************/
@@ -200,7 +214,7 @@ int countWordsInQuery(char* query)
 */
 char** parseQuery(char* query, int numWords)
 {
-    char** words = calloc(numWords, sizeof(char*));
+    char** words = count_calloc(numWords, sizeof(char*));
     
     bool lastSpace = true;
     char** currWord = words;
@@ -217,7 +231,7 @@ char** parseQuery(char* query, int numWords)
             lastSpace = true;
 
         } else {
-            fprintf(stderr, "Error: fsdjkfljdsljfl\n");
+            fprintf(stderr, "Error: bad character '%c' in query\n", *i);
             return NULL;
         }
     }
@@ -252,80 +266,105 @@ counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDi
     hashtable_t* indexTable = getHashtable(index);
 
     bool firstInSequence = true;
-    bool lastOperator = false;
+    char* lastWord = "";
     char** wordTraverse = words;
     for(int i = 0; i < numWords; i++) {
         char* word = *wordTraverse;
         wordTraverse++;
 
         if(strcmp(word, "and") == 0) {
-            printf("ANDSEQUENCE\n");
-            if(lastOperator) ERROR;
-            if(firstInSequence) ERROR;
-            lastOperator = true;
+            #ifdef DEBUG
+                printf("AND SEQUENCE\n---------------\n");
+            #endif
+            if(strcmp(lastWord, "") == 0 || strcmp(lastWord, "or") == 0 || strcmp(lastWord, "and") == 0) {
+                if(strcmp(lastWord, "") == 0) {
+                    fprintf(stderr, "Error: 'and' cannot be first\n");
+                    return NULL;
+                } else {
+                    fprintf(stderr, "Error: '%s' and 'and' cannot be adjacent\n", lastWord);
+                    return NULL;
+                }
+            }
+            lastWord = word;
             continue;
         } else if(strcmp(word, "or") == 0) {
-            printf("ORSEQUENCE\n");
-            if(lastOperator) ERROR;
-            if(firstInSequence) ERROR;
+            #ifdef DEBUG
+                printf("OR SEQUENCE\n--------------\n");
+            #endif
+            if(strcmp(lastWord, "") == 0 || strcmp(lastWord, "or") == 0 || strcmp(lastWord, "and") == 0) {
+                if(strcmp(lastWord, "") == 0) {
+                    fprintf(stderr, "Error: 'or' cannot be first\n");
+                    return NULL;
+                } else {
+                    fprintf(stderr, "Error: '%s' and 'or' cannot be adjacent\n", lastWord);
+                    return NULL;
+                }
+            }
             orSequence(prod, scores);
             counters_delete(prod);
             prod = counters_new();
             firstInSequence = true;
-            lastOperator = true;
         } else {
-            lastOperator = false;
             counters_t* indexCounter = hashtable_find(indexTable, word);
-            if(indexCounter != NULL) {
-                printf("Found word %s\n", word);
-                if (firstInSequence) {
-                    orSequence(indexCounter, prod);
-                    firstInSequence = false;
-                } else {
-                    prod = andSequence(prod, indexCounter);
-                }
+            #ifdef DEBUG 
+                printf("\nFOUND WORD %s\n\n", word); 
+            #endif
+            if (firstInSequence) {
+                #ifdef DEBUG
+                    printf("OR SEQUENCE\n---------------\n");
+                #endif
+                orSequence(indexCounter, prod);
+            } else {
+                #ifdef DEBUG
+                    printf("AND SEQUENCE\n---------------\n");
+                #endif
+                prod = andSequence(prod, indexCounter);
             }
-
-            printf("\nResult after query of %s\n", word);
-            counters_print(prod, stdout);
-            printf("\n\n");
+            firstInSequence = false;
         }
+        lastWord = word;
     }
-    orSequence(prod, scores);
-
-    counters_print(scores, stdout);
-    printf("\n");
-
-    return scores;
+    if(strcmp(lastWord, "or") == 0 || strcmp(lastWord, "and") == 0) {
+        fprintf(stderr, "Error: '%s' cannot be last\n", lastWord);
+        return NULL;
+    } else {
+        orSequence(prod, scores);
+        return scores;
+    }
 }
 
 bool orSequence(counters_t* prod, counters_t* scores) 
 {
+#ifdef DEBUG
     printf("Last prod: ");
     counters_print(prod, stdout);
     printf("\n");
     printf("Current score: ");
     counters_print(scores, stdout);
     printf("\n\n");
+#endif
 
     counters_iterate(prod, scores, countersUnionHelper);
 
+#ifdef DEBUG
     printf("Scores after union: ");
     counters_print(scores, stdout);
     printf("\n");
+#endif
 
     return true;
 }
 
 counters_t* andSequence(counters_t* prod, counters_t* wordCount)
 {
-
+#ifdef DEBUG
     printf("New word: ");
     counters_print(wordCount, stdout);
     printf("\n");
     printf("Current prod: ");
     counters_print(prod, stdout);
     printf("\n\n");
+#endif
 
     counters_t* intersection = counters_new();
     if(intersection == NULL) return false;
@@ -337,9 +376,11 @@ counters_t* andSequence(counters_t* prod, counters_t* wordCount)
 
     counters_iterate(wordCount, tuple, countersIntersectionHelper);
 
+#ifdef DEBUG
     printf("Prod after intersection: ");
     counters_print(intersection, stdout);
     printf("\n");
+#endif 
 
     counters_delete(prod);
     return intersection;
@@ -365,4 +406,83 @@ static void countersIntersectionHelper(void* arg, const int key, const int count
     }
 }
 
+static void rankAndPrint(counters_t* idScores, char* pageDirectory)
+{
+    int count = 0;
+    counters_iterate(idScores, &count, countFunc);
+    #ifdef DEBUG
+        printf("there are %d valid options\n", count);
+    #endif
+
+    if(count == 0) {
+        printf("No documents match.\n");
+    } else {
+
+        scoreID_t** arr = count_calloc(count, sizeof(scoreID_t*));
+        scoreIDArr_t* scoreIDArr = count_malloc(sizeof(scoreIDArr_t));
+        scoreIDArr->arr = arr;
+        scoreIDArr->size = count;
+        scoreIDArr->slotsFilled = 0;
+        counters_iterate(idScores, scoreIDArr, sortFunc);
+
+    #ifdef DEBUG
+        for(int i = 0; i<scoreIDArr->size; i++) {
+            printf("Index %d: docID - %d, score - %d\n", i, arr[i]->docID, arr[i]->score);
+        }
+    #endif
+
+        for(int i = 0; i<count; i++) {
+            int id = arr[i]->docID;
+            int score = arr[i]->score;
+            char* idString = intToString(id);
+            char* filepath = stringBuilder(pageDirectory, idString);
+            FILE* fp = fopen(filepath, "r");
+            if(fp != NULL) {
+                char* URL = freadlinep(fp);
+                printf("score %3d doc %3d: %s\n", score, id, URL);
+            }
+        }
+    }
+    printf("-----------------------------------------------------------------------------\n");
+
+}
+
+static void countFunc(void* arg, const int key, const int count)
+{
+    int* num = arg;
+    (*num)++;
+}
+
+static void sortFunc(void* arg, const int key, const int count)
+{
+    #ifdef DEBUG
+        printf("SORTING ID %d, COUNT %d\n", key, count);
+    #endif
+
+    scoreIDArr_t* scoreIDArr = arg;
+    scoreID_t** arr = scoreIDArr->arr;
+    int slotsFilled = scoreIDArr->slotsFilled;
+
+    scoreID_t* newScoreID = count_malloc(sizeof(scoreID_t));
+    newScoreID->docID = key;
+    newScoreID->score = count;
+
+    for(int i = 0; i < slotsFilled; i++) {
+        if (count > arr[i]->score) {
+            int j = 1;
+            scoreID_t* temp = arr[i];
+            arr[i] = newScoreID;
+            while(temp != NULL) {
+                scoreID_t* temp2 = arr[i + j];
+                arr[i + j] = temp;
+                temp = temp2;
+                j++;
+            }
+
+            scoreIDArr->slotsFilled++;
+            return;
+        }
+
+    }
+}
 
