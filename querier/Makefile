@@ -25,10 +25,10 @@ DEPTH = 1
 
 .PHONY: all test valgrind clean run
 
-all: querier
+all: querier fuzzquery
 
 # expects a file `test.names` to exist; it can contain any text.
-test: querier testing.sh
+test: querier testing.sh fuzzquery
 	bash -v testing.sh 
 
 run: querier
@@ -47,3 +47,6 @@ clean:
 
 querier: $(OBJS) $(LIBS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@ 
+
+fuzzquery: fuzzquery.o $(LIBS)
+	$(CC) $(CFLAGS) fuzzquery.o $(LIBS) -o $@ 
