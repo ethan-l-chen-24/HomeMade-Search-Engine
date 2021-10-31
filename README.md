@@ -53,7 +53,7 @@ For this project, I attribute a few sources
     - the Lab instructions, from which I borrowed most of my ideas
     - Will, Kysen, Dylan, Jeff, and Bansharee for working with me on thinking about how scoring of a query may work
     - Professor Prioleau for addressing my complaints about Lab 5
-    - finally, the support of my friends and family. Ryan, you are the man.
+    - finally, the support of my friends and family. Ryan and Jason, you are the men.
 
 It is worth noting that
     - Even though I was deducted from for placing my data in a folder called data, I DECIDED TO CONTINUE USING IT in order to avoid changing to much code
