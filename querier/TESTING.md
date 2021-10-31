@@ -5,11 +5,15 @@ _Unit testing._
 
 Unit testing was implemented within the `querier.c` file. This can be run by toggling the `-DUNITTEST` flag in the makefile. By toggling the flag, it will replace the regular querier with its unit tests. There was one test for every method I thought necessary to test:
 
-* `newIndex()`
-* `buildIndexFromCrawler()`
-* `loadIndexFromFile()`
-* `indexWebpage()`
-* `deleteIndex()`
+* `countWordsInQuery()`
+* `parseQuery()`
+* `normalizeQuery()`
+* `orSequence()`
+* `andSequence()`
+* `countFunc()`
+* `sortFunc()`
+
+It is worth noting that for `sortFunc()` in particular, I tested the sorted case, reverse-order case, and an average case scenario to show that all three work.
 
 It is worth noting that this coding was not as defensive because it is unit testing, and I believe readability to be more important in this case.
 

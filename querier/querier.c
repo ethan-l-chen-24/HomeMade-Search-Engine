@@ -698,6 +698,7 @@ void sortFunc(void* arg, const int key, const int count)
         int numWords3 = countWordsInQuery(query3);
         int numWords4 = countWordsInQuery(NULL);
 
+        // check if correct counts
         if(numWords != 7) numFailed++;
         if(numWords2 != 5) numFailed++;
         if(numWords3 != 2) numFailed++;
@@ -710,6 +711,7 @@ void sortFunc(void* arg, const int key, const int count)
     int test2()
     {
         int numFailed = 0;
+        // building a non-final string
         char* q = "there are seven words in this sentence";
         char* q2 = "     there     are   multiple spacesss     in this";
         char* q3 = "  there are special cha&acters in this sentence";
@@ -729,6 +731,7 @@ void sortFunc(void* arg, const int key, const int count)
         char** pq3 = parseQuery(query3, numWords3);
         char** pq4 = parseQuery(NULL, 0);
 
+        // check if the words were parsed correctly
         if(strcmp(pq[0], "there") != 0) numFailed++;
         if(strcmp(pq[6], "sentence") != 0) numFailed++;
         if(strcmp(pq2[0], "there") != 0) numFailed++;
@@ -754,6 +757,7 @@ void sortFunc(void* arg, const int key, const int count)
         normalizeQuery(pq, numWords);
         normalizeQuery(pq2, 0);
 
+        // check if the words all became lowercase
         if(strcmp(pq[0], "there") != 0) numFailed++;
         if(strcmp(pq[3], "words") != 0) numFailed++;
         if(strcmp(pq[4], "in") != 0) numFailed++;
@@ -776,6 +780,7 @@ void sortFunc(void* arg, const int key, const int count)
         counters_t* c3 = counters_new();
         counters_t* c4 = NULL;
 
+        // check if the sets merged successfully
         if(!orSequence(c2, c1)) numFailed++;
         if(counters_get(c1, 1) != 11) numFailed++;
         if(counters_get(c1, 2) != 4) numFailed++;
@@ -812,6 +817,7 @@ void sortFunc(void* arg, const int key, const int count)
         counters_t* c3 = counters_new();
         counters_t* c4 = NULL;
 
+        // check if the sets intersect properly
         c1 = andSequence(c1, c2);
         if(counters_get(c1, 1) != 0) numFailed++;
         if(counters_get(c1, 2) != 4) numFailed++;
@@ -844,6 +850,7 @@ void sortFunc(void* arg, const int key, const int count)
         int count2 = 0;
         counters_iterate(counters2, &count, countFunc);
 
+        // check if the function counts properly
         if(count != 10) numFailed++;
         if(count2 != 0) numFailed++;
 
@@ -888,6 +895,7 @@ void sortFunc(void* arg, const int key, const int count)
         }
         counters_iterate(counters3, arrObj3, sortFunc);
 
+        // check if the arrays are sorted properly
         for(int i = 0; i < 10; i++) {
             if(arr[i]->docID != (10 - i)) {
                 numFailed++;
@@ -898,6 +906,9 @@ void sortFunc(void* arg, const int key, const int count)
                 numFailed++;
             }
         }
+
+        // check if the average-case works (I figured)
+        // these out by hand
         if(arr3[9]->docID != 10) numFailed++;
         if(arr3[4]->docID != 5) numFailed++;
         if(arr3[3]->docID != 6) numFailed++;

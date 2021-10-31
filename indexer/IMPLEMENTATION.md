@@ -7,9 +7,7 @@ The indexer is implemented in _C_ using _VSCode_ as an editor. It was also devel
 
 The indexer is implemented with respect to the design specs in `DESIGN.md`.
 
-The major data structure, as mentioned, is a `struct index` as defined in `index.h`. It is a wrapper struct for a `struct hashtable` as defined in `hashtable.h`, but its methods initialize it more specifically as a `struct hashtable` with a `char*` as its key (as usual) and a `struct counter` as its value. The `struct counters` is defined in `counters.h`
-
-The algorithm follows the pseudocode as described in `DESIGN.md`. Here is the major data flow and pseudocode for all of the modules, including those in the `index.h` file.
+The algorithm follows the pseudocode as described in `DESIGN.md`. Here is the major data flow and pseudocode for all of the modules, as well as any additional necessary helper functions.
 
 #### `main`
 Runs the indexer
@@ -97,36 +95,29 @@ Loads a specific word's ids and frequency into the index
 
 ### Functions
 
-Here are the function declarations of those necessary to indexer.
+Here are the function declarations of those necessary to querier.
 
-#### index.h
 ```c
-index_t* newIndex(const int tableSize);
-void deleteIndex(index_t* index);
-bool saveIndexToFile(char* filename, index_t* index);
-bool buildIndexFromCrawler(char* pageDir, index_t* index);
-index_t* loadIndexFromFile(char* filepath);
-bool indexWebpage(index_t* index, webpage_t* webpage, int id);
-static void loadWordInIndex(index_t* index, char* word, FILE* fp);
-static void printCT(void* arg, const char* key, void* item);
-static void printCTHelper(void* arg, const int key, const int count);
-static void readWordsInFile(webpage_t* page, index_t* index, int* id);
-static void deleteCT(void* item);
-```
+// query methods
+bool query(char* pageDirectory, char* indexFilename);
+void processQuery(char* search, index_t* index, char* pageDirectory);
+int countWordsInQuery(char* query);
+char** parseQuery(char* query, int numWords);
+void normalizeQuery(char** words, int numWords);
 
-#### pagedir.h
-```c
-bool pageDirValidate(char* pageDir);
-webpage_t* loadPageToWebpage(char* pageDir, int* id);
-char* stringBuilder(char* pageDir, char* end);
-```
+// scoring methods
+counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDirectory);
+bool orSequence(counters_t* prod, counters_t* scores);
+counters_t* andSequence(counters_t* prod, counters_t* wordCount);
+void countersUnionHelper(void* arg, const int key, const int count);
+void countersIntersectionHelper(void* arg, const int key, const int count);
 
-#### word.h
-```c
-void normalizeWord(char* word);
-char* intToString(int x);
+// ranking and printing methods
+void rankAndPrint(counters_t* idScores, char* pageDirectory);
+void countFunc(void* arg, const int key, const int count);
+void sortFunc(void* arg, const int key, const int count);
 ```
 
 ### Usage
 
-The _indexer_ module implemented in `indexer.c` provides the main `indexer()` method that can be used in other modules. However, the majority of the methods created for the indexer are in the _common_ directory, as shown above. These can be called from any other module as long as the makefile imports the `common.a` archive correctly.
+The querier module implemented in `querier.c` provides the main method to run the query. As this file is not an implementation of a _.h_ file, compiling the executable and running `./querier [args]` is the only way to use the querier.

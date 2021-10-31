@@ -54,7 +54,7 @@ The querier will run as follows:
 2. querier prompts the user for a query and passes it to _processQuery_
 3. processQuery counts the words, parses it, normalizes it, and sends it to _getIDScores_ to calculate the score of each document in a query. processQuery then calls _rankAndPrint_ to print out the ids and scores
 4. getIDScores reads through the words and processes and-sequences or or-sequences, calling methods to merge or intersect countersets to create a running score
-5. rankAndPrint sorts all of the IDs by their corresponding score inside an array, then looping through and printint all of them to stdout
+5. rankAndPrint sorts all of the IDs by their corresponding score inside an array, then looping through and printing all of them to stdout
 3. see `IMPLEMENTATION.md` for the helper methods and their usages
 
 ### Major Structures
