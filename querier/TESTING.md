@@ -3,7 +3,9 @@
 
 _Unit testing._
 
-Unit testing was implemented within the `querier.c` file. This can be run by toggling the `-DUNITTEST` flag in the makefile. By toggling the flag, it will replace the regular querier with its unit tests. There was one test for every method I thought necessary to test:
+Unit testing was implemented within the `querier.c` file. This can be run by toggling the `-DUNITTEST` flag in the makefile. By toggling the flag, it will replace the regular querier with its unit tests. To go back to normal, untoggle the flag and recompile.
+
+There was one test for every method I thought necessary to test:
 
 * `countWordsInQuery()`
 * `parseQuery()`
@@ -25,9 +27,9 @@ I assembled the querier and test it as a whole. In each case, I examined the out
 
 2. Tested the querier with a pageDir that does not exist and an indexfile that doesn't exist
 
-3. Tested the indexer with the incorrect number of arguments
+3. Tested the querier with the incorrect number of arguments
 
-4. Tested the indexer on some of the crawler directories and index files from the crawler and indexer modules
+4. Tested the querier on some of the crawler directories and index files from the crawler and indexer modules
 
 6. Tested valgrind on several test cases
 

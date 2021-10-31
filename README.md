@@ -45,3 +45,15 @@ It is worth noting that
     - I was  able to fix the problem when it comes to the include statement and relative paths, thanks to the help of 
     - I added some of my own methods outisde of the requirements. Namely, I made the intToString() method in word.c and stringBuilder() in pagedir.c, as both methods are used very frequently throughout all modules
     - I also changed `crawler.c` accordingly to utilitize those methods for consistency
+
+### Lab 6
+For this project, I attribute a few sources
+    - the previous lab, from which I took heavily
+    - The comments from my grader on Lab 5, (which hopefully I have fixed)
+    - the Lab instructions, from which I borrowed most of my ideas
+    - Will, Kysen, Dylan, Jeff, and Bansharee for working with me on thinking about how scoring of a query may work
+    - Professor Prioleau for addressing my complaints about Lab 5
+    - finally, the support of my friends and family. Ryan, you are the man.
+
+It is worth noting that
+    - Even though I was deducted from for placing my data in a folder called data, I DECIDED TO CONTINUE USING IT in order to avoid changing to much code

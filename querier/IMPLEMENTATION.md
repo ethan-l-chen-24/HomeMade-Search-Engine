@@ -3,130 +3,83 @@
 
 ### Implementation
 
-The indexer is implemented in _C_ using _VSCode_ as an editor. It was also developed using MacOS.
+The querier is implemented in _C_ using _VSCode_ as an editor. It was also developed using MacOS.
 
-The indexer is implemented with respect to the design specs in `DESIGN.md`.
+The querier is implemented with respect to the design specs in `DESIGN.md`.
 
-The major data structure, as mentioned, is a `struct index` as defined in `index.h`. It is a wrapper struct for a `struct hashtable` as defined in `hashtable.h`, but its methods initialize it more specifically as a `struct hashtable` with a `char*` as its key (as usual) and a `struct counter` as its value. The `struct counters` is defined in `counters.h`
-
-The algorithm follows the pseudocode as described in `DESIGN.md`. Here is the major data flow and pseudocode for all of the modules, including those in the `index.h` file.
+The algorithm follows the pseudocode as described in `DESIGN.md`. Here is the major data flow and pseudocode for all of the modules
 
 #### `main`
-Runs the indexer
+Runs the querier
 
 1. validate args
 2. call pageDirValidate, and if false, return
-3. call indexer
+3. call querier
 
-#### `pageDirValidate`
-Makes sure a pageDir is a valid crawler directory
+#### `query`
 
-1. build the filepath of the .crawler file
-2. try to read the file
-3. if it is possible, return true, otherwise return false
 
-#### `indexer`
-Builds the index and then prints it out
+#### `processQuery`
 
-1. create a new index struct
-2. call buildIndexFromCrawler
-3. call saveIndexToFile
 
-#### `buildIndexFromCrawler`
-inserts items into the index from a crawler directory
+#### `countWordsInQuery`
 
-1. sets the first id = 1
-2. goes through each webpage until it can't read anymore
-    1. tries to index the webpage by calling indexWebpage, which will also increment the id by calling loadPageToWebpage
 
-#### `indexWebpage`
-this method really just calls readWordsInFile, and is not worthy of legitimate pseudocode
+#### `parseQuery`
 
-#### `readWordsInWebpage`
-goes through all of the words in a webpage and loads them into the index
 
-1. get words from the webpage as long as they are not null
-    1. make the word lowercase
-    2. check if the word is more than 2 characters
-    3. find the counterset of that word in the index
-    4. if it doesn't exist
-        1. add a new counter set in the hashtable
-        2. add the word to it
-    5. if it does exist
-        1. get the counter set and add the word
-2. increment the id
+#### `normalizeQuery`
 
-#### `loadPageToWebpage`
-takes a pagedirectory and id of a crawler page, retrieves the URL and builds the webpage
 
-1. builds the filepath of the crawler file
-2. tries to open the file
-    1. if possible, read the first line
-    2. check if the URL is internal/valid
-    3. create a new webpage with the URL as its URL
-    4. Try to get the URL of the webpage
-    5. Return the page
+#### `getIDScores`
 
-#### `saveIndexToFile`
-takes an index  and saves it to a file
 
-1. builds the filepath of the output file
-2. tries to open that file
-    1. iterates through and prints, using the printCT function we developed in class
+#### `orSequence`
 
-The `indextest` is not quite as worthy of mention, as it is meant as a tester for the `index` file. However, there are a couple of methods worthy of mention that will be relevant for the `query` module.
 
-#### `loadIndexFromFile`
-Loads the index struct from an index output file
+#### `andSequence`
 
-1. create a new index
-2. build the filepath of the index file
-3. open the file and read from it
-4. read a word as long as it exists
-5. call loadWordInIndex and pass that word
-6. close memory
 
-#### `loadWordInIndex`
-Loads a specific word's ids and frequency into the index
+#### `countersUnionHelper`
 
-1. create a new counterset
-2. try to insert it into the index
-3. read pairs of ints as long as they exist
-    1. insert the pair into the counterset, with the first int as the key and the second as the count
+
+#### `countersIntersectionHelper`
+
+
+#### `rankAndPrint`
+
+
+#### `countFunc`
+
+
+#### `sortFunc`
 
 
 ### Functions
 
-Here are the function declarations of those necessary to indexer.
+Here are the function declarations of those necessary to querier.
 
-#### index.h
 ```c
-index_t* newIndex(const int tableSize);
-void deleteIndex(index_t* index);
-bool saveIndexToFile(char* filename, index_t* index);
-bool buildIndexFromCrawler(char* pageDir, index_t* index);
-index_t* loadIndexFromFile(char* filepath);
-bool indexWebpage(index_t* index, webpage_t* webpage, int id);
-static void loadWordInIndex(index_t* index, char* word, FILE* fp);
-static void printCT(void* arg, const char* key, void* item);
-static void printCTHelper(void* arg, const int key, const int count);
-static void readWordsInFile(webpage_t* page, index_t* index, int* id);
-static void deleteCT(void* item);
-```
+// query methods
+bool query(char* pageDirectory, char* indexFilename);
+void processQuery(char* search, index_t* index, char* pageDirectory);
+int countWordsInQuery(char* query);
+char** parseQuery(char* query, int numWords);
+void normalizeQuery(char** words, int numWords);
 
-#### pagedir.h
-```c
-bool pageDirValidate(char* pageDir);
-webpage_t* loadPageToWebpage(char* pageDir, int* id);
-char* stringBuilder(char* pageDir, char* end);
-```
+// scoring methods
+counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDirectory);
+bool orSequence(counters_t* prod, counters_t* scores);
+counters_t* andSequence(counters_t* prod, counters_t* wordCount);
+void countersUnionHelper(void* arg, const int key, const int count);
+void countersIntersectionHelper(void* arg, const int key, const int count);
 
-#### word.h
-```c
-void normalizeWord(char* word);
-char* intToString(int x);
+// ranking and printing methods
+void rankAndPrint(counters_t* idScores, char* pageDirectory);
+void countFunc(void* arg, const int key, const int count);
+void sortFunc(void* arg, const int key, const int count);
 ```
 
 ### Usage
 
-The _indexer_ module implemented in `indexer.c` provides the main `indexer()` method that can be used in other modules. However, the majority of the methods created for the indexer are in the _common_ directory, as shown above. These can be called from any other module as long as the makefile imports the `common.a` archive correctly.
+The querier module implemented in `querier.c` provides the main method to run the query. As this file is not an implementation of a _.h_ file, compiling the executable and running `./querier [args]` is the only way to use the querier.
