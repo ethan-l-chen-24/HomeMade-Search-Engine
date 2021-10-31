@@ -33,15 +33,20 @@ void normalizeQuery(char** words, int numWords);
 
 // scoring methods
 counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDirectory);
-static bool orSequence(counters_t* prod, counters_t* scores);
-static counters_t* andSequence(counters_t* prod, counters_t* wordCount);
-static void countersUnionHelper(void* arg, const int key, const int count);
-static void countersIntersectionHelper(void* arg, const int key, const int count);
+bool orSequence(counters_t* prod, counters_t* scores);
+counters_t* andSequence(counters_t* prod, counters_t* wordCount);
+void countersUnionHelper(void* arg, const int key, const int count);
+void countersIntersectionHelper(void* arg, const int key, const int count);
 
 // ranking and printing methods
 void rankAndPrint(counters_t* idScores, char* pageDirectory);
-static void countFunc(void* arg, const int key, const int count);
-static void sortFunc(void* arg, const int key, const int count);
+void countFunc(void* arg, const int key, const int count);
+void sortFunc(void* arg, const int key, const int count);
+
+// unit testing
+#ifdef UNITTEST
+    void unittest(void);
+#endif
 
 /***************** local types ********************/
 
@@ -77,6 +82,11 @@ typedef struct scoreIDArr { // stores an array of scoreIDs and keeps track of ho
 */
 int main(const int argc, char* argv[])
 {
+
+    #ifdef UNITTEST
+        unittest();
+    #else
+
     char* program = argv[0];
     // check for the appropriate number of arguments
     if(argc != 3) {
@@ -129,6 +139,7 @@ int main(const int argc, char* argv[])
         return 1;
     }
 
+    #endif
 }
 
 /************** query() ******************/
@@ -246,7 +257,7 @@ int countWordsInQuery(char* query)
     return count;
 }
 
-/************** parseQuery() ******************/
+/************* parseQuery() ***************/
 /* takes the query string and splits it into an array of words.
  * it splits by spaces, and any bad characters will lead to a null
  * return
@@ -428,8 +439,9 @@ counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDi
 
 /************** orSequence() ******************/
 /* runs an orSequence, which merges the two given countersets */
-static bool orSequence(counters_t* prod, counters_t* scores) 
+bool orSequence(counters_t* prod, counters_t* scores) 
 {
+    if(prod == NULL || scores == NULL) return false;
     #ifdef DEBUG
         printf("Last prod: ");
         counters_print(prod, stdout);
@@ -464,7 +476,7 @@ static bool orSequence(counters_t* prod, counters_t* scores)
  *  Assumptions:
  *      1. The arguments are valid, otherwise throw errors
 */
-static counters_t* andSequence(counters_t* prod, counters_t* wordCount)
+counters_t* andSequence(counters_t* prod, counters_t* wordCount)
 {
     // validate arguments
     if(prod == NULL || wordCount == NULL) return NULL;
@@ -505,7 +517,7 @@ static counters_t* andSequence(counters_t* prod, counters_t* wordCount)
 /* merges two counters together by adding their counts together and setting the key 
  * to the value
  */
-static void countersUnionHelper(void* arg, const int key, const int count) 
+void countersUnionHelper(void* arg, const int key, const int count) 
 {  
     // validate arguments
     if(arg == NULL) return;
@@ -520,7 +532,7 @@ static void countersUnionHelper(void* arg, const int key, const int count)
 /* Finds the intersection between two countersets by finding the minimum of both
  * of their counts for a key and adding the min to the other counterset given in the tuple
 */
-static void countersIntersectionHelper(void* arg, const int key, const int count) 
+void countersIntersectionHelper(void* arg, const int key, const int count) 
 {
     // validate arguments
     if(arg == NULL) return;
@@ -602,7 +614,7 @@ void rankAndPrint(counters_t* idScores, char* pageDirectory)
 
 /************** countFunc() ******************/
 /* helper that counts the number of items in the counterset */
-static void countFunc(void* arg, const int key, const int count)
+void countFunc(void* arg, const int key, const int count)
 {
     int* num = arg;
     (*num)++; // increment the count
@@ -630,7 +642,7 @@ static void countFunc(void* arg, const int key, const int count)
  *      2. the arg is actually of type scoreIDArr_t*
  *      3. the array has enough spots to hold the next key and count
 */
-static void sortFunc(void* arg, const int key, const int count)
+void sortFunc(void* arg, const int key, const int count)
 {
     // validate arguments
     if(arg == NULL) return;
@@ -671,3 +683,303 @@ static void sortFunc(void* arg, const int key, const int count)
     arr[slotsFilled] = newScoreID;
     scoreIDArr->slotsFilled++;
 }
+
+#ifdef UNITTEST
+
+    // unit testing for the countWordsInQuery function 
+    int test1()
+    {
+        int numFailed = 0;
+        char* query = "there are seven words in this sentence";
+        char* query2 = "     this      is ....a     crazy *&( input";
+        char* query3 = "a\nb";
+        int numWords = countWordsInQuery(query);
+        int numWords2 = countWordsInQuery(query2);
+        int numWords3 = countWordsInQuery(query3);
+        int numWords4 = countWordsInQuery(NULL);
+
+        if(numWords != 7) numFailed++;
+        if(numWords2 != 5) numFailed++;
+        if(numWords3 != 2) numFailed++;
+        if(numWords4 != 0) numFailed++;
+
+        return numFailed;
+    }
+
+    // unit testing for the parseQuery function
+    int test2()
+    {
+        int numFailed = 0;
+        char* q = "there are seven words in this sentence";
+        char* q2 = "     there     are   multiple spacesss     in this";
+        char* q3 = "  there are special cha&acters in this sentence";
+
+        char* query = malloc(strlen(q) + 1);
+        char* query2 = malloc(strlen(q2) + 1);
+        char* query3 = malloc(strlen(q3) + 1);
+        strcpy(query, q);
+        strcpy(query2, q2);
+        strcpy(query3, q3);
+
+        int numWords = countWordsInQuery(query);
+        char** pq = parseQuery(query, numWords);
+        int numWords2 = countWordsInQuery(query2);
+        char** pq2 = parseQuery(query2, numWords2);
+        int numWords3 = countWordsInQuery(query3);
+        char** pq3 = parseQuery(query3, numWords3);
+        char** pq4 = parseQuery(NULL, 0);
+
+        if(strcmp(pq[0], "there") != 0) numFailed++;
+        if(strcmp(pq[6], "sentence") != 0) numFailed++;
+        if(strcmp(pq2[0], "there") != 0) numFailed++;
+        if(strcmp(pq2[4], "in") != 0) numFailed++;
+        if(pq3 != NULL) numFailed++;
+        if(pq4 != NULL) numFailed++;
+
+        return numFailed;
+    }
+
+    // unit testing for the normalizeQuery function
+    int test3()
+    {
+        int numFailed = 0;
+        char* q = "THeRe aRE SevEN WoRDS iN ThIs sENTENcE";
+
+        char* query = malloc(strlen(q) + 1);
+        strcpy(query, q);
+
+        int numWords = countWordsInQuery(query);
+        char** pq = parseQuery(query, numWords);
+        char** pq2 = NULL;
+        normalizeQuery(pq, numWords);
+        normalizeQuery(pq2, 0);
+
+        if(strcmp(pq[0], "there") != 0) numFailed++;
+        if(strcmp(pq[3], "words") != 0) numFailed++;
+        if(strcmp(pq[4], "in") != 0) numFailed++;
+        if(strcmp(pq[6], "sentence") != 0) numFailed++;
+        if(pq2 != NULL) numFailed++;
+
+        return numFailed;
+    }
+
+    // unit testing for the orSequence function
+    int test4()
+    {
+        int numFailed = 0; 
+        counters_t* c1 = counters_new();
+        counters_set(c1, 1, 5);
+        counters_set(c1, 2, 4);
+        counters_t* c2 = counters_new();
+        counters_set(c2, 1, 6);
+        counters_set(c2, 3, 6);
+        counters_t* c3 = counters_new();
+        counters_t* c4 = NULL;
+
+        if(!orSequence(c2, c1)) numFailed++;
+        if(counters_get(c1, 1) != 11) numFailed++;
+        if(counters_get(c1, 2) != 4) numFailed++;
+        if(counters_get(c1, 3) != 6) numFailed++;
+        if(counters_get(c2, 1) != 6) numFailed++;
+        if(counters_get(c2, 2) != 0) numFailed++;
+
+        if(!orSequence(c3, c1)) numFailed++;
+        if(counters_get(c3, 1) != 0) numFailed++;
+        if(counters_get(c3, 2) != 0) numFailed++;
+
+        if(!orSequence(c1, c3)) numFailed++;
+        if(counters_get(c3, 1) != 11) numFailed++;
+        if(counters_get(c3, 2) != 4) numFailed++;
+
+        if(orSequence(c4, c3)) numFailed++;
+        if(counters_get(c3, 1) != 11) numFailed++;
+
+        return numFailed;
+    }
+
+    // unit testing for the andSequence function
+    int test5()
+    {
+        int numFailed = 0; 
+        counters_t* c1 = counters_new();
+        counters_set(c1, 1, 5);
+        counters_set(c1, 2, 4);
+        counters_set(c1, 3, 6);
+        counters_t* c2 = counters_new();
+        counters_set(c2, 2, 6);
+        counters_set(c2, 3, 1);
+        counters_set(c2, 4, 5);
+        counters_t* c3 = counters_new();
+        counters_t* c4 = NULL;
+
+        c1 = andSequence(c1, c2);
+        if(counters_get(c1, 1) != 0) numFailed++;
+        if(counters_get(c1, 2) != 4) numFailed++;
+        if(counters_get(c1, 3) != 1) numFailed++;
+        if(counters_get(c2, 2) != 6) numFailed++;
+        if(counters_get(c2, 4) != 5) numFailed++;
+
+        counters_t* temp = andSequence(c1, c3);
+        if(counters_get(temp, 1) != 0) numFailed++;
+        if(counters_get(temp, 2) != 0) numFailed++;
+
+        c1 = andSequence(c1, c4);
+        if(c1 != NULL) numFailed++;
+
+        return numFailed;
+    }
+
+    // unit testing for the countFunc function
+    int test6()
+    {
+        int numFailed = 0;
+        counters_t* counters = counters_new();
+        for(int i = 0; i < 10; i++) {
+            counters_add(counters, i);
+        }
+        int count = 0;
+        counters_iterate(counters, &count, countFunc);
+
+        counters_t* counters2 = counters_new();
+        int count2 = 0;
+        counters_iterate(counters2, &count, countFunc);
+
+        if(count != 10) numFailed++;
+        if(count2 != 0) numFailed++;
+
+        return numFailed;
+    }
+
+    // unit testing for the countFunc function
+    int test7()
+    {
+        int numFailed = 0;
+
+        // ascending order test
+        scoreIDArr_t* arrObj = count_malloc(sizeof(scoreIDArr_t));
+        scoreID_t** arr = count_calloc(10, sizeof(scoreID_t*));
+        arrObj->arr = arr;
+        arrObj->slotsFilled = 0;
+        counters_t* counters = counters_new();
+        for(int i = 1; i <= 10; i++) {
+            counters_set(counters, i, i);
+        }
+        counters_iterate(counters, arrObj, sortFunc);
+
+        // descending order test
+        scoreIDArr_t* arrObj2 = count_malloc(sizeof(scoreIDArr_t));
+        scoreID_t** arr2 = count_calloc(10, sizeof(scoreID_t*));
+        arrObj2->arr = arr2;
+        arrObj2->slotsFilled = 0;
+        counters_t* counters2 = counters_new();
+        for(int i = 10; i > 0; i--) {
+            counters_set(counters2, i, i);
+        }
+        counters_iterate(counters2, arrObj2, sortFunc);
+
+        // non-sorted order test
+        scoreIDArr_t* arrObj3 = count_malloc(sizeof(scoreIDArr_t));
+        scoreID_t** arr3 = count_calloc(10, sizeof(scoreID_t*));
+        arrObj3->arr = arr3;
+        arrObj3->slotsFilled = 0;
+        counters_t* counters3 = counters_new();
+        for(int i = 1; i <= 10; i++) {
+            counters_set(counters3, i, (i*i)%10);
+        }
+        counters_iterate(counters3, arrObj3, sortFunc);
+
+        for(int i = 0; i < 10; i++) {
+            if(arr[i]->docID != (10 - i)) {
+                numFailed++;
+            }
+        }
+        for(int i = 0; i < 10; i++) {
+            if(arr2[i]->docID != (10 - i)) {
+                numFailed++;
+            }
+        }
+        if(arr3[9]->docID != 10) numFailed++;
+        if(arr3[4]->docID != 5) numFailed++;
+        if(arr3[3]->docID != 6) numFailed++;
+        
+        return numFailed;
+    }
+    
+    // runs the unit testing, called in main above
+    void unittest() 
+    {
+        int totalFailed = 0;
+
+        // test 1: countWordsInQuery
+        int failed = 0;
+        printf("Welcome to Unit Testing\n");
+        failed += test1();
+        if(failed == 0) {
+            printf("Test 1 passed\n");
+        } else {
+            printf("Test 1 failed!\n");
+            totalFailed++;
+        }
+
+        // test 2: parseQuery
+        failed = 0;
+        failed += test2();
+        if(failed == 0) {
+            printf("Test 2 passed\n");
+        } else {
+            printf("Test 2 failed!\n");
+            totalFailed++;
+        }
+
+        // test 3: normalizeQuery
+        failed = 0;
+        failed += test3();
+        if(failed == 0) {
+            printf("Test 3 passed\n");
+        } else {
+            printf("Test 3 failed!\n");
+            totalFailed++;
+        }
+
+        // test 4: orSequence
+        failed = 0;
+        failed += test4();
+        if(failed == 0) {
+            printf("Test 4 passed\n");
+        } else {
+            printf("Test 4 failed!\n");
+            totalFailed++;
+        }
+
+        // test 5: andSequence
+        failed = 0;
+        failed += test5();
+        if(failed == 0) {
+            printf("Test 5 passed\n");
+        } else {
+            printf("Test 5 failed!\n");
+            totalFailed++;
+        }
+
+        // test 6: countFunc
+        failed = 0;
+        failed += test6();
+        if(failed == 0) {
+            printf("Test 6 passed\n");
+        } else {
+            printf("Test 6 failed!\n");
+            totalFailed++;
+        }
+
+        // test 7: sortFunc
+        failed = 0;
+        failed += test7();
+        if(failed == 0) {
+            printf("Test 7 passed\n");
+        } else {
+            printf("Test 7 failed!\n");
+            totalFailed++;
+        }
+    }
+
+#endif
