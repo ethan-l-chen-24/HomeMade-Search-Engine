@@ -1,96 +1,70 @@
-# Lab 5 - Ethan Chen
+# Lab 6 - Ethan Chen
 # CS50 Fall 2021
 
 ### User Interface
 
-The indexer's only interface with the user is on the command-line; it must always have two arguments
+The querier's only interface with the user is arguments on the command line followed by input from stdin. To call querier, it must always have two arguments
 
 ```bash
 ./indexer pageDirectory indexFilename
 ```
 
-Alternatively, this module also contains a file called indextest. This also takes two arguments and can be run as so
+Alternatively, this module also contains a file called fuzzquery. This also takes two arguments and can be run as so
 
 ```bash
-./indextest oldIndexFilename newIndexFilename
+./fuzzquery pageDirectory indexFilename
 ```
 
 ### Inputs and Outputs
 
-Input: The only inputs are command-line parameters; see the User Interface above.
+Input: The first inputs are command-line parameters; see the User Interface above. The second inputs are "queries" given by the user. These are in the form of words, and special characters are not allowed
 
-Output: In indexer, we save a file of the given name to the data directory. In indextest, we save a file with the _newIndexFilename_ to the data directory. Within both of those files, we write
-
-* the word on each line, and following each word
-* pairs of the ints, where the first is the id of the crawler file the word was found in, and the second is the number of times it shows up in that file
+Output: In querier, we find the documents with the highest scores based on the query and print them to stdout in rank order. The format of the output is the score, followed by the document ID and URL on each line.
 
 ### Functional Decomposition into Modules
 
-We anticipate the following modules or functions:
+I anticipate the following functions:
 
 1. main, which parses arguments and initializes other modules
-2. indexer, which calls methods to build the index from the crawler files and then save the created index to an output file
+2. querier, which prompts for user input
+3. processQuery, which parses the input
+4. getIDScores, which scores the parsed query input
+5. rankAndPrint, which ranks and prints the line described above based on the scores
 
-And a helper modulee to provide data structures: _index_ of words and their associated files and frequencies
-
-The _index_ module, as well as a few others also provide very important functions for loading, reading, and writing the _index_ to a file. See `index.h`, `pagedir.h`, and `word.h` for more information. 
+These functions will likely have several accompanying helper functions to go alongside
 
 ### Pseudo-Code for logic/algorithmic flow
 
-The indexer will fun as follows:
+The querier will run as follows:
 
 1. execute from a command line as shown in the User interface
-2. parse the command line, validate parameters, initialize other modules
-3. make sure a valid crawler directory is given and make an _index_
+2. parse the command line, validate parameters
+3. make sure a valid crawler directory is given and make sure the index file is readable
 4. this is a line to see if the TA is actually reading this :)
-5. begin incrementing from 1 and find all files of that name, e.g. data/pageDir/1, data/pageDir/2, etc.
-    1. extract the URL and build the webpage
-    2. fetch the HTML of that webpage
-    3. Read through each word inside that webpage
-        1. normalize the word (make it lowercase)
-        2. insert it into the index
-6. iterate through all of the words in the index
-    1. print the word to the output file
-    2. print each counter pair to the output file
+5. prompt the user for user input and perform actions for each one
+    1. parse the input
+    2. score the input
+    3. rank the scores
+    3. print the output
 
-### Dataflow through modules
 
-1. main parses parameters and passes them to the indexer
-2. indexer calls index methods to load from crawler and write to the file
-3. see `IMPLEMENTATION.md` for the rest of the index methods and their usages
+### Dataflow through major modules
 
-### Major Data Structures
+1. main parses parameters and passes them to _querier_
+2. querier prompts the user for a query and passes it to _processQuery_
+3. processQuery counts the words, parses it, normalizes it, and sends it to _getIDScores_ to calculate the score of each document in a query. processQuery then calls _rankAndPrint_ to print out the ids and scores
+4. getIDScores reads through the words and processes and-sequences or or-sequences, calling methods to merge or intersect countersets to create a running score
+5. rankAndPrint sorts all of the IDs by their corresponding score inside an array, then looping through and printint all of them to stdout
+3. see `IMPLEMENTATION.md` for the helper methods and their usages
 
-The major data structure of this modle is the _index_, which is really just a specified *hashtable*. The hashtable takes a *char* key which is a word in the index, while its value is a *counters* object that counts the occurrences of that word in each file and has the corresponding file id as the key. The *hashtable* also indirectly uses a *set*.
+### Major Structures
+
+There are three new structures introduced in this project.
+
+* `struct countersTuple` stores two countersets - this is important for passing two sets as the `void*` arg to `counters_iterate()`
+* `scoreID_t` stores a docID and a score
+* `scoreIDArr_t` stores an array of docIDs and the number of slots in that array that have been filled; this is useful for the sorting algorithm
 
 ### Testing Plan
 
-_Unit testing._
-
-Unit testing was implemented within the _common_ module in the `unittest.c` file. This can be compiled by calling `make test` within the common module, and it will run 5 tests on different methods.
-
-* `newIndex()`
-* `buildIndexFromCrawler()`
-* `loadIndexFromFile()`
-* `indexWebpage()`
-* `deleteIndex()`
-
-It is worth noting that this coding was not as defensive because it is unit testing, and I believe readability to be more important in this case.
-
-_Integration testing._ Assemble the indexer and test it as a whole. In each case, examine the output files carefully to be sure they have the contents of the correct page, with the correct words and correct occurrences of each. 
-
-1. Test the program with various forms of incorrect command-line arguments to ensure that its command-line parsing, and validation of those parameters, works correctly.
-
-2. Test the indexer with a pageDir that does not exist
-
-3. Test the indexer with a pageDir that exists but isn't a crawler directory
-
-4. Test the indexer with the incorrect number of arguments
-
-5. Test the indexer on all of the crawler directories made by `make test` in the crawler module
-
-6. Test valgrind using `make valgrind`
-
-7. Run the same tests on indextest to test the code and also prove that the loadIndex method works well
-
-For the indextest in particular, it is important to note that I compared the test files to the original indexes by eye, as well as to the output given on the tse website. This is how I validated the success of my algorithm.
+See `TESTING.md`.
