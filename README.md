@@ -59,4 +59,4 @@ It is worth noting that
     - Even though I was deducted from for placing my data in a folder called data, __I DECIDED TO CONTINUE USING IT__ in order to avoid changing too much code, and I decided to continue building the filepath in the same way I did in previous labs. I know that it is better to not have that hardcoded path, but it made inputting into the terminal much much nicer
     - I did not actually use Backus-Naur form, but I implemented the same logic to merge and intersect countersets
     - I also included a `-DDEBUG` tag on my makefile, as well as all of my debugging code inside my file. This was useful to me and I thought the TAs may like to see it. However, for the 
-        proper output, make sure that this is toggled OFF. The same goes with my unittesting flag, `-DUNITTEST`. The Unit test methods are included at the bottom of querier.c, from lines 800 on.
+        proper output, make sure that this is toggled OFF. The same goes with my unittesting flag, `-DUNITTEST`. The Unit test methods are included at the bottom of querier.c, from lines 800 or so on.
