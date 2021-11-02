@@ -21,7 +21,7 @@ It is worth noting that this coding was not as defensive because it is unit test
 
 _Integration testing._ 
 
-I assembled the querier and test it as a whole. In each case, I examined the output carefully to be sure the scores and documents are correct. Additionally, I tested edge cases for invalid inputs.
+I assembled the querier and test it as a whole. In each case, I examined the output carefully to be sure the scores and documents are correct. Additionally, I tested edge cases for invalid inputs. This was all done through the shell testing script `testing.sh` and its output can be examined in `testing.out`
 
 1. Tested the program with various forms of incorrect command-line arguments to ensure that its command-line parsing, and validation of those parameters, works correctly.
 
