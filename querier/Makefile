@@ -11,7 +11,7 @@ LIBS = $C/common.a $L/libcs50.a
 
 # uncomment the following to turn on verbose memory logging
 # recomment -DTEST to turn off testing output in stdout
-TESTING= #-DUNITTEST #-DDEBUG 
+TESTING= -DUNITTEST #-DDEBUG 
 
 CFLAGS = -Wall -pedantic -std=gnu11 -ggdb $(TESTING) -I$L -I$C 
 CC = gcc
@@ -21,7 +21,7 @@ VALGRIND = valgrind --leak-check=full --show-leak-kinds=all
 
 # editable test values
 PAGE_DIRECTORY = toscrape
-DEPTH = 1
+DEPTH = 0
 
 .PHONY: all test valgrind clean run
 

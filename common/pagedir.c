@@ -140,6 +140,7 @@ webpage_t* loadPageToWebpage(char* pageDir, int id)
 // see pagedir.h for description
 char* stringBuilder(char* pageDir, char* end) 
 {
+    if(end == NULL) return NULL;
     char prefix[] = "../data";
     if (pageDir != NULL) {
         // count the number of characters that will be in the final filepath string

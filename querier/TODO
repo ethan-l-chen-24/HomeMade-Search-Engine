@@ -1,4 +1,3 @@
-querier/IMPLEMENTATION.md
 valgrind debugging
 valgrind debugging of unit tests
 fix testing.sh and print to testing.out

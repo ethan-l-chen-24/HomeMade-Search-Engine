@@ -15,12 +15,30 @@
 #include <stdbool.h>
 #include <ctype.h>
 #include <string.h>
+#include <unistd.h>
 #include "index.h"
 #include "word.h"
 #include "pagedir.h"
 #include "file.h"
 #include "counters.h"
 #include "memory.h"
+
+/***************** local types ********************/
+
+typedef struct countersTuple { // stores two counters to be passed to counters_iterate
+    counters_t* counters1;
+    counters_t* counters2;
+} countersTuple_t;
+
+typedef struct scoreID { // stores two ints, an id and its score for a query
+    int docID;
+    int score;
+} scoreID_t;
+
+typedef struct scoreIDArr { // stores an array of scoreIDs and keeps track of how much of the array has been filled
+    scoreID_t** arr;
+    int slotsFilled;
+} scoreIDArr_t;
 
 /************* function prototypes ********************/
 
@@ -39,31 +57,21 @@ void countersUnionHelper(void* arg, const int key, const int count);
 void countersIntersectionHelper(void* arg, const int key, const int count);
 
 // ranking and printing methods
-void rankAndPrint(counters_t* idScores, char* pageDirectory);
+bool rankAndPrint(counters_t* idScores, char* pageDirectory);
 void countFunc(void* arg, const int key, const int count);
 void sortFunc(void* arg, const int key, const int count);
+
+// struct deletion
+void deleteScoreIDArr(scoreIDArr_t* scoreIDArr, int arrSize);
+
+// Prompting
+int fileno(FILE *stream);
+void prompt(void);
 
 // unit testing
 #ifdef UNITTEST
     void unittest(void);
 #endif
-
-/***************** local types ********************/
-
-typedef struct countersTuple { // stores two counters to be passed to counters_iterate
-    counters_t* counters1;
-    counters_t* counters2;
-} countersTuple_t;
-
-typedef struct scoreID { // stores two ints, an id and its score for a query
-    int docID;
-    int score;
-} scoreID_t;
-
-typedef struct scoreIDArr { // stores an array of scoreIDs and keeps track of how much of the array has been filled
-    scoreID_t** arr;
-    int slotsFilled;
-} scoreIDArr_t;
 
 /************** main() ******************/
 /* the "testing" function/main function, which takes two arguments 
@@ -117,14 +125,18 @@ int main(const int argc, char* argv[])
         count_free(indexFilename);
         count_free(pageDir);
         fprintf(stderr, "Error: %s is an invalid crawler directory\n", pageDir);
-        return false;
+        return 1;
     }
 
     // check to see if the index file can be opened
     char* trueFilename = stringBuilder(NULL, indexFilename);
-    if(fopen(trueFilename, "r") == NULL) {
+    FILE* fp;
+    if((fp = fopen(trueFilename, "r")) == NULL) {
         fprintf(stderr, "Error: provided filename %s is invalid\n", indexFilename);
+        return 1;
     }
+    fclose(fp);
+    count_free(trueFilename);
 
     // run the querier
     if (query(pageDir, indexFilename)) {
@@ -160,6 +172,8 @@ bool query(char* pageDirectory, char* indexFilename)
 {
     // validate arguments
     if(pageDirectory == NULL || indexFilename == NULL) {
+        if(pageDirectory != NULL) count_free(pageDirectory);
+        if(indexFilename != NULL) count_free(indexFilename);
         fprintf(stderr, "Error: query failed");
         return false;
     }
@@ -169,16 +183,21 @@ bool query(char* pageDirectory, char* indexFilename)
 
     if(index != NULL) {
         // prompt for user input
-        printf("Query: ");
+        prompt();
         char* query = freadlinep(fp);
         while(query != NULL) {
             // process the queries and ask again until EOF
             processQuery(query, index, pageDirectory);
-            printf("Query: ");
+            prompt();
             query = freadlinep(fp);
         }
+        deleteIndex(index);
+        count_free(pageDirectory);
+        count_free(indexFilename);
         return true;
     } else {
+        count_free(pageDirectory);
+        count_free(indexFilename);
         return false;
     }
 }
@@ -228,10 +247,12 @@ void processQuery(char* query, index_t* index, char* pageDirectory)
 
     // calculate the stores
     counters_t* idScores = getIDScores(words, numWords, index, pageDirectory);
+    count_free(query);
+    count_free(words);
     if(idScores == NULL) return;
     
     // rank order the document ids by score and print them
-    rankAndPrint(idScores, pageDirectory);
+    if(!rankAndPrint(idScores, pageDirectory)) return;
 }
 
 /************** countWordsInQuery() ******************/
@@ -279,7 +300,11 @@ int countWordsInQuery(char* query)
 char** parseQuery(char* query, int numWords)
 {
     // validate arguments
-    if(query == NULL || numWords == 0) return NULL;
+    if(query == NULL || numWords == 0) {
+        if(query != NULL) count_free(query);
+        return NULL;
+    }
+   
     char** words = count_calloc(numWords, sizeof(char*));
 
     bool lastSpace = true; // tracks if the last character read was a space
@@ -305,6 +330,8 @@ char** parseQuery(char* query, int numWords)
         // throw an error if a bad char is read.
         } else {
             fprintf(stderr, "Error: bad character '%c' in query\n", *i);
+            count_free(words);
+            count_free(query);
             return NULL;
         }
     }
@@ -323,7 +350,7 @@ void normalizeQuery(char** words, int numWords)
     char** wordTraverse = words;
     for(int i = 0; i < numWords; i++) {
         char* word = *wordTraverse;
-        normalizeWord(word); // make them lowercase
+        if(word != NULL) normalizeWord(word); // make them lowercase
         wordTraverse++;
     }
 
@@ -351,7 +378,9 @@ void normalizeQuery(char** words, int numWords)
 counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDirectory) 
 {
     // validate args
-    if(words == NULL || index == NULL || pageDirectory == NULL) return NULL;
+    if(words == NULL || index == NULL || pageDirectory == NULL) {
+        return NULL;
+    }
 
     // initialize structs
     counters_t* prod = counters_new();
@@ -374,9 +403,13 @@ counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDi
             if(strcmp(lastWord, "") == 0 || strcmp(lastWord, "or") == 0 || strcmp(lastWord, "and") == 0) {
                 if(strcmp(lastWord, "") == 0) {
                     fprintf(stderr, "Error: 'and' cannot be first\n");
+                    counters_delete(prod);
+                    counters_delete(scores);
                     return NULL;
                 } else {
                     fprintf(stderr, "Error: '%s' and 'and' cannot be adjacent\n", lastWord);
+                    counters_delete(prod);
+                    counters_delete(scores);
                     return NULL;
                 }
             }
@@ -391,9 +424,13 @@ counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDi
             if(strcmp(lastWord, "") == 0 || strcmp(lastWord, "or") == 0 || strcmp(lastWord, "and") == 0) {
                 if(strcmp(lastWord, "") == 0) {
                     fprintf(stderr, "Error: 'or' cannot be first\n");
+                    counters_delete(prod);
+                    counters_delete(scores);
                     return NULL;
                 } else {
                     fprintf(stderr, "Error: '%s' and 'or' cannot be adjacent\n", lastWord);
+                    counters_delete(prod);
+                    counters_delete(scores);
                     return NULL;
                 }
             }
@@ -427,12 +464,17 @@ counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDi
     // check for edge cases
     if(strcmp(lastWord, "or") == 0 || strcmp(lastWord, "and") == 0) {
         fprintf(stderr, "Error: '%s' cannot be last\n", lastWord);
+        counters_delete(prod);
+        counters_delete(scores);
         return NULL;
     } else if (strcmp(lastWord, "") == 0) {
+        counters_delete(prod);
+        counters_delete(scores);
         return NULL;
     } else {
         // merge the final product with the scores
         orSequence(prod, scores);
+        counters_delete(prod);
         return scores;
     }
 }
@@ -451,7 +493,7 @@ bool orSequence(counters_t* prod, counters_t* scores)
         printf("\n\n");
     #endif
 
-        counters_iterate(prod, scores, countersUnionHelper);
+    counters_iterate(prod, scores, countersUnionHelper);
 
     #ifdef DEBUG
         printf("Scores after union: ");
@@ -479,7 +521,11 @@ bool orSequence(counters_t* prod, counters_t* scores)
 counters_t* andSequence(counters_t* prod, counters_t* wordCount)
 {
     // validate arguments
-    if(prod == NULL || wordCount == NULL) return NULL;
+    if(prod == NULL || wordCount == NULL) {
+        if(prod != NULL) counters_delete(prod);
+        if(wordCount != NULL) counters_delete(wordCount);
+        return NULL;
+    }
 
     #ifdef DEBUG
         printf("New word: ");
@@ -510,6 +556,7 @@ counters_t* andSequence(counters_t* prod, counters_t* wordCount)
     #endif 
 
     counters_delete(prod);
+    count_free(tuple);
     return intersection;
 }
 
@@ -562,10 +609,10 @@ void countersIntersectionHelper(void* arg, const int key, const int count)
  *      1. The arguments are valid, otherwise throw errors
  *      2. the pageDirectory is a valid crawler directory
 */
-void rankAndPrint(counters_t* idScores, char* pageDirectory)
+bool rankAndPrint(counters_t* idScores, char* pageDirectory)
 {
     // validate arguments
-    if(idScores == NULL || pageDirectory == NULL) return;
+    if(idScores == NULL || pageDirectory == NULL) return false;
 
     // count the number of ids that satisfied the query
     int count = 0;
@@ -576,15 +623,27 @@ void rankAndPrint(counters_t* idScores, char* pageDirectory)
 
     if(count == 0) {
         printf("No documents match.\n");
+        counters_delete(idScores);
+        return true;
     } else {
         // allocate enough space for the array of structs
         scoreID_t** arr = count_calloc(count, sizeof(scoreID_t*));
+        if(arr == NULL) {
+            fprintf(stderr, "Error: out of memory\n");
+            return false;
+        }
         // create the struct that stores the array
         scoreIDArr_t* scoreIDArr = count_malloc(sizeof(scoreIDArr_t));
+        if(scoreIDArr == NULL) {
+            fprintf(stderr, "Error: out of memory\n");
+            count_free(arr);
+            return false;
+        }
         scoreIDArr->arr = arr;
         scoreIDArr->slotsFilled = 0;
         // sort the id-scores into the array
         counters_iterate(idScores, scoreIDArr, sortFunc);
+        counters_delete(idScores);
 
     #ifdef DEBUG
         for(int i = 0; i<count; i++) {
@@ -597,19 +656,32 @@ void rankAndPrint(counters_t* idScores, char* pageDirectory)
             int id = arr[i]->docID;
             int score = arr[i]->score;
             char* idString = intToString(id); // build the filepath
+            if(idString == NULL) continue;
 
             // open the filepath to retrieve the URL
             char* filepath = stringBuilder(pageDirectory, idString);
+            count_free(idString);
+            if(filepath == NULL) continue;
             FILE* fp = fopen(filepath, "r");
+            count_free(filepath);
             if(fp != NULL) {
                 char* URL = freadlinep(fp);
+                if(URL == NULL) {
+                    fclose(fp);
+                    continue;
+                }
                 // print out the score line
                 printf("score %3d doc %3d: %s\n", score, id, URL);
+                count_free(URL);
+                fclose(fp);
             }
         }
+
+        deleteScoreIDArr(scoreIDArr, count);
     }
     // print a looooooong bar
     printf("-----------------------------------------------------------------------------\n");
+    return true;
 }
 
 /************** countFunc() ******************/
@@ -683,6 +755,36 @@ void sortFunc(void* arg, const int key, const int count)
     arr[slotsFilled] = newScoreID;
     scoreIDArr->slotsFilled++;
 }
+
+/************** prompt() ******************/
+/* prompts the user for input if stdin is used */
+void prompt(void)
+{
+  // print a prompt iff stdin is a tty (terminal)
+  if (isatty(fileno(stdin))) {
+    printf("Query? ");
+  }
+}
+
+/************** deleteScoreIDArr() ******************/
+/* deletes the scoreIDArr struct */
+void deleteScoreIDArr(scoreIDArr_t* scoreIDArr, int arrSize) 
+{
+    if(scoreIDArr == NULL) return;
+    scoreID_t** arr = scoreIDArr->arr; // get the array
+    if(arr == NULL) {
+        count_free(scoreIDArr);
+        return;
+    }
+    for(int i = 0; i<arrSize; i++) { // loop through items inside and free
+        if(arr[i] != NULL) count_free(arr[i]);
+    }
+    count_free(arr); // free the array
+    count_free(scoreIDArr); // free the wrapper struct
+}
+
+
+
 
 #ifdef UNITTEST
 

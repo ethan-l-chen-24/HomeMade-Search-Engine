@@ -1,0 +1,10 @@
+and
+or
+this and or that
+this and and that
+this or and that
+this or or that
+this and
+this or
+
+empty above, this has a special character
