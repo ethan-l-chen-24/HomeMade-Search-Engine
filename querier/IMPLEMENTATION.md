@@ -162,6 +162,7 @@ implemented automatically by unistd.h
 
 
 #### `prompt`
+checks if stdin from keyboard or not and prints "query" - given by prof
 
 
 ### AND and OR
