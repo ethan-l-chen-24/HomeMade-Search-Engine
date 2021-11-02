@@ -841,6 +841,12 @@ void deleteScoreIDArr(scoreIDArr_t* scoreIDArr, int arrSize)
         if(pq3 != NULL) numFailed++;
         if(pq4 != NULL) numFailed++;
 
+        // frees
+        count_free(query);
+        count_free(query2);
+        count_free(pq);
+        count_free(pq2);
+
         return numFailed;
     }
 
@@ -865,6 +871,10 @@ void deleteScoreIDArr(scoreIDArr_t* scoreIDArr, int arrSize)
         if(strcmp(pq[4], "in") != 0) numFailed++;
         if(strcmp(pq[6], "sentence") != 0) numFailed++;
         if(pq2 != NULL) numFailed++;
+
+        // frees
+        count_free(query);
+        count_free(pq);
 
         return numFailed;
     }
@@ -901,6 +911,11 @@ void deleteScoreIDArr(scoreIDArr_t* scoreIDArr, int arrSize)
         if(orSequence(c4, c3)) numFailed++;
         if(counters_get(c3, 1) != 11) numFailed++;
 
+        // frees
+        counters_delete(c1);
+        counters_delete(c2);
+        counters_delete(c3);
+
         return numFailed;
     }
 
@@ -920,19 +935,24 @@ void deleteScoreIDArr(scoreIDArr_t* scoreIDArr, int arrSize)
         counters_t* c4 = NULL;
 
         // check if the sets intersect properly
-        c1 = andSequence(c1, c2);
-        if(counters_get(c1, 1) != 0) numFailed++;
-        if(counters_get(c1, 2) != 4) numFailed++;
-        if(counters_get(c1, 3) != 1) numFailed++;
+        counters_t* temp1 = andSequence(c1, c2);
+        if(counters_get(temp1, 1) != 0) numFailed++;
+        if(counters_get(temp1, 2) != 4) numFailed++;
+        if(counters_get(temp1, 3) != 1) numFailed++;
         if(counters_get(c2, 2) != 6) numFailed++;
         if(counters_get(c2, 4) != 5) numFailed++;
 
-        counters_t* temp = andSequence(c1, c3);
-        if(counters_get(temp, 1) != 0) numFailed++;
-        if(counters_get(temp, 2) != 0) numFailed++;
+        counters_t* temp2 = andSequence(temp1, c3);
+        if(counters_get(temp2, 1) != 0) numFailed++;
+        if(counters_get(temp2, 2) != 0) numFailed++;
 
-        c1 = andSequence(c1, c4);
-        if(c1 != NULL) numFailed++;
+        counters_t* temp3 = andSequence(temp2, c4);
+        if(temp3 != NULL) numFailed++;
+
+        // frees
+        counters_delete(temp3);
+        counters_delete(c2);
+        counters_delete(c3);
 
         return numFailed;
     }
@@ -950,11 +970,15 @@ void deleteScoreIDArr(scoreIDArr_t* scoreIDArr, int arrSize)
 
         counters_t* counters2 = counters_new();
         int count2 = 0;
-        counters_iterate(counters2, &count, countFunc);
+        counters_iterate(counters2, &count2, countFunc);
 
         // check if the function counts properly
         if(count != 10) numFailed++;
         if(count2 != 0) numFailed++;
+
+        // frees
+        counters_delete(counters);
+        counters_delete(counters2);
 
         return numFailed;
     }
@@ -1014,6 +1038,22 @@ void deleteScoreIDArr(scoreIDArr_t* scoreIDArr, int arrSize)
         if(arr3[9]->docID != 10) numFailed++;
         if(arr3[4]->docID != 5) numFailed++;
         if(arr3[3]->docID != 6) numFailed++;
+
+        // frees
+        for(int i = 0; i < 10; i++) {
+            count_free(arr[i]);
+            count_free(arr2[i]);
+            count_free(arr3[i]);
+        }
+        count_free(arr);
+        count_free(arr2);
+        count_free(arr3);
+        count_free(arrObj);
+        count_free(arrObj2);
+        count_free(arrObj3);
+        counters_delete(counters);
+        counters_delete(counters2);
+        counters_delete(counters3);
         
         return numFailed;
     }
