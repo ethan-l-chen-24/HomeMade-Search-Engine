@@ -480,7 +480,7 @@ counters_t* getIDScores(char** words, int numWords, index_t* index, char* pageDi
 }
 
 /************** orSequence() ******************/
-/* runs an orSequence, which merges the two given countersets */
+/* runs an orSequence, which merges prod into scores */
 bool orSequence(counters_t* prod, counters_t* scores) 
 {
     if(prod == NULL || scores == NULL) return false;
@@ -782,6 +782,17 @@ void deleteScoreIDArr(scoreIDArr_t* scoreIDArr, int arrSize)
     count_free(arr); // free the array
     count_free(scoreIDArr); // free the wrapper struct
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
