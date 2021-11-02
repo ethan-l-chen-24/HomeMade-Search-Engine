@@ -132,6 +132,9 @@ int main(const int argc, char* argv[])
     char* trueFilename = stringBuilder(NULL, indexFilename);
     FILE* fp;
     if ((fp = fopen(trueFilename, "r")) == NULL) {
+        count_free(indexFilename);
+        count_free(pageDir);
+        count_free(trueFilename);
         fprintf(stderr, "Error: provided filename %s is invalid\n", indexFilename);
         return 1;
     }

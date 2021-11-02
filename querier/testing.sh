@@ -37,8 +37,11 @@
 # WRONG NUMBER OF ARGUMENTS
 ./querier sdjflkjdslk sdfjkldslj sdfjklsdj sdfjlkj sdjfklj ejflkdjs < tests/testQueries.txt
 
-# NONEXISTENT FILES
-./querier invalidFile invalidFile2 < testQueries.txt
+# NONEXISTENT DIRECTORY
+./querier invalidDirectory toscrape-index-0 < testQueries.txt
+
+# NONEXISTENT TESTING FILE
+./querier toscrape-depth-0 invalidFile < testQueries.txt
 
 # VALGRIND TESTS
 # --------------
