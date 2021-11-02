@@ -148,6 +148,22 @@ sorts scoreIDs into an array - passed into counters_iterate()
     3. return
 5. if it makes it this far, it is the smallest item and should be placed at the end of the list
 
+
+#### `deleteScoreIDArr`
+deletes a scoreIDArr struct
+
+1. validate args
+2. loop through the item in the array and delete them
+3. delete the array
+4. delete the struct
+
+#### `fileno`
+implemented automatically by unistd.h
+
+
+#### `prompt`
+
+
 ### AND and OR
 
 It is very important to note that my `andSequence` method returns a new counterset while my `orSequence` method does not. This was a deliberate implementation choice, as I realized that there is no reason to deal with the extra time of creating a new counterset for OR and looping through both sets - instead, you can simply loop through one set and add the corresponding scores of the other in one go. However, for the AND, you have to create a new set. Although we could reasonably find the "minimum" between two sets in one loop, there is no way to delete specific counter nodes in our countersets. The best we can do is set the score to 0, but then we will ultimately print out many documents with a score of 0, which we should not do. Thus, AND creates a new counterset and returns it while OR alters one of the existing sets.
@@ -176,6 +192,13 @@ void countersIntersectionHelper(void* arg, const int key, const int count);
 void rankAndPrint(counters_t* idScores, char* pageDirectory);
 void countFunc(void* arg, const int key, const int count);
 void sortFunc(void* arg, const int key, const int count);
+
+// struct deletion
+void deleteScoreIDArr(scoreIDArr_t* scoreIDArr, int arrSize);
+
+// Prompting
+int fileno(FILE *stream);
+void prompt(void);
 ```
 
 ### Usage

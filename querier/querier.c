@@ -90,7 +90,7 @@ void prompt(void);
 */
 int main(const int argc, char* argv[])
 {
-
+    // performs unit testing instead of regular querier if flag activated
     #ifdef UNITTEST
         unittest();
     #else
