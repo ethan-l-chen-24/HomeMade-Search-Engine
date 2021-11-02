@@ -165,3 +165,31 @@ char* stringBuilder(char* pageDir, char* end)
         }
     }
 }
+
+/************** stringBuilder2() ******************/
+// see pagedir.h for description
+char* stringBuilder2(char* pageDir, char* end) 
+{
+    if(end == NULL) return NULL;
+    if (pageDir != NULL) {
+        // count the number of characters that will be in the final filepath string
+        int destSize = strlen(end) + strlen(pageDir) + 2; // +1 for /0 character
+
+        // allocate the space and print the filepath to that memory
+        char* filename = count_malloc(destSize);
+        if (filename != NULL) sprintf(filename, "%s/%s", pageDir, end);
+        else return NULL;
+
+        return filename;
+    } else {
+        // if pageDir is null, write directly to data directory
+        if (end != NULL) {
+            int destSize = strlen(end) + 1; // +1 for /0 character
+            char* filename = count_malloc(destSize);
+            sprintf(filename, "%s", end);
+            return filename;
+        } else {
+            return NULL;
+        }
+    }
+}

@@ -32,11 +32,11 @@ test: querier testing.sh fuzzquery
 	bash -v testing.sh 
 
 run: querier
-	./querier $(PAGE_DIRECTORY)-depth-$(DEPTH) $(PAGE_DIRECTORY)-index-$(DEPTH)
+	./querier ../data/$(PAGE_DIRECTORY)-depth-$(DEPTH) ../data/$(PAGE_DIRECTORY)-index-$(DEPTH)
 
 # expects a file `test.names` to exist; it can contain any text.
 valgrind: querier
-	$(VALGRIND) ./querier valgrind valgrind-index
+	$(VALGRIND) ./querier ../data/valgrind ../data/valgrind-index
 
 clean:
 	rm -rf *.dSYM  # MacOS debugger info

@@ -122,20 +122,20 @@ int main(const int argc, char* argv[])
 
     // make sure the directory is a valid crawler directory
     if (!pageDirValidate(pageDir)) {
+        fprintf(stderr, "Error: %s is an invalid crawler directory\n", pageDir);
         count_free(indexFilename);
         count_free(pageDir);
-        fprintf(stderr, "Error: %s is an invalid crawler directory\n", pageDir);
         return 1;
     }
 
     // check to see if the index file can be opened
-    char* trueFilename = stringBuilder(NULL, indexFilename);
+    char* trueFilename = stringBuilder2(NULL, indexFilename);
     FILE* fp;
     if ((fp = fopen(trueFilename, "r")) == NULL) {
+        fprintf(stderr, "Error: provided filename %s is invalid\n", indexFilename);
         count_free(indexFilename);
         count_free(pageDir);
         count_free(trueFilename);
-        fprintf(stderr, "Error: provided filename %s is invalid\n", indexFilename);
         return 1;
     }
     fclose(fp);
@@ -668,7 +668,7 @@ bool rankAndPrint(counters_t* idScores, char* pageDirectory)
             if (idString == NULL) continue;
 
             // open the filepath to retrieve the URL
-            char* filepath = stringBuilder(pageDirectory, idString);
+            char* filepath = stringBuilder2(pageDirectory, idString);
             count_free(idString);
             if (filepath == NULL) continue;
             FILE* fp = fopen(filepath, "r");

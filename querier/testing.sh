@@ -12,23 +12,23 @@
 
 # TEST INPUTS TEST
 
-./querier toscrape-depth-0 toscrape-index-0 < tests/testQueries.txt
+./querier ../data/toscrape-depth-0 ../data/toscrape-index-0 < tests/testQueries.txt
 
-./querier toscrape-depth-1 toscrape-index-1 < tests/testQueries.txt
+./querier ../data/toscrape-depth-1 ../data/toscrape-index-1 < tests/testQueries.txt
 
-./querier letters-depth-1 letters-index-1 < tests/testQueries.txt
+./querier ../data/letters-depth-1 ../data/letters-index-1 < tests/testQueries.txt
 
-./querier letters-depth-6 letters-index-6 < tests/testQueries.txt
+./querier ../data/letters-depth-6 ../data/letters-index-6 < tests/testQueries.txt
 
-./querier wikipedia-depth-1 wikipedia-index-1 < tests/testQueries.txt
+./querier ../data/wikipedia-depth-1 ../data/wikipedia-index-1 < tests/testQueries.txt
 
 # FUZZQUERY TESTS
 
-./querier wikipedia-depth-1 wikipedia-index-1 < tests/fqWiki.txt
+./querier ../data/wikipedia-depth-1 ../data/wikipedia-index-1 < tests/fqWiki.txt
 
-./querier toscrape-depth-1 toscrape-index-1 < tests/fqToscrape.txt
+./querier ../data/toscrape-depth-1 ../data/toscrape-index-1 < tests/fqToscrape.txt
 
-./querier letters-depth-6 letters-index-6 < tests/fqLetters.txt
+./querier ../data/letters-depth-6 ../data/letters-index-6 < tests/fqLetters.txt
 
 
 # EDGE CASES
@@ -38,16 +38,16 @@
 ./querier sdjflkjdslk sdfjkldslj sdfjklsdj sdfjlkj sdjfklj ejflkdjs < tests/testQueries.txt
 
 # NONEXISTENT DIRECTORY
-./querier invalidDirectory toscrape-index-0 < testQueries.txt
+./querier invalidDirectory ../data/toscrape-index-0 < tests/testQueries.txt
 
 # NONEXISTENT TESTING FILE
-./querier toscrape-depth-0 invalidFile < testQueries.txt
+./querier ../data/toscrape-depth-0 invalidFile < tests/testQueries.txt
 
 # VALGRIND TESTS
 # --------------
 
-valgrind --leak-check=full --show-leak-kinds=all ./querier toscrape-depth-1 toscrape-index-1 < tests/testQueries.txt
+valgrind --leak-check=full --show-leak-kinds=all ./querier ../data/toscrape-depth-1 ../data/toscrape-index-1 < tests/testQueries.txt
 
-valgrind --leak-check=full --show-leak-kinds=all ./querier toscrape-depth-1 toscrape-index-1 < tests/invalidQueries.txt
+valgrind --leak-check=full --show-leak-kinds=all ./querier ../data/toscrape-depth-1 ../data/toscrape-index-1 < tests/invalidQueries.txt
 
-valgrind --leak-check=full --show-leak-kinds=all ./querier toscrape-depth-1 toscrape-index-1 < tests/fqToscrape.txt
+valgrind --leak-check=full --show-leak-kinds=all ./querier ../data/toscrape-depth-1 ../data/toscrape-index-1 < tests/fqToscrape.txt

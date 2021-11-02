@@ -62,5 +62,14 @@ webpage_t* loadPageToWebpage(char* pageDir, int id);
 */
 char* stringBuilder(char* pageDir, char* end);
 
+/***************** stringBuilder2() ***********************/
+/* Function used to build the filepath of a file given
+ * a directory and a suffix, leaves in default directory
+ *
+ * Note:
+ *      added to appease TA comments on lab 5
+*/
+char* stringBuilder2(char* pageDir, char* end);
+
 
 #endif

@@ -56,7 +56,10 @@ For this project, I attribute a few sources
     - finally, the support of my friends and family. Ryan and Jason, you are the men.
 
 It is worth noting that
-    - Even though I was deducted from for placing my data in a folder called data, __I DECIDED TO CONTINUE USING IT__ in order to avoid changing too much code, and I decided to continue building the filepath in the same way I did in previous labs. I know that it is better to not have that hardcoded path, but it made inputting into the terminal much much nicer
+    - Since I was deducted from for placing my data in a folder called data, __I DECIDED TO CREATE A NEW METHOD IN PAGEDIR__ in order to avoid changing too much code, I named that method `stringBuilder2` to not automatically append `../data/`. I did not change this for my indexer or crawler, but hopefully this suffices for the querier.
     - I did not actually use Backus-Naur form, but I implemented the same logic to merge and intersect countersets
     - I also included a `-DDEBUG` tag on my makefile, as well as all of my debugging code inside my file. This was useful to me and I thought the TAs may like to see it. However, for the 
         proper output, make sure that this is toggled OFF. The same goes with my unittesting flag, `-DUNITTEST`. The Unit test methods are included at the bottom of querier.c, from lines 800 or so on.
+
+Finally
+    - I did in fact use my 1-day extension on this lab. I did not originally follow the correct extension request instructions, as I am a big idiot that struggles to read instructions. However, I have since included the appropriate EXTENSION commit, and hopefully this will not play a part into my overall grade
