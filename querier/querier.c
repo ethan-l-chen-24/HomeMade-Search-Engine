@@ -493,6 +493,7 @@ bool orSequence(counters_t* prod, counters_t* scores)
         printf("\n\n");
     #endif
 
+    // iterate through prod and add to scores
     counters_iterate(prod, scores, countersUnionHelper);
 
     #ifdef DEBUG
@@ -782,7 +783,6 @@ void deleteScoreIDArr(scoreIDArr_t* scoreIDArr, int arrSize)
     count_free(arr); // free the array
     count_free(scoreIDArr); // free the wrapper struct
 }
-
 
 
 
