@@ -1,5 +1,5 @@
 # Ethan Chen
-## CS50 Fall 2021, Tiny Search Engine
+Basic Search Engine
 
 GitHub username: ethan-l-chen-24
 
